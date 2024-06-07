@@ -20,4 +20,4 @@ Para abrir server ejecuta
 npm install
 ```
 ## Imagen Entidad Relacion
-![alt text](https://labsys.frc.utn.edu.ar/gitlab/desarrollo-4m/tp-desarrollobiblioteca/-/blob/main/utils/diagrams/DER%20basico.jpg?ref_type=heads)
+![image info](utils/diagrams/DER%20basico.jpg)
