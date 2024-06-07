@@ -23,3 +23,5 @@ npm start
 ```
 ## Imagen Entidad Relacion
 ![image info](utils/diagrams/DER%20basico.jpg)
+
+[Click aca para ver el diagrama en pagina web](https://dbdiagram.io/d/libros-DDS-666258899713410b05f98bbe)
