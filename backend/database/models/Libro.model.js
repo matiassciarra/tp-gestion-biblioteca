@@ -1,7 +1,9 @@
 import { sequelize } from "../db.js";
 import { DataTypes } from "sequelize";
+import { Genero } from "./Genero.model.js";
+import { Autor } from "./Autor.model.js";
 
-export const Libro = sequelize.define("Libro", {
+const Libro = sequelize.define("Libro", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -13,10 +15,7 @@ export const Libro = sequelize.define("Libro", {
   },
   id_genero: {
     type: DataTypes.INTEGER,
-    references: {
-      model: "Genero",
-      key: "id_genero",
-    },
+    allowNull: false
   },
   id_autor: {
     type: DataTypes.INTEGER,
@@ -32,10 +31,45 @@ export const Libro = sequelize.define("Libro", {
   url:{
     type:DataTypes.STRING,
     allowNull: true,
-  },
-  
+  }
 },
 {
     timestamps: false,
 }
 );
+//aca defino las relaciones
+// genero tiene muchos Libros, y libro tiene un genero
+Genero.hasMany(Libro, { foreignKey: 'id_genero' });
+Libro.belongsTo(Genero, { foreignKey: 'id_genero' });
+// Autor tiene muchos Libros, y libro tiene un Autor
+Autor.hasMany(Libro, { foreignKey: 'id_autor' });
+Libro.belongsTo(Autor, { foreignKey: 'id_autor' });
+
+
+export default Libro
+ 
+/* 
+buscar libro y que muestre su genero
+
+async function buscarLibroPorTitulo(titulo) {
+  try {
+    const libro = await Libro.findOne({
+      where: { titulo: titulo },
+      Buscar por genro y auro
+      include: [Genero, Autor]
+    });
+    if (libro) {
+      console.log(`Título: ${libro.titulo}`);
+      console.log(`Género: ${libro.Genero.nombre}`);
+      console.log(`Autor: ${libro.Autor.nombre} ${libro.Autor.apellido}`);
+    } else {
+      console.log('Libro no encontrado');
+    }
+  } catch (error) {
+    console.error('Error al buscar el libro:', error);
+  }
+}
+
+buscarLibroPorTitulo('El título del libro');
+
+*/

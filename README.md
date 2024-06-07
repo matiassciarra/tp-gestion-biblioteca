@@ -1,8 +1,21 @@
+# Gestion de Libros de Biblioteca
 
-# Como iniciar proyecto
+## Como installar proyecto
 
-Entra a la carpeta backend y ejecuta *pnpm install*
+Entra a la carpeta backend y ejecuta
 
-# Como abrir proyecto
+```bash
+pnpm install
+```
+o usa
+```bash
+npm install
+```
 
-Para abrir server ejecuta *pnpm start*
+### Como abrir proyecto
+
+Para abrir server ejecuta
+
+```bash
+npm install
+```
