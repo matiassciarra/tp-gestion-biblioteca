@@ -18,7 +18,9 @@ export const Usuario = sequelize.define("Usuario", {
     correo: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-
+    }
+},
+{
     timestamps: false,
-})
+}
+)
