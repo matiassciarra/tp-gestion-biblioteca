@@ -23,6 +23,9 @@ export const Autor = sequelize.define("Autor", {
         type: DataTypes.DATE,
         allowNull: true,
     },
-
+},
+//comando opcionales
+{
     timestamps: false,
-});
+}
+);
