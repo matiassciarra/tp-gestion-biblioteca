@@ -7,7 +7,9 @@ Entra a la carpeta backend y ejecuta
 ```bash
 pnpm install
 ```
+
 o usa
+
 ```bash
 npm install
 ```
@@ -17,7 +19,7 @@ npm install
 Para abrir server ejecuta
 
 ```bash
-npm install
+npm start
 ```
 ## Imagen Entidad Relacion
 ![image info](utils/diagrams/DER%20basico.jpg)
