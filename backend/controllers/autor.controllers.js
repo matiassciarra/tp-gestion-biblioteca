@@ -1,22 +1,25 @@
-import  Autor  from "../database/models/Autor.model.js";
+import Autor from "../database/models/Autor.model.js";
 import { Pais } from "../database/models/Pais.model.js";
 
 export const getAutores = async (req, res) => {
     try {
-        res.send(await Autor.findAll({include:Pais}));
+        res.send(await Autor.findAll({ include: Pais }));
     } catch (error) {
-        res.status(500).send({ message: "No se encontraron autores" });
+        res.status(500).send({
+            message: "No se encontraron autores",
+            error: error.toString(),
+        });
     }
 };
 
 export const getAutorPorId = async (req, res) => {
     try {
         const { id } = req.params;
-        const autor = await Autor.findByPk(id,{include: Pais})
-        if (!autor){
-            return res.status(404).send('no se encontro autor por id')
+        const autor = await Autor.findByPk(id, { include: Pais });
+        if (!autor) {
+            return res.status(404).send("no se encontro autor por id");
         }
-        return res.send(autor)
+        return res.send(autor);
     } catch (error) {
         res.status(500).send({
             message: "No se ha podido encontrar autor con esa ID",
@@ -24,16 +27,22 @@ export const getAutorPorId = async (req, res) => {
     }
 };
 
-
 export const createAutor = async (req, res) => {
     try {
-        const { nombre, apellido, biografia, fecha_nacimiento, id_pais } = req.body;
-        const nuevoAutor = { nombre, apellido, biografia, fecha_nacimiento };
+        const { nombre, apellido, biografia, fecha_nacimiento, id_pais } =
+            req.body;
+        const nuevoAutor = {
+            nombre,
+            apellido,
+            biografia,
+            fecha_nacimiento,
+            id_pais,
+        };
         const autorExistente = await Autor.findOne({
             where: {
                 nombre: nombre,
                 apellido: apellido,
-                id_pais:id_pais
+                id_pais: id_pais,
             },
         });
         if (!autorExistente) {
@@ -69,6 +78,27 @@ export const deleteAutor = async (req, res) => {
     } catch (error) {
         res.status(500).send({
             message: "Hubo un error al eliminar el autor",
+            error: error.toString(),
+        });
+    }
+};
+
+export const updateAutor = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const autorExistente = await Autor.findByPk(id);
+
+        if (autorExistente) {
+            await Autor.update(req.body, { where: { id_autor: id } });
+
+            res.send({ message: "Autor actualizado con éxito" });
+        } else {
+            res.status(404).send("Autor no encontrado");
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: "Hubo un error al actualizar el autor",
             error: error.toString(),
         });
     }

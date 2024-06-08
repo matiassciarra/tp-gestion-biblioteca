@@ -24,11 +24,16 @@ const Autor = sequelize.define(
         },
         fecha_nacimiento: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
-        id_pais:{
-            type: DataTypes.INTEGER
-        }
+        url_imagen: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        id_pais: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
     },
     //comando opcionales
     {
@@ -36,7 +41,7 @@ const Autor = sequelize.define(
     }
 );
 // Pais tiene muchos Autor, y Autor tiene un pais
-Pais.hasMany(Autor, { foreignKey: 'id_pais' });
-Autor.belongsTo(Pais, { foreignKey: 'id_pais' });
+Pais.hasMany(Autor, { foreignKey: "id_pais" });
+Autor.belongsTo(Pais, { foreignKey: "id_pais" });
 
-export default Autor
+export default Autor;

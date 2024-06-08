@@ -4,6 +4,7 @@ import {
     getAutorPorId,
     createAutor,
     deleteAutor,
+    updateAutor,
 } from "../controllers/autor.controllers.js";
 
 const router = Router();
@@ -12,6 +13,6 @@ router.get("/autores", getAutores);
 router.get("/autores/:id", getAutorPorId);
 router.post("/autores", createAutor);
 router.delete("/autores/:id", deleteAutor);
-router.put("/autores/:id", () => {});
+router.patch("/autores/:id", updateAutor);
 
 export default router;

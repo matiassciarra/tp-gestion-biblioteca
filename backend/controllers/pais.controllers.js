@@ -1,11 +1,11 @@
-import { Pais } from "../database/models/Pais.model.js"
+import { Pais } from "../database/models/Pais.model.js";
 
 export const getPaises = async (req, res) => {
     try {
         const paises = await Pais.findAll();
         res.json(paises);
-    } catch(error) {
-        res.status(500).send({message: "Error del servidor"})
+    } catch (error) {
+        res.status(500).send({ message: "Error del servidor" });
     }
 };
 
@@ -14,12 +14,14 @@ export const getPaisById = async (req, res) => {
         const { id } = req.params;
         const pais = await Pais.findByPk(id);
         if (!pais) {
-            res.status(404).send({message: "No existe un pais con el ID ingresado"})
+            res.status(404).send({
+                message: "No existe un pais con el ID ingresado",
+            });
+        } else {
+            res.send(pais);
         }
-        else {
-        res.send(pais)};
     } catch (error) {
-        res.status(500).send({message: "Error del servidor"})
+        res.status(500).send({ message: "Error del servidor" });
     }
 };
 
@@ -29,7 +31,7 @@ export const createPais = async (req, res) => {
         const nuevoPais = { nombre };
         const paisExistente = await Pais.findOne({
             where: {
-                nombre: nombre
+                nombre: nombre,
             },
         });
         if (!paisExistente) {
@@ -42,7 +44,7 @@ export const createPais = async (req, res) => {
         }
     } catch (error) {
         res.status(500).send({
-            message: "Error del servidor"
+            message: "Error del servidor",
         });
     }
 };
@@ -57,9 +59,9 @@ export const deletePais = async (req, res) => {
                     id_pais: id,
                 },
             });
-            res.send({ message: "País eliminado exitosamente"});
+            res.send({ message: "País eliminado exitosamente" });
         } else {
-            res.status(404).send("País no encontrado");
+            res.status(404).send({ message: "Pais no encontrado" });
         }
     } catch (error) {
         res.status(500).send({
