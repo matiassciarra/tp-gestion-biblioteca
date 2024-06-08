@@ -1,0 +1,3 @@
+id,titulo,id_genero,id_autor,fecha_publicacion,url,estado_libro,createdAt,updatedAt,deletedAt
+1,hola,1,1,2004-03-20,,1,,2024-06-08 20:13:01.964 +00:00,
+2,chau,2,1,2003,,1,,,

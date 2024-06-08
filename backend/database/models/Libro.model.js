@@ -35,7 +35,9 @@ const Libro = sequelize.define("Libro", {
   }
 },
 {
-    timestamps: false,
+    sequelize,
+    paranoid: true,
+    timestamps: true,
 }
 );
 //aca defino las relaciones
