@@ -22,6 +22,10 @@ export const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    estado_usuario: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
     id_pais: {
       type: DataTypes.INTEGER,
       allowNull: false,

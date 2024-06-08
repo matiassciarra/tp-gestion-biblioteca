@@ -1,4 +1,4 @@
-import { Pais } from "../database/models/Pais.model.js";
+import { Pais } from "../database/models/Pais.model.js"; 
 
 export const getPaises = async (req, res) => {
     try {
@@ -67,5 +67,25 @@ export const deletePais = async (req, res) => {
         res.status(500).send({
             message: "Error del servidor",
         });
+    }
+};
+
+export const updatePais = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const paisExistente = await Pais.findByPk(id);
+
+        if (paisExistente) {
+            await Pais.update(req.body, {
+                where: {
+                    id_pais: id,
+                }
+            });
+            res.send({ message: "País actualizado exitosamente" });
+        } else {
+            res.status(404).send("País no encontrado");
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error del servidor" });
     }
 };
