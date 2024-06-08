@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getPaises, getPaisById, createPais, deletePais, modificarPais } from "../controllers/pais.controllers.js"
+import { getPaises, getPaisById, createPais, deletePais } from "../controllers/pais.controllers.js"
 
 const router = Router()
 

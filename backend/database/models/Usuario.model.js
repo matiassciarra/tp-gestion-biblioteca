@@ -41,3 +41,4 @@ Usuario.belongsTo(Pais, { foreignKey: 'id_pais' });
 Usuario.belongsTo(Pais, {foreignKey: "id_pais"})
 //País tiene muchos usuarios
 Pais.hasMany(Usuario, {foreignKey: "id_pais"})
+
