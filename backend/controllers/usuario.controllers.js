@@ -2,8 +2,8 @@ import { Usuario } from "../database/models/Usuario.model.js";
 import { Pais } from "../database/models/Pais.model.js";
 
 export const getUsers = async (req, res) => {
-    const usuarios = await Usuario.findAll({ include: Pais });
     try {
+        const usuarios = await Usuario.findAll({ include: Pais });
         return res.send(usuarios);
     } catch (error) {
         res.status(500).send({
