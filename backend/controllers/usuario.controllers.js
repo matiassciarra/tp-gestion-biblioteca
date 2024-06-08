@@ -97,3 +97,4 @@ export const updateUsuario = async (req, res) => {
         res.status(500).send({ message: "Error del servidor" });
     }
 };
+// Falta create Usuarios, update y delete
