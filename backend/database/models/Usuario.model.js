@@ -1,5 +1,6 @@
 import { sequelize } from "../db.js";
 import { DataTypes } from "sequelize";
+import { Pais } from "./Pais.model.js"
 
 export const Usuario = sequelize.define(
   "Usuario",
@@ -21,9 +22,18 @@ export const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    id_pais: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   },
   //comando opcionales
   {
     timestamps: false,
   }
 );
+
+//Usuario tiene un país
+Usuario.belongsTo(Pais, {foreignKey: "id_pais"})
+//País tiene muchos usuarios
+Pais.hasMany(Usuario, {foreignKey: "id_pais"})
