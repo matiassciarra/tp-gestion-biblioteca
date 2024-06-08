@@ -2,7 +2,7 @@ import { sequelize } from "../db.js";
 import { DataTypes } from "sequelize";
 
 export const Pais = sequelize.define(
-    "País",
+    "Pais",
     {
         id_pais: {
             type: DataTypes.INTEGER,

@@ -1,12 +1,13 @@
 import app from "./app.js";
 import { sequelize } from "../database/db.js";
+import Usuario from "../database/models/Usuario.model.js";
+import Autor from "../database/models/Autor.model.js";
 const PORT = 3002 || process.env.PORT;
 
 async function main() {
     try {
         //Autenticamos y sincronizamos a la base de datos
         await sequelize.sync({ force: false });
-
         console.log("Conexion a base de datos establecida correctamente");
 
         app.listen(PORT, () => {
