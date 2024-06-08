@@ -22,3 +22,48 @@ export const getPaisById = async (req, res) => {
         res.status(500).send({message: "Error del servidor"})
     }
 };
+
+export const createPais = async (req, res) => {
+    try {
+        const { nombre } = req.body;
+        const nuevoPais = { nombre };
+        const paisExistente = await Pais.findOne({
+            where: {
+                nombre: nombre
+            },
+        });
+        if (!paisExistente) {
+            const paisCreado = await Pais.create(nuevoPais);
+            res.send(paisCreado);
+        } else {
+            res.status(400).send({
+                message: "Ya existe un país con ese nombre",
+            });
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: "Error del servidor"
+        });
+    }
+};
+
+export const deletePais = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const paisExistente = await Pais.findByPk(id);
+        if (paisExistente) {
+            await Pais.destroy({
+                where: {
+                    id_pais: id,
+                },
+            });
+            res.send({ message: "País eliminado exitosamente"});
+        } else {
+            res.status(404).send("País no encontrado");
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: "Error del servidor",
+        });
+    }
+};
