@@ -28,4 +28,72 @@ export const getUserById = async (req, res) => {
     }
 };
 
-// Falta create Usuarios, update y delete
+export const createUsuario = async (req, res) => {
+    try {
+        const { nombre, apellido, correo, id_pais } = req.body;
+        const nuevoUsuario = {
+            nombre,
+            apellido,
+            correo,
+            id_pais,
+        };
+        const usuarioExistente = await Usuario.findOne({
+            where: {
+                correo: correo,
+            },
+        });
+        if (!usuarioExistente) {
+            const usuarioCreado = await Usuario.create(nuevoUsuario);
+            res.send(usuarioCreado);
+        } else {
+            res.status(400).send({
+                message: "Ya existe un usuario con ese correo",
+            });
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: "Error del servidor",
+        });
+    }
+};
+
+export const deleteUsuario = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const usuarioExistente = await Usuario.findByPk(id);
+        if (usuarioExistente) {
+            await Usuario.destroy({
+                where: {
+                    id_usuario: id,
+                },
+            });
+            res.send({ message: "Usuario eliminado exitosamente" });
+        } else {
+            res.status(400).send({ message: "Usuario no encontrado" });
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: "Error del servidor",
+        });
+    }
+};
+
+export const updateUsuario = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const usuarioExistente = await Usuario.findByPk(id);
+
+        if (usuarioExistente) {
+            await Usuario.update(req.body, {
+                where: {
+                    id_usuario: id,
+                },
+            });
+            res.send({ message: "Usuario actualizado exitosamente" });
+        } else {
+            res.status(404).send("Usuario no encontrado");
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error del servidor" });
+    }
+};

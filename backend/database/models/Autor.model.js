@@ -36,7 +36,7 @@ const Autor = sequelize.define(
         },
     },
     //comando opcionales
-    {
+    {   
         timestamps: false,
     }
 );
