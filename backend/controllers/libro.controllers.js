@@ -106,11 +106,13 @@ export const deleteLibro = async (req, res) => {
             include: [{ model: Genero }, { model: Autor, include: [Pais] }],
         });
         if (!resultado) {
-            return res.status(404).send("no se encontro el libro");
+            return res.status(404).send({ message: "no se encontro el libro" });
+        } else {
+            resultado.destroy();
+            res.status(202).send({
+                message: "Se ha eliminado el libro correctamente",
+            });
         }
-        return res
-            .status(202)
-            .send({ message: "Se ha eliminado el libro correctamente" });
     } catch (error) {
         console.log("mensaje de error:", error);
     }
