@@ -65,7 +65,7 @@ export const CreateLibro = async (req, res) => {
 
 export const getLibro = async (req, res) => {
     try {
-        const libros = await Libro();
+        const libros = await Libro.findAll();
         return res.status(200).send(libros);
     } catch (error) {
         console.error("Error al obtener los libros:", error);
@@ -108,7 +108,9 @@ export const deleteLibro = async (req, res) => {
         if (!resultado) {
             return res.status(404).send("no se encontro el libro");
         }
-        return res.status(201).send(await resultado.destroy());
+        return res
+            .status(202)
+            .send({ message: "Se ha eliminado el libro correctamente" });
     } catch (error) {
         console.log("mensaje de error:", error);
     }

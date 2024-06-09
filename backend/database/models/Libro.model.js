@@ -1,55 +1,57 @@
 import { sequelize } from "../db.js";
 import { DataTypes } from "sequelize";
 import { Genero } from "./Genero.model.js";
-import  Autor from "./Autor.model.js";
+import Autor from "./Autor.model.js";
 
-const Libro = sequelize.define("Libro", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  titulo: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  id_genero: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  id_autor: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  fecha_publicacion: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  url:{
-    type:DataTypes.STRING,
-    allowNull: true,
-  },
-  estado_libro: {
-    type:DataTypes.BOOLEAN,
-    defaultValue: true
-  }
-},
-{
-    sequelize,
-    paranoid: true,
-    timestamps: true,
-}
+const Libro = sequelize.define(
+    "Libro",
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        titulo: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        id_genero: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        id_autor: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        fecha_publicacion: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
+        url: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        estado_libro: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+        },
+    },
+    {
+        sequelize,
+        paranoid: true,
+        timestamps: true,
+    }
 );
 //aca defino las relaciones
 // genero tiene muchos Libros, y libro tiene un genero
 // Relaciones
-Genero.hasMany(Libro, { foreignKey: 'id_genero', onDelete: 'CASCADE' });
-Libro.belongsTo(Genero, { foreignKey: 'id_genero' });
+Genero.hasMany(Libro, { foreignKey: "id_genero", onDelete: "CASCADE" });
+Libro.belongsTo(Genero, { foreignKey: "id_genero" });
 
-Autor.hasMany(Libro, { foreignKey: 'id_autor', onDelete: 'CASCADE' });
-Libro.belongsTo(Autor, { foreignKey: 'id_autor' });
-export default Libro
- 
+Autor.hasMany(Libro, { foreignKey: "id_autor", onDelete: "CASCADE" });
+Libro.belongsTo(Autor, { foreignKey: "id_autor" });
+export default Libro;
+
 /* 
 buscar libro y que muestre su genero
 

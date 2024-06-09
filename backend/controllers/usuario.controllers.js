@@ -24,7 +24,10 @@ export const getUserById = async (req, res) => {
             res.send(user);
         }
     } catch (error) {
-        res.status(500).send({ message: "Error del servidor" });
+        res.status(500).send({
+            message: "Error del servidor",
+            error: error.toString(),
+        });
     }
 };
 
@@ -53,6 +56,7 @@ export const createUsuario = async (req, res) => {
     } catch (error) {
         res.status(500).send({
             message: "Error del servidor",
+            error: error.toString(),
         });
     }
 };
@@ -74,6 +78,7 @@ export const deleteUsuario = async (req, res) => {
     } catch (error) {
         res.status(500).send({
             message: "Error del servidor",
+            error: error.toString(),
         });
     }
 };
@@ -94,6 +99,9 @@ export const updateUsuario = async (req, res) => {
             res.status(404).send("Usuario no encontrado");
         }
     } catch (error) {
-        res.status(500).send({ message: "Error del servidor" });
+        res.status(500).send({
+            message: "Error del servidor",
+            error: error.toString(),
+        });
     }
 };
