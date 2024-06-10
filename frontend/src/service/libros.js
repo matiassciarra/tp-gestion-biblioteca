@@ -1,3 +1,3 @@
 
 
-export const obtenerLibros = async()=> await fetch("https://jsonplaceholder.typicode.com/todos/")
+export const obtenerLibros = async()=> {return await fetch("https://jsonplaceholder.typicode.com/todos/")}

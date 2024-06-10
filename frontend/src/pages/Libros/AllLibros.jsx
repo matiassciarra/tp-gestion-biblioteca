@@ -1,10 +1,6 @@
-import { useLoaderData } from "react-router-dom"
-async function AllLibros() {
-    const data = await useLoaderData();
-    console.log(data);
+
+export const AllLibros = () => {
   return (
     <div>AllLibros</div>
   )
 }
-
-export default AllLibros

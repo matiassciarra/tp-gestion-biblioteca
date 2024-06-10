@@ -4,9 +4,8 @@ export const LibrosScreen = () => {
     
     return (
         <>
-        
-            <Outlet/>
             main
+            <Outlet/>
         </>
     );
 };
