@@ -37,7 +37,9 @@ const Autor = sequelize.define(
     },
     //comando opcionales
     {   
-        timestamps: false,
+        sequelize,
+        paranoid: true,
+        timestamps: true,
     }
 );
 // Pais tiene muchos Autor, y Autor tiene un pais
