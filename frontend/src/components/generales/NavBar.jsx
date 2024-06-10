@@ -1,24 +1,16 @@
 import { NavLink } from "react-router-dom";
 import BookIcon from "../../assets/bookIcon";
-
+import { Outlet } from "react-router-dom"; 
+import './navBar.css'
 export const NavBar = () => {
     return (
+        <>
         <nav className="navbar  navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
                 <NavLink to="/" className="navbar-brand">
                     <BookIcon></BookIcon>
                 </NavLink>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+                
                 <div
                     className="collapse navbar-collapse"
                     id="navbarNavDropdown"
@@ -27,25 +19,25 @@ export const NavBar = () => {
                         <li className="nav-item">
                             <NavLink
                                 to="/libros"
-                                className="nav-link"
+                                className={({isActive})=> isActive ? 'nav-link navLink' : 'nav-link'}
                                 aria-current="page"
                             >
                                 Libros
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/autores" className="nav-link">
+                            <NavLink to="/autores" className={({isActive})=> isActive ? 'nav-link navLink' : 'nav-link'}>
                                 Autores
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/usuarios" className="nav-link">
+                            <NavLink to="/usuarios" className={({isActive})=> isActive ? 'nav-link navLink' : 'nav-link'}>
                                 Usuarios
                             </NavLink>
                         </li>
 
                         <li className="nav-item">
-                            <NavLink to="/prestamos" className="nav-link">
+                            <NavLink to="/prestamos" className={({isActive})=> isActive ? 'nav-link navLink' : 'nav-link'}>
                                 Prestamos
                             </NavLink>
                         </li>
@@ -53,5 +45,7 @@ export const NavBar = () => {
                 </div>
             </div>
         </nav>
+        <Outlet/>
+       </>
     );
 };
