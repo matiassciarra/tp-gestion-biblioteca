@@ -1,16 +1,16 @@
 import { useParams, useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import {deleteAutor} from '../../service/autores';
 
+import '../../assets/autores/cardSingleAutor.css'
 export const OneAutor = () => {
-  const navigate = useNavigate();
-  const [isDeleted, setIsDeleted] = useState(false); // Estado para el toggle
-
-  const deleteHandler = () => {
-    console.log('eliminado puto');
-    setIsDeleted(true); // Mostrar el toggle
+  const navigate = useNavigate(); // Estado para el toggle
+  
+  const deleteHandler = async(id) => {
+    await deleteAutor(id)
     setTimeout(() => {
       navigate(-1); // Redirigir a la página anterior después de un pequeño retraso
-    }, 2000); // Puedes ajustar el tiempo según tus necesidades
+    }, 200); // Puedes ajustar el tiempo según tus necesidades
   }
 
   const { id } = useParams();
@@ -18,24 +18,38 @@ export const OneAutor = () => {
 
   return (
     <>
-      <article>
-        <h1>{nombre} {apellido}</h1>
-        <span>
-          {fecha_nacimiento && (
-            <div>Aca se ejecuta la fecha de nacimiento {fecha_nacimiento}</div>
-          )}
-        </span>
-        <p>{biografia}</p>
-        <span>
-          {Pai && (
-            <h4>Pais: {Pai.nombre}</h4>
-          )}
-        </span>
+      <article className="card cardSingleAutor">
+        <h1 className="card-title placeholder-glow card-header widthMax">{nombre} {apellido}</h1>
+        <ul className="card-body list-group list-group-flush widthMax">
+          <li className="list-group-item">
+            <p>{biografia}</p>
+          </li>
+            {fecha_nacimiento && (
+              <li className="list-group-item">
+
+                    <div>Aca se ejecuta la fecha de nacimiento {fecha_nacimiento}</div>
+              </li>
+            
+            )}
+          
+            {Pai && (
+              <li className="list-group-item">
+                <h4>Pais: {Pai.nombre}</h4>
+              </li>
+
+            )}
+          <li className="list-group-item">
+            <button onClick={() => navigate(-1)} className="btn btn-primary text-white fw-bold card-link">Volver atras</button>
+            <button onClick={() => navigate(-1)} className="btn btn-warning text-white fw-bold card-link">Volver atras</button>
+            <button onClick={()=>deleteHandler(id_autor)} className="btn btn-danger fw-bold card-link">Eliminar usuario</button>
+          </li>
+          
+          
+        </ul>
+        
+        
       </article>
-      <button onClick={deleteHandler} className="btn btn-danger fw-bold">Eliminar usuario</button>
-      <button onClick={() => navigate(-1)} className="btn btn-primary text-white fw-bold">Volver atras</button>
-      //aca se le elimina el usuario si es exitoso
-      {isDeleted && <div className="toggle-alert">¡Usuario eliminado!</div>} {/* El toggle */}
+      
     </>
   )
 }

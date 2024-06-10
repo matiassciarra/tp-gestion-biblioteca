@@ -19,3 +19,16 @@ export const getAutor = async (id) => {
     
     return data;
 }
+export const deleteAutor = async (id) => {
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const response = await fetch(URL+`api/autores/${id}`, options);
+    if (!response.ok) {
+        throw new Error('Problema con la petición Fetch: ' + response.statusText);
+    }
+    return await response.json();
+}

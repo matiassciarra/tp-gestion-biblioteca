@@ -1,0 +1,13 @@
+.cardSingleAutor {
+    width: 50%;
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    margin: 0 auto; /* Centra el bloque entero horizontalmente en la página */
+}
+
+.widthMax {
+    width: 100%;
+    text-align: center; /* Centra el contenido horizontalmente */
+    
+}
