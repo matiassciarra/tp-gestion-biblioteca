@@ -10,7 +10,7 @@ export const getAllAutores = async () => {
     return data;
 }
 
-export const getAutor =async (id) => {
+export const getAutor = async (id) => {
     const response = await fetch(URL+`api/autores/${id}`);
     if (!response.ok) {
         throw new Error("Error al obtener autores");

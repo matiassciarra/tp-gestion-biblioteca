@@ -1,0 +1,14 @@
+.containerAutores {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    width: 80%;
+    margin: 0 auto; /* Centra el contenedor `.containerAutores` en la página */
+    gap: 2em;
+    flex-wrap: wrap;
+}
+.accionAutores {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+}
