@@ -1,0 +1,16 @@
+.conteiner-all-generos{
+    display: flex;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    flex-direction: column;
+    gap: 1.3em;
+} 
+
+.conteiner-all-generos article {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between; /* Distribuye el contenido de los artículos en fila */
+    align-items: center;
+}
