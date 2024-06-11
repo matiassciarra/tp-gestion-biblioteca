@@ -6,6 +6,7 @@ import {deleteAutor} from '../../service/autores';
 export const AllAutores = () => {
   const res = useLoaderData();
   const [data, setData] = useState(res);
+  const [showModal, setShowModal] = useState(false);
 
   // Función para eliminar usuario
   const handlerDelete = async (id) => {
@@ -22,6 +23,14 @@ export const AllAutores = () => {
 
   return (
     <>
+    <h1 className="tituloMain">Autores</h1>
+      <button
+        type="button"
+        className="btn btn-success text-white fw-bold"
+        onClick={() => setShowModal(true)}
+      >
+        Nuevo Autor
+      </button>
       <article className='containerAutores'>
         {
           data.map(({id_autor, nombre, apellido, biografia}) => (

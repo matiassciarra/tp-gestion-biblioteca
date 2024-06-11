@@ -1,5 +1,7 @@
 import Autor from "../database/models/Autor.model.js";
 import { Pais } from "../database/models/Pais.model.js";
+import Libro from "../database/models/Libro.model.js"
+import { Genero } from "../database/models/Genero.model.js";
 import { z } from "zod";
 export const getAutores = async (req, res) => {
     try {
@@ -15,7 +17,22 @@ export const getAutores = async (req, res) => {
 export const getAutorPorId = async (req, res) => {
     try {
         const { id } = req.params;
-        const autor = await Autor.findByPk(id, { include: Pais });
+        //verificamos el id
+        const idSchema = z.number().int().positive();
+        const parseResult = idSchema.safeParse(Number(id));
+        if (!parseResult.success) {
+            return res.status(400).send("ID no válido");
+        }
+        //consultamos el autor consigo todos sus libros
+        const autor = await Autor.findByPk(id, {
+            include: [
+                Pais,
+                {
+                    model: Libro,
+                    include: [Genero]
+                }
+            ]
+        });
         if (!autor) {
             return res.status(404).send("no se encontro autor por id");
         }

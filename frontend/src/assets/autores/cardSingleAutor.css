@@ -1,13 +1,53 @@
 .cardSingleAutor {
-    width: 50%;
     display: flex;
     justify-content: center; /* Centra el contenido horizontalmente */
     align-items: center; /* Centra el contenido verticalmente */
-    margin: 0 auto; /* Centra el bloque entero horizontalmente en la página */
 }
 
 .widthMax {
     width: 100%;
     text-align: center; /* Centra el contenido horizontalmente */
-    
+}
+
+.condicional button {
+    margin: 0;
+    width: 100%; /* Inicialmente, toma el 100% del contenedor */
+    max-width: 150px; /* Máximo 200px de ancho */
+}
+/*seccion*/
+.sectionCard {
+  padding: 1.3em;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.sectionCard div {
+  width: 100%;
+}
+.sectionCard .info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.accion {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+@media (min-width: 800px) {
+  .sectionCard {
+    flex-direction: row;
+  }
+
+  .sectionCard .info {
+    width: 30%;
+  }
+
+  .sectionCard .peliculas {
+    width: 70%;
+  }
 }

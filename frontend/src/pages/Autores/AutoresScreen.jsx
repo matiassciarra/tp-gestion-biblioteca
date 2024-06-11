@@ -5,20 +5,12 @@ import Button from 'react-bootstrap/Button';
 
 export const AutoresMain = () => {
   // Estado para controlar la visibilidad del modal
-  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <h1 className="tituloMain">Autores</h1>
-      <button
-        type="button"
-        className="btn btn-success text-white fw-bold"
-        onClick={() => setShowModal(true)}
-      >
-        Nuevo Autor
-      </button>
+      
       <Outlet />
-
+      {/*
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
@@ -33,6 +25,7 @@ export const AutoresMain = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      */}
     </>
   );
 };

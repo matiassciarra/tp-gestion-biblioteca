@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+
 import {Outlet} from 'react-router-dom'
 export const Genero = ()=>{
     console.log(Genero);

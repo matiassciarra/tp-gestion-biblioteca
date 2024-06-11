@@ -1,9 +1,9 @@
 import {createBrowserRouter,createRoutesFromElements,Route,RouterProvider } from 'react-router-dom'
 
 import { NavBar } from "./components/generales/NavBar";
-import { Navigate } from "react-router-dom";
-import {HomeScreen} from './pages/HomeScreen'
+//TODO: aca van las importacion de libros
 import {TodoLibros,OneLibro,PantallaMainLibro} from "./pages/Libros/exportLibros";
+//TODO: aca van las importacion de Autores
 import {AutoresMain , AllAutores,OneAutor} from "./pages/Autores/Autores"
 import { getAllAutores , getAutor} from "./service/autores";
 //TODO:aca van las importacions de genero
