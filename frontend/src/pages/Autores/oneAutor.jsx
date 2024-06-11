@@ -12,7 +12,6 @@ export const OneAutor = () => {
     }, 200); // Puedes ajustar el tiempo según tus necesidades
   }
   const { id_autor, nombre, apellido, biografia, fecha_nacimiento, url_imagen, Pai } = useLoaderData();
-  console.log(url_imagen);
   return (
     <section className="sectionCard">
       <div className="info">

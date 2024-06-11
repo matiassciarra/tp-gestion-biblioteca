@@ -1,9 +1,14 @@
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FormAutor } from './FormAutor';
 
 export const modalAutorCreate = ({bool,setBool, action=null}) =>{
   if(!action) action = setBool
+  const res = (data) =>{
+    const res = action(data)
+    if (res){
+      setBool(false)
+    }
+  }
   return (
     <Modal show={bool} onHide={setBool} centered>
         <Modal.Header closeButton>
@@ -11,16 +16,8 @@ export const modalAutorCreate = ({bool,setBool, action=null}) =>{
         </Modal.Header>
         <Modal.Body>
           {/*TODO: aca va el formulario */}
-          <FormAutor/>
+          <FormAutor action={res}/>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={()=>setBool(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={()=>action()}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
   )
 }

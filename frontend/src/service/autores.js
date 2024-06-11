@@ -32,3 +32,21 @@ export const deleteAutor = async (id) => {
     }
     return await response.json();
 }
+
+export const createAutor = async (obj) => {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj)
+    };
+    const response = await fetch(URL + "api/autores", options);
+    if (!response.ok) {
+        throw new Error('Error al crear el autor');
+    }
+    const data = await response.json();
+    
+    return data;
+}
+

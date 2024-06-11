@@ -7,13 +7,12 @@ export const cardAutor = ({ object })=> {
         
         <h1 className="card-title placeholder-glow card-header widthMax">{nombre} {apellido}</h1>
         <ul className="card-body list-group list-group-flush widthMax">
-          <li className="list-group-item">
+          {biografia && (<li className="list-group-item">
             <p>{biografia}</p>
-          </li>
+          </li>)}
             {fecha_nacimiento && (
               <li className="list-group-item">
-
-                    <div>Aca se ejecuta la fecha de nacimiento {fecha_nacimiento}</div>
+                    <h4>Fecha de nacimiento: {fecha_nacimiento}</h4>
               </li>
             
             )}

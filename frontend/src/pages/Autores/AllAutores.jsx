@@ -3,14 +3,17 @@ import { useState } from 'react';
 import '../../assets/autores/autoresAll.css';
 import {deleteAutor} from '../../service/autores';
 import { modalAutorCreate as Modal } from '../../components/autor/modalAutorCreate';
-
+import { createAutor } from '../../service/autores';
 export const AllAutores = () => {
   const res = useLoaderData();
   const [data, setData] = useState(res);
   const [showModal, setShowModal] = useState(false);
+  
 
-  const AccionCreate = () =>{
-    setShowModal(false)
+  const AccionCreate =async (objeto) =>{
+    const newUser = await createAutor(objeto)
+    setData([...data,newUser])
+    return true
   }
 
   // Función para eliminar usuario
