@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import { Input } from "../../components/libros/Input";
 import { Filtros } from "../../components/libros/Filtros";
 
 export const LibrosScreen = () => {

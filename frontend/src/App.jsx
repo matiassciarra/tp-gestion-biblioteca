@@ -15,6 +15,9 @@ import {
     PantallaMainLibro,
     CrearOActualizar,
 } from "./pages/Libros/exportLibros";
+
+import { UnGenero, AllGeneros, Genero } from "./pages/Genero/Genero";
+import { getAllGenero } from "./service/generos";
 // Crear una instancia del navegador
 
 export default function App() {
@@ -49,6 +52,14 @@ export default function App() {
                         loader={({ params }) => getLibro(params.id)}
                         element={<OneLibro />}
                     ></Route>
+                </Route>
+                <Route path="generos/*" element={<Genero />}>
+                    <Route
+                        index
+                        loader={getAllGenero}
+                        element={<AllGeneros />}
+                    />
+                    <Route path=":nombreGenero" element={<UnGenero />} />
                 </Route>
 
                 <Route path="*" element={<h1>hola</h1>}></Route>

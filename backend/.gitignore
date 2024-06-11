@@ -3,4 +3,4 @@ package-lock.json
 pnpm-lock.yaml
 
 
-datos.sqlite
+database/datos.sqlite
