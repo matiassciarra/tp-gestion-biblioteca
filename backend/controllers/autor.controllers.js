@@ -53,7 +53,8 @@ export const createAutor = async (req, res) => {
             fecha_nacimiento: z.string().refine((val) => !isNaN(Date.parse(val)), {
                 message: "Invalid date format",
             }).optional(),
-            id_pais: z.number().optional()  // Hace que 'id_pais' sea opcional
+            id_pais: z.number().optional(),  // Hace que 'id_pais' sea opcional
+            URL: z.string().optional()
         });
         const validationResult = AutorSchema.safeParse(req.body);
         if (!validationResult.success) {

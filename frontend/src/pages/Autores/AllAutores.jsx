@@ -2,11 +2,16 @@ import {useLoaderData, Link} from 'react-router-dom';
 import { useState } from 'react';
 import '../../assets/autores/autoresAll.css';
 import {deleteAutor} from '../../service/autores';
+import { modalAutorCreate as Modal } from '../../components/autor/modalAutorCreate';
 
 export const AllAutores = () => {
   const res = useLoaderData();
   const [data, setData] = useState(res);
   const [showModal, setShowModal] = useState(false);
+
+  const AccionCreate = () =>{
+    setShowModal(false)
+  }
 
   // Función para eliminar usuario
   const handlerDelete = async (id) => {
@@ -52,6 +57,8 @@ export const AllAutores = () => {
           ))
         }
       </article>
+      <Modal bool={showModal} setBool={setShowModal} action={AccionCreate}/>
     </>
   )
 }
+
