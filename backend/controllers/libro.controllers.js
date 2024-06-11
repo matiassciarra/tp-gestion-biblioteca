@@ -65,7 +65,9 @@ export const CreateLibro = async (req, res) => {
 
 export const getLibro = async (req, res) => {
     try {
-        const libros = await Libro.findAll();
+        const libros = await Libro.findAll({
+            include: [{ model: Autor }, { model: Genero }],
+        });
         return res.status(200).send(libros);
     } catch (error) {
         console.error("Error al obtener los libros:", error);
@@ -190,5 +192,29 @@ export const updateLibro = async (req, res) => {
     } catch (error) {
         console.error("Error al actualizar el libro:", error);
         res.status(500).json({ error: "Error al actualizar el libro." });
+    }
+};
+
+export const getLibrosPorGenero = async (req, res) => {
+    const { id_genero } = req.query;
+    try {
+        const librosDeGenero = await Libro.findAll({
+            where: {
+                id_genero: id_genero,
+            },
+        });
+        if (!librosDeGenero) {
+            res.status(404).send({
+                message: "No se encontraron libros de ese genero",
+            });
+        } else {
+            res.send(librosDeGenero);
+        }
+    } catch (error) {
+        res.status(500).send({
+            message:
+                "Ha existido un error de servidor al buscar libros de ese genero",
+            error: error,
+        });
     }
 };
