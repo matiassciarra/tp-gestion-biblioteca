@@ -1,6 +1,6 @@
 import Autor from "../database/models/Autor.model.js";
 import { Pais } from "../database/models/Pais.model.js";
-
+import { z } from "zod";
 export const getAutores = async (req, res) => {
     try {
         res.send(await Autor.findAll({ include: Pais }));
@@ -29,8 +29,20 @@ export const getAutorPorId = async (req, res) => {
 
 export const createAutor = async (req, res) => {
     try {
-        const { nombre, apellido, biografia, fecha_nacimiento, id_pais } =
-            req.body;
+        const AutorSchema = z.object({
+            nombre: z.string(),
+            apellido: z.string(),  // Asumiendo que 'apellido' es requerido y debe ser un string
+            biografia: z.string().optional(),  // Hace que 'biografia' sea opcional
+            fecha_nacimiento: z.string().refine((val) => !isNaN(Date.parse(val)), {
+                message: "Invalid date format",
+            }).optional(),
+            id_pais: z.number().optional()  // Hace que 'id_pais' sea opcional
+        });
+        const validationResult = AutorSchema.safeParse(req.body);
+        if (!validationResult.success) {
+            return res.status(400).json({ error: validationResult.error.errors });
+        }
+        const { nombre, apellido, biografia, fecha_nacimiento, id_pais } = validationResult.data
         const nuevoAutor = {
             nombre,
             apellido,
