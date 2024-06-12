@@ -1,5 +1,4 @@
 import { Router } from "express";
-<<<<<<< HEAD
 import {
     CreateLibro,
     getLibro,
@@ -10,10 +9,6 @@ import {
     getLibrosPorGenero,
 } from "../controllers/libro.controllers.js";
 import { z } from "zod";
-=======
-import { CreateLibro, getLibro,shemaIdLibro, getLibroId, updateLibro,deleteLibro } from "../controllers/libro.controllers.js";
-
->>>>>>> 94a4caa116b64c2241645298692f95fc41971f38
 
 const router = Router();
 
