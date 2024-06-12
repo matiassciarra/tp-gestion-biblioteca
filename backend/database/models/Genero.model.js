@@ -14,6 +14,8 @@ export const Genero = sequelize.define("Genero", {
 },
 //comando opcionales
 {
-    timestamps: false,
+    sequelize,
+    paranoid: true,
+    timestamps: true,
 }
 );

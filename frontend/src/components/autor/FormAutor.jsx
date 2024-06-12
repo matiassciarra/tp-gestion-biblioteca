@@ -1,4 +1,3 @@
-import Button from 'react-bootstrap/Button';
 //css
 import '../../assets/autores/FormAutor.css'
 //react-hook-form

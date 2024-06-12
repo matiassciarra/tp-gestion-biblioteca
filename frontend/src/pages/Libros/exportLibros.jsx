@@ -1,7 +1,9 @@
-import {AllLibros} from "./AllLibros";
+import { AllLibros } from "./AllLibros";
 import { LibrosScreen } from "./mainLibros";
-import oneLibro from "./Libro"
+import unLibro from "./Libro";
+import { crearOModificar } from "./crearOModificar";
 
 export const TodoLibros = AllLibros;
 export const PantallaMainLibro = LibrosScreen;
-export const OneLibro = oneLibro;
+export const OneLibro = unLibro;
+export const CrearOActualizar = crearOModificar;
