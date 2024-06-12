@@ -1,5 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 
+import { useLoaderData, useNavigate } from "react-router-dom";
+
 function Libro() {
     const libro = useLoaderData();
     const navigate = useNavigate();
@@ -26,9 +28,10 @@ function Libro() {
                     <h3 className="fw-medium text-primary text-primary">
                         {libro.Autor.nombre + " " + libro.Autor.apellido}
                     </h3>
-                    <h4 className="fw-medium text-primary-emphasis">
+                    {libro.Genero ? <h4 className="fw-medium text-primary-emphasis">
                         {libro.Genero.nombre}
-                    </h4>
+                    </h4>: null}
+                    
                     <h4 className="fw-medium text-info-emphasis">
                         {fechaFormateada}
                     </h4>
@@ -42,5 +45,7 @@ function Libro() {
         </div>
     );
 }
+
+export default Libro;
 
 export default Libro;

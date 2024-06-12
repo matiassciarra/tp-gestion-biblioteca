@@ -20,5 +20,9 @@ router.get("/libros/generos", getLibrosPorGenero);
 router.get("/libros/:id", shemaIdLibro, getLibroId);
 router.patch("/libros/:id", shemaIdLibro, updateLibro);
 router.delete("/libros/:id", shemaIdLibro, deleteLibro);
+router.get("/libros/generos", getLibrosPorGenero);
+router.get("/libros/:id", shemaIdLibro, getLibroId);
+router.patch("/libros/:id", shemaIdLibro, updateLibro);
+router.delete("/libros/:id", shemaIdLibro, deleteLibro);
 
 export default router;
