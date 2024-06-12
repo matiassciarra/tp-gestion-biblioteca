@@ -1,5 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 
+import { useLoaderData, useNavigate } from "react-router-dom";
+
 function Libro() {
     const libro = useLoaderData();
     const navigate = useNavigate();
@@ -43,5 +45,7 @@ function Libro() {
         </div>
     );
 }
+
+export default Libro;
 
 export default Libro;
