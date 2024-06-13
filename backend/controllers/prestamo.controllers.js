@@ -1,6 +1,6 @@
-import { Prestamo } from "../database/models/Prestamo.model.js";
+import  Prestamo  from "../database/models/Prestamo.model.js";
 import Libro from "../database/models/Libro.model.js";
-import { Usuario } from "../database/models/Usuario.model.js";
+import  Usuario  from "../database/models/Usuario.model.js";
 
 export const getPrestamos = async (req, res) => {
     try {

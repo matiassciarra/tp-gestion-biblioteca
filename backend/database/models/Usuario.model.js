@@ -1,8 +1,8 @@
 import { sequelize } from "../db.js";
 import { DataTypes } from "sequelize";
 import { Pais } from "./Pais.model.js"
-
-export const Usuario = sequelize.define(
+import { TipoUsuario } from "./TipoUsuario.js";
+const Usuario = sequelize.define(
   "Usuario",
   {
     id_usuario: {
@@ -29,20 +29,26 @@ export const Usuario = sequelize.define(
     id_pais: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    id_tipo_usuario: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     }
   },
   //comando opcionales
   {
-    timestamps: false,
+        sequelize,
+        paranoid: true,
+        timestamps: true,
   }
 );
 // Pais tiene muchos usuarios, y usario tiene un pais
 Pais.hasMany(Usuario, { foreignKey: 'id_pais' });
 Usuario.belongsTo(Pais, { foreignKey: 'id_pais' });
 
+TipoUsuario.hasMany(Usuario, { foreignKey: 'id_tipo_usuario' });
+Usuario.belongsTo(TipoUsuario, { foreignKey: 'id_tipo_usuario' });
 
-//Usuario tiene un país
-Usuario.belongsTo(Pais, {foreignKey: "id_pais"})
-//País tiene muchos usuarios
-Pais.hasMany(Usuario, {foreignKey: "id_pais"})
 
+
+export default Usuario

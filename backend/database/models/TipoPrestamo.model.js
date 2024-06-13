@@ -1,18 +1,17 @@
 import { sequelize } from "../db.js";
 import { DataTypes } from "sequelize";
 
-export const Pais = sequelize.define(
-    "Pais",
+export const TipoPrestamo = sequelize.define('TipoPrestamo',
     {
-        id_pais: {
+        id_prestamo : {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        nombre: {
-            type: DataTypes.TEXT,
+        nombre_prestamo: {
+            type: DataTypes.STRING,
             allowNull: false,
-        },
+        }
     },
     {
         sequelize,
