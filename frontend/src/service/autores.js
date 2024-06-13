@@ -1,25 +1,15 @@
 export const URL = "http://localhost:3002/";
-export const URL = "http://localhost:3002/";
 
 export const getAllAutores = async () => {
-    const response = await fetch(URL + "api/autores");
     const response = await fetch(URL + "api/autores");
     if (!response.ok) {
         throw new Error("Error al obtener autores");
     }
     const data = await response.json();
-<<<<<<< HEAD
     return data;
 };
 export const getAutor = async (id) => {
     const response = await fetch(URL + `api/autores/${id}`);
-=======
-    return data
-}
-export const getAutor = async (id) => {
-    const response = await fetch(URL+`api/autores/${id}`);
->>>>>>> 94a4caa116b64c2241645298692f95fc41971f38
->>>>>>> bac3718e07f3ecbd98056f737108509e7e4149b0
     if (!response.ok) {
         throw new Error("Error al obtener autores");
     }

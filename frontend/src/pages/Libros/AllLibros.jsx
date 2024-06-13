@@ -4,7 +4,9 @@ import { useState } from "react";
 import { Input } from "../../components/libros/Input";
 
 export const AllLibros = () => {
-    const [libros, setLibros] = useState(useLoaderData());
+    const resLibros = useLoaderData()
+    const [libros, setLibros] = useState(resLibros);
+    console.log(libros);
 
     return (
         <>
