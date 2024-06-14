@@ -1,4 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { deleteLibro } from "../../service/libros";
+import swal from "sweetalert";
 
 function Libro() {
     const libro = useLoaderData();
@@ -8,11 +10,37 @@ function Libro() {
         fechaPublicacion.getMonth() + 1
     }/${fechaPublicacion.getFullYear()}`;
 
+    const onDelete = () => {
+        swal({
+            title: "Eliminar",
+            text:
+                "Estas seguro que deseas eliminar este libro: " + libro.titulo,
+            icon: "warning",
+            buttons: ["No, regresar", "Si, eliminar"],
+        }).then((resp) => {
+            if (resp) {
+                deleteLibro(libro.id);
+                navigate(-1);
+                swal({
+                    title: "Eliminar libro",
+                    text: "Libro eliminado con exito",
+                    icon: "success",
+                    timer: 2000,
+                });
+            }
+        });
+    };
     return (
         <div className="container">
-            <button className="btn btn-info mb-2" onClick={() => navigate(-1)}>
+            <button
+                className="btn btn-dark mx-3 my-2"
+                onClick={() => navigate(-1)}
+            >
                 Regresar
             </button>
+            <button className="btn btn-danger" onClick={onDelete}>
+                Eliminar libro
+            </button>{" "}
             <div className="row">
                 <div className="col-md-4">
                     <img
@@ -26,10 +54,12 @@ function Libro() {
                     <h3 className="fw-medium text-primary text-primary">
                         {libro.Autor.nombre + " " + libro.Autor.apellido}
                     </h3>
-                    {libro.Genero ? <h4 className="fw-medium text-primary-emphasis">
-                        {libro.Genero.nombre}
-                    </h4>: null}
-                    
+                    {libro.Genero ? (
+                        <h4 className="fw-medium text-primary-emphasis">
+                            {libro.Genero.nombre}
+                        </h4>
+                    ) : null}
+
                     <h4 className="fw-medium text-info-emphasis">
                         {fechaFormateada}
                     </h4>
