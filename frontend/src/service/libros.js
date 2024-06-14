@@ -51,10 +51,11 @@ export const createLibro = async (obj) => {
         body: JSON.stringify(obj),
     };
     const response = await fetch(URL + "api/libros", options);
-    if (!response.ok) {
-        throw new Error("Error al crear el libro");
-    }
     const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message);
+    }
+    
 
     return data;
 };
