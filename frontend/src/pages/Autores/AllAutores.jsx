@@ -11,6 +11,7 @@ export const AllAutores = () => {
 
     const AccionCreate = async (objeto) => {
         const newUser = await createAutor(objeto);
+        //aca agregar manejo de error
         setData([...data, newUser]);
         return true;
     };

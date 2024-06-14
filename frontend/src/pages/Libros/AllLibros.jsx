@@ -6,7 +6,6 @@ import { Input } from "../../components/libros/Input";
 export const AllLibros = () => {
     const resLibros = useLoaderData()
     const [libros, setLibros] = useState(resLibros);
-    console.log(libros);
 
     return (
         <>

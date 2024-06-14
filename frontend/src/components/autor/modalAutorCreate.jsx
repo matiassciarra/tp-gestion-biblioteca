@@ -5,9 +5,10 @@ export const modalAutorCreate = ({bool,setBool, action=null}) =>{
   if(!action) action = setBool
   const res = (data) =>{
     const res = action(data)
-    if (res){
-      setBool(false)
+    if (!res){
+      
     }
+    setBool(false)
   }
   return (
     <Modal show={bool} onHide={setBool} centered>

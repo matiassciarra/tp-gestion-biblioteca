@@ -16,15 +16,25 @@ export const Formulario = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = handleSubmit((data) => {
-        createLibro(data);
-        swal({
-            title: "Nuevo libro: " + data.titulo,
-            text: "Creado exitosamente",
-            icon: "success",
-            button: "Aceptar",
-        });
-        navigate(-1);
+    const onSubmit = handleSubmit( async (data) => {
+        try {
+            const response = await createLibro(data);
+            swal({
+                title: "Nuevo libro: " + data.titulo,
+                text: response.message,  // Utiliza el mensaje del backend
+                icon: "success",
+                button: "Aceptar",
+            });
+            navigate(-1);
+        } catch (error) {
+            swal({
+                title: "Error",
+                text: error.message,
+                icon: "error",
+                button: "Aceptar",
+            });
+        }
+    
     });
 
     useEffect(() => {
@@ -198,11 +208,11 @@ export const Formulario = () => {
                     )}
                 </div>
                 <div className="container-fluid d-flex m-3">
-                    <button className="btn btn-success ml-2" type="submit">
+                    <button className="btn btn-success ml-2 " type="submit">
                         Crear nuevo libro
                     </button>
                     <button
-                        className="btn btn-dark"
+                        className="btn btn-dark mx-2"
                         onClick={() => {
                             navigate(-1);
                         }}
