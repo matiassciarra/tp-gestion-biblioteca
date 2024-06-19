@@ -5,15 +5,18 @@ import { createGenero } from '../../service/generos';
 
 const ModalG = ({ show, handleClose, onSave }) => {
     const [inputValue, setInputValue] = useState("");
-
+    const [inputURLValue, setInputURLValue] = useState(null)
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
+    const handleInputURLChange = (e) => {
+      setInputURLValue(e.target.value);
+  };
 
     const handleSubmit = async () => {
         console.log("Nuevo Género:", inputValue);
         try {
-            const nuevoGenero = await createGenero({ nombre: inputValue });
+            const nuevoGenero = await createGenero({ nombre: inputValue , url: inputURLValue});
             onSave(nuevoGenero);
             handleClose();
         } catch (error) {
@@ -39,6 +42,14 @@ const ModalG = ({ show, handleClose, onSave }) => {
                     value={inputValue}
                     onChange={handleInputChange}
                 />
+                <input
+                    type='text'
+                    className='form-control'
+                    placeholder='Ingrese la URL para la imagen'
+                    value={inputURLValue}
+                    onChange={handleInputURLChange}
+                />
+                
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

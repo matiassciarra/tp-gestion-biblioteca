@@ -22,7 +22,7 @@ export const getGeneroById = async (req, res) => {
 
 export const createGenero = async (req, res) => {
     try {
-        const { nombre } = req.body; //Recibimos el nombre del genero
+        const { nombre ,url } = req.body; //Recibimos el nombre del genero
         if (!nombre) {
             return res
                 .status(400)
@@ -37,7 +37,7 @@ export const createGenero = async (req, res) => {
         }
 
         // Crear el nuevo género
-        const nuevoGenero = await Genero.create({ nombre: nombre });
+        const nuevoGenero = await Genero.create({ nombre: nombre , url:url});
         res.status(201).json(nuevoGenero);
     } catch (error) {
         res.status(500).json({

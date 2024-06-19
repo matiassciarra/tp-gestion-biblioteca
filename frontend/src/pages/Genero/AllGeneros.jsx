@@ -6,6 +6,7 @@ import ModalG from '../../components/generos/modal';
 
 export const AllGeneros = () => {
     const initialData = useLoaderData();
+    console.log(initialData);
     const [generos, setGeneros] = useState(initialData);
     const [searchTerm, setSearchTerm] = useState("");
     const [showModal, setShowModal] = useState(false);
@@ -55,8 +56,9 @@ export const AllGeneros = () => {
                 </form>
             </div>
             {
-                generos.map(({ id_genero, nombre }) => (
+                generos.map(({ id_genero, nombre ,url}) => (
                     <article className="card card-body" key={id_genero}>
+                        <img src={url}/>
                         <h1 className="card-title text-black">{nombre}</h1>
                         <div>
                             <button type='button' className="btn btn-primary card-link fw-bold">Editar</button>

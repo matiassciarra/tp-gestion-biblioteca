@@ -10,7 +10,11 @@ export const Genero = sequelize.define("Genero", {
   nombre: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
+  url: {
+    type: DataTypes.STRING,
+    allowNull: true,
+},
 },
 //comando opcionales
 {
