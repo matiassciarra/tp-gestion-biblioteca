@@ -44,3 +44,21 @@ export const createGenero = async (obj) => {
 
     return data;
 };
+
+export const updateGenero = async (id,obj) => {
+    const options = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj),
+    };
+    const response = await fetch(`${URL}/${id}`, options);
+    if (!response.ok) {
+        throw new Error("Error al actualizar el género");
+    }
+    const data = await response.json();
+
+    return data;
+};
+

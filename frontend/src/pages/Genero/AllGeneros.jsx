@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import '../../assets/generos/AllGeneros.css';
 import { useState } from "react";
-import { deleteGenero, getGenero } from "../../service/generos";
+import { deleteGenero, getGenero, updateGenero,createGenero } from "../../service/generos";
 import ModalG from '../../components/generos/modal';
 
 export const AllGeneros = () => {
@@ -10,6 +10,7 @@ export const AllGeneros = () => {
     const [generos, setGeneros] = useState(initialData);
     const [searchTerm, setSearchTerm] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const [editingGenero, setEditingGenero] = useState(null);
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -31,17 +32,44 @@ export const AllGeneros = () => {
         }
     };
 
-    const handleModalClose = () => setShowModal(false);
-    const handleModalShow = () => setShowModal(true);
+    const handleUpdateGenero = async (id, newGeneroData) => {
+        try {
+            const updatedGenero = await updateGenero(id, newGeneroData);
+            const gen=updatedGenero.genero
+            setGeneros(generos.map(genero => genero.id_genero === id ? gen : genero));
+            handleModalClose();
+        } catch (error) {
+            console.error("Error al actualizar el género:", error);
+        }
+    };
 
-    const handleAddGenero = (nuevoGenero) => {
+    const handleModalClose = () => {
+        setShowModal(false);
+        setEditingGenero(null);
+    };
+    const handleModalShow = (genero = null) => {
+        setEditingGenero(genero);
+        setShowModal(true);
+    };
+
+    const handleAddGenero =async (nuevoGenero) => {
+        await createGenero( nuevoGenero)
         setGeneros([...generos, nuevoGenero]);
+    };
+
+    const handleSaveGenero = async (generoData) => {
+        if (editingGenero) {
+            await handleUpdateGenero(editingGenero.id_genero, generoData);
+        } else {
+            handleAddGenero(generoData);
+        }
+        handleModalClose();
     };
 
     return (
         <div className="conteiner-all-generos">
             <div className="add-button-container mt-4">
-                <button onClick={handleModalShow} className="btn btn-success fw-bold">Agregar Género</button>
+                <button onClick={() => handleModalShow()} className="btn btn-success fw-bold">Agregar Género</button>
             </div>
             <div className="search-container mt-4">
                 <form onSubmit={handleSearch}>
@@ -61,13 +89,13 @@ export const AllGeneros = () => {
                         <img src={url}/>
                         <h1 className="card-title text-black">{nombre}</h1>
                         <div>
-                            <button type='button' className="btn btn-primary card-link fw-bold">Editar</button>
+                            <button type='button' onClick={() => handleModalShow({ id_genero, nombre, url })} className="btn btn-primary card-link fw-bold">Editar</button>
                             <button type='button' onClick={() => handlerDelete(id_genero)} className="btn btn-danger card-link fw-bold">Eliminar</button>
                         </div>
                     </article>
                 ))
             }
-            <ModalG show={showModal} handleClose={handleModalClose} onSave={handleAddGenero} />
+            <ModalG show={showModal} handleClose={handleModalClose} onSave={handleSaveGenero} onUpDate={handleUpdateGenero} genero={editingGenero} />
         </div>
     );
 };
