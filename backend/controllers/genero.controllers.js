@@ -22,7 +22,7 @@ export const getGeneroById = async (req, res) => {
 
 export const createGenero = async (req, res) => {
     try {
-        const { nombre } = req.body; //Recibimos el nombre del genero
+        const { nombre ,url } = req.body; //Recibimos el nombre del genero
         if (!nombre) {
             return res
                 .status(400)
@@ -37,7 +37,7 @@ export const createGenero = async (req, res) => {
         }
 
         // Crear el nuevo género
-        const nuevoGenero = await Genero.create({ nombre: nombre });
+        const nuevoGenero = await Genero.create({ nombre: nombre , url:url});
         res.status(201).json(nuevoGenero);
     } catch (error) {
         res.status(500).json({
@@ -68,7 +68,7 @@ export const deleteGenero = async (req, res) => {
 
 export const patchGenero = async (req, res) => {
     const { id } = req.params;
-    const { nombre } = req.body;
+    const { nombre , url} = req.body
     try {
         //me tiene que pasar si o si el genero
         if (!nombre) {
@@ -81,7 +81,8 @@ export const patchGenero = async (req, res) => {
         if (!resultado) {
             return res.status(404).json({ message: "Género no encontrado" });
         }
-        resultado.nombre = nombre; // Asigna el nuevo nombre del género
+        resultado.nombre = nombre;// Asigna el nuevo nombre del género
+        resultado.url =url;
         await resultado.save(); // Guarda los cambios
 
         return res.status(200).json({

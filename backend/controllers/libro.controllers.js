@@ -19,7 +19,7 @@ export const CreateLibro = async (req, res) => {
     const validationResult = createLibro.safeParse(req.body);
 
     if (!validationResult.success) {
-        return res.status(400).json({ error: validationResult.error.errors });
+        return res.status(400).json({ message: validationResult.error.errors });
     }
 
     const {
@@ -36,7 +36,7 @@ export const CreateLibro = async (req, res) => {
         if (!genero) {
             return res
                 .status(400)
-                .json({ error: "El ID del género no existe." });
+                .json({ message: "El ID del género no existe." });
         }
 
         // Verificar si el autor existe
@@ -44,7 +44,19 @@ export const CreateLibro = async (req, res) => {
         if (!autor) {
             return res
                 .status(400)
-                .json({ error: "El ID del autor no existe." });
+                .json({ message: "El ID del autor no existe." });
+        }
+        //TODO: CREAR VALIDACION SI EXISTE EL LIBRO
+        const libroExist = await Libro.findOne({
+            where: {
+                id_autor: id_autor,
+                id_genero: id_genero,
+                titulo: titulo
+            }
+        })
+        if (libroExist) {
+            throw new Error("El libro ya existe");
+            //return res.status(400).json({message:""})
         }
 
         const nuevoLibro = await Libro.create({
@@ -56,10 +68,11 @@ export const CreateLibro = async (req, res) => {
             estado_libro: estado_libro !== undefined ? estado_libro : true,
         });
 
-        return res.status(201).json(nuevoLibro);
+        return res.status(201).json({ message: "Creado exitosamente", libro: nuevoLibro });
     } catch (error) {
-        console.error("Error al crear el libro:", error);
-        res.status(500).json({ error: "Error al crear el libro." });
+        console.error("Error al crear el libro:", error.message);
+        const statusCode = error.message === "El libro ya existe" ? 400 : 500;
+        res.status(statusCode).json({ message: error.message });
     }
 };
 

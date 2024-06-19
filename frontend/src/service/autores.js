@@ -15,7 +15,6 @@ export const getAutor = async (id) => {
     }
     const data = await response.json();
 
-
     return data;
 };
 export const deleteAutor = async (id) => {

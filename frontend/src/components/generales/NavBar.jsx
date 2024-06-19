@@ -1,11 +1,15 @@
 import { NavLink } from "react-router-dom";
 import BookIcon from "../../assets/bookIcon";
 import { Outlet } from "react-router-dom"; 
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import './navBar.css'
 export const NavBar = () => {
     return (
         <>
-        <nav className="navbar  navbar-expand-lg bg-body-tertiary">
+        <Navbar expand="lg" className="bg-body-tertiary">
             <div className="container-fluid">
                 <NavLink to="/" className="navbar-brand">
                     <BookIcon></BookIcon>
@@ -50,7 +54,7 @@ export const NavBar = () => {
                     </ul>
                 </div>
             </div>
-        </nav>
+            </Navbar>
         <Outlet/>
        </>
     );

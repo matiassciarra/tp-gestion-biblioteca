@@ -41,3 +41,38 @@ export const getGeneros = async () => {
 
     return data;
 };
+
+export const createLibro = async (obj) => {
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj),
+    };
+    const response = await fetch(URL + "api/libros", options);
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message);
+    }
+    
+
+    return data;
+};
+
+export const deleteLibro = async (id) => {
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    const response = await fetch(URL + `api/libros/${id}`, options);
+    if (!response.ok) {
+        throw new Error(
+            "Problema con la petición Fetch de eliminar libro: " +
+                response.statusText
+        );
+    }
+    return await response.json();
+};
