@@ -7,7 +7,7 @@
     margin: 0 auto; /* Centra el contenedor `.containerAutores` en la página */
     gap: 2em;
     flex-wrap: wrap;
-    background-color: #e0f7fa; /* Añade un color de fondo suave */
+    background-color: #686868; /* Añade un color de fondo suave */
     padding: 20px; /* Añade un poco de espacio interno */
     border-radius: 15px; /* Añade bordes redondeados */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Añade una sombra suave */
