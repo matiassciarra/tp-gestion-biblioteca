@@ -8,7 +8,7 @@ import {
     deleteLibro,
     getLibrosPorGenero,
     getLibrosPorTitulo,
-} from "../controllers/libro.controllers.js";
+} from "../controllers/libro.controller.js";
 import { z } from "zod";
 
 const router = Router();
