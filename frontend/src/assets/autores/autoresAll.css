@@ -8,14 +8,16 @@
     gap: 2em;
     flex-wrap: wrap;
     background-color: #686868; /* Añade un color de fondo suave */
-    padding: 20px; /* Añade un poco de espacio interno */
+    padding: 10px; /* Añade un poco de espacio interno */
     border-radius: 15px; /* Añade bordes redondeados */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Añade una sombra suave */
+    box-shadow: 0px 0px px rgba(0, 0, 0, 0.1); /* Añade una sombra suave */
     transition: all 0.5s ease; /* Añade una transición suave a todos los cambios de propiedad */
 }
 
 .containerAutores:hover {
-    transform: scale(1.05); /* Aumenta ligeramente el tamaño del contenedor cuando se pasa el ratón por encima */
+    transform: scale(
+        1.02
+    ); /* Aumenta ligeramente el tamaño del contenedor cuando se pasa el ratón por encima */
 }
 
 /* Estilos para la acción de autores */
@@ -27,5 +29,7 @@
 }
 
 .accionAutores:hover {
-    transform: rotate(360deg); /* Gira el elemento 360 grados cuando se pasa el ratón por encima */
+    transform: rotate(
+        360deg
+    ); /* Gira el elemento 360 grados cuando se pasa el ratón por encima */
 }

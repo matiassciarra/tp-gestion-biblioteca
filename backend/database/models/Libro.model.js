@@ -45,11 +45,12 @@ const Libro = sequelize.define(
 //aca defino las relaciones
 // genero tiene muchos Libros, y libro tiene un genero
 // Relaciones
-Genero.hasMany(Libro, { foreignKey: "id_genero", onDelete: "CASCADE" });
+Genero.hasMany(Libro, { foreignKey: "id_genero" });
 Libro.belongsTo(Genero, { foreignKey: "id_genero" });
 
-Autor.hasMany(Libro, { foreignKey: "id_autor", onDelete: "CASCADE" });
+Autor.hasMany(Libro, { foreignKey: "id_autor" });
 Libro.belongsTo(Autor, { foreignKey: "id_autor" });
+
 export default Libro;
 
 /* 

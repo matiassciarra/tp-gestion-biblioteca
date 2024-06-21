@@ -39,15 +39,15 @@ export const AllAutores = () => {
             >
                 Nuevo Autor
             </button>
-            <article className="containerAutores">
+            <div className="containerAutores">
                 {data.map(({ id_autor, nombre, apellido, biografia }) => (
                     <div key={id_autor} className="card card-body">
                         <h1 className="card-title">
                             {nombre} {apellido}
                         </h1>
-                        <div className="">
+                        <div>
                             <h3>{biografia}</h3>
-                            <ul className="list-group list-group-flush accionAutores">
+                            <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <Link
                                         to={`${id_autor}`}
@@ -78,7 +78,7 @@ export const AllAutores = () => {
                         </div>
                     </div>
                 ))}
-            </article>
+            </div>
             <Modal
                 bool={showModal}
                 setBool={setShowModal}

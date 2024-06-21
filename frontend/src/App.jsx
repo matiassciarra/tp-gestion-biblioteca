@@ -8,6 +8,8 @@ import { NavBar } from "./components/generales/NavBar";
 import { AutoresMain, AllAutores, OneAutor } from "./pages/Autores/Autores";
 import { getAllAutores, getAutor } from "./service/autores";
 import { getAllLibros, getLibro } from "./service/libros";
+import { Home, RegistrarUsuario } from "./pages/auth/auth.js";
+
 import {
     OneLibro,
     TodoLibros,
@@ -17,20 +19,14 @@ import {
 
 import { UnGenero, AllGeneros, Genero } from "./pages/Genero/Genero";
 import { getAllGenero } from "./service/generos";
-<<<<<<< HEAD
 // Crear una instancia del navegador
 
 export function App() {
-=======
-// importar elementos de home
-import { Home,RegistrarUsuario } from "./pages/auth/auth";
-export default function App() {
->>>>>>> e3838f673fa86645ea46007ad12b5946d6ff666c
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<NavBar />}>
-                <Route index element={<Home/>}/>
-                <Route path="registrar" element={<RegistrarUsuario/>} />
+                <Route index element={<Home />} />
+                <Route path="register" element={<RegistrarUsuario />} />
                 <Route path="autores/*" element={<AutoresMain />}>
                     <Route
                         index

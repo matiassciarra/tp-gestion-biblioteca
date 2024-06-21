@@ -1,6 +1,3 @@
-
-export const registrarUsuario = () => {
-  return (
-    <div>registrar Usuario</div>
-  )
-}
+export const RegistrarUsuario = () => {
+    return <div>registrar Usuario</div>;
+};

@@ -56,7 +56,9 @@ function Libro() {
                 <div className="col">
                     <h1 className="fw-bold text-dark">{libro.titulo}</h1>
                     <h3 className="fw-medium text-primary text-primary">
-                        {libro.Autor.nombre + " " + libro.Autor.apellido}
+                        {libro.Autor
+                            ? libro.Autor.nombre + " " + libro.Autor.apellido
+                            : ""}
                     </h3>
                     {libro.Genero ? (
                         <h4 className="fw-medium text-primary-emphasis">
