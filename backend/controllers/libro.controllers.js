@@ -3,6 +3,7 @@ import Libro from "../database/models/Libro.model.js";
 import Autor from "../database/models/Autor.model.js";
 import { Genero } from "../database/models/Genero.model.js";
 import { Pais } from "../database/models/Pais.model.js";
+import { Op } from "sequelize";
 
 export const CreateLibro = async (req, res) => {
     // Esquema utilizando la libreria Z, el cual me tiene que llegar un body especifico
@@ -51,9 +52,9 @@ export const CreateLibro = async (req, res) => {
             where: {
                 id_autor: id_autor,
                 id_genero: id_genero,
-                titulo: titulo
-            }
-        })
+                titulo: titulo,
+            },
+        });
         if (libroExist) {
             throw new Error("El libro ya existe");
             //return res.status(400).json({message:""})
@@ -68,9 +69,10 @@ export const CreateLibro = async (req, res) => {
             estado_libro: estado_libro !== undefined ? estado_libro : true,
         });
 
-        return res.status(201).json({ message: "Creado exitosamente", libro: nuevoLibro });
+        return res
+            .status(201)
+            .json({ message: "Creado exitosamente", libro: nuevoLibro });
     } catch (error) {
-        console.error("Error al crear el libro:", error.message);
         const statusCode = error.message === "El libro ya existe" ? 400 : 500;
         res.status(statusCode).json({ message: error.message });
     }
@@ -187,6 +189,19 @@ export const updateLibro = async (req, res) => {
                     .json({ error: "El ID del autor no existe." });
             }
         }
+        const libroExist = await Libro.findOne({
+            where: {
+                id_autor: id_autor,
+                id_genero: id_genero,
+                titulo: titulo,
+            },
+        });
+        if (libroExist) {
+            throw new Error(
+                "Ya existe un libro con el titulo y autor ingresados"
+            );
+            //return res.status(400).json({message:""})
+        }
 
         // Actualizar el libro con los datos proporcionados
         await libro.update({
@@ -203,8 +218,8 @@ export const updateLibro = async (req, res) => {
         });
         return res.status(200).json(libro);
     } catch (error) {
-        console.error("Error al actualizar el libro:", error);
-        res.status(500).json({ error: "Error al actualizar el libro." });
+        const statusCode = error.message === "El libro ya existe" ? 400 : 500;
+        res.status(statusCode).json({ message: error.message });
     }
 };
 
@@ -227,6 +242,32 @@ export const getLibrosPorGenero = async (req, res) => {
         res.status(500).send({
             message:
                 "Ha existido un error de servidor al buscar libros de ese genero",
+            error: error,
+        });
+    }
+};
+
+export const getLibrosPorTitulo = async (req, res) => {
+    const { titulo } = req.query;
+    try {
+        const librosPorTitulo = await Libro.findAll({
+            where: {
+                titulo: {
+                    [Op.like]: "%" + titulo + "%",
+                },
+            },
+        });
+        if (!librosPorTitulo) {
+            res.status(404).send({
+                message: "No se encontraron libros con ese titulo",
+            });
+        } else {
+            res.send(librosPorTitulo);
+        }
+    } catch (error) {
+        res.status(500).send({
+            message:
+                "Ha existido un error en el servidor al buscar libros con ese titulo",
             error: error,
         });
     }

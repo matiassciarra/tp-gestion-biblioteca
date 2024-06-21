@@ -4,7 +4,6 @@ import {
     Route,
     RouterProvider,
 } from "react-router-dom";
-
 import { NavBar } from "./components/generales/NavBar";
 import { AutoresMain, AllAutores, OneAutor } from "./pages/Autores/Autores";
 import { getAllAutores, getAutor } from "./service/autores";
@@ -20,7 +19,7 @@ import { UnGenero, AllGeneros, Genero } from "./pages/Genero/Genero";
 import { getAllGenero } from "./service/generos";
 // Crear una instancia del navegador
 
-export default function App() {
+export function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<NavBar />}>
@@ -44,11 +43,14 @@ export default function App() {
                         loader={getAllLibros}
                     ></Route>
                     <Route
-                        path="crearOModificar"
+                        path="crearOModificar/:id?"
+                        loader={({ params }) =>
+                            params.id ? getLibro(params.id) : null
+                        }
                         element={<CrearOActualizar />}
                     ></Route>
                     <Route
-                        path=":id"
+                        path="libro/:id"
                         loader={({ params }) => getLibro(params.id)}
                         element={<OneLibro />}
                     ></Route>

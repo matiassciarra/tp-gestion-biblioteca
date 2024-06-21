@@ -1,6 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { deleteLibro } from "../../service/libros";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 function Libro() {
     const libro = useLoaderData();
@@ -41,6 +42,9 @@ function Libro() {
             <button className="btn btn-danger" onClick={onDelete}>
                 Eliminar libro
             </button>{" "}
+            <Link to={`/libros/crearOModificar/${libro.id}`}>
+                <button className="btn btn-warning ml-2">Modificar</button>
+            </Link>
             <div className="row">
                 <div className="col-md-4">
                     <img

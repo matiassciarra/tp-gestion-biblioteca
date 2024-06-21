@@ -1,30 +1,49 @@
 import { useState, useEffect } from "react";
-import { getGeneros, createLibro } from "../../service/libros";
+import {
+    getGeneros,
+    createLibro,
+    getLibro,
+    updateLibro,
+} from "../../service/libros";
 import { getAllAutores } from "../../service/autores";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import swal from "sweetalert";
 
 export const Formulario = () => {
     const [generos, setGeneros] = useState([]);
     const [autores, setAutores] = useState([]);
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
+        setValue,
     } = useForm();
-
-    const onSubmit = handleSubmit( async (data) => {
+    const onSubmit = handleSubmit(async (data) => {
         try {
-            const response = await createLibro(data);
-            swal({
-                title: "Nuevo libro: " + data.titulo,
-                text: response.message,  // Utiliza el mensaje del backend
-                icon: "success",
-                button: "Aceptar",
-            });
+            if (!id) {
+                await createLibro(data);
+                swal({
+                    title: "Nuevo libro: " + data.titulo,
+                    text: "Creado exitosamente",
+                    icon: "success",
+                    button: "Aceptar",
+                    timer: 2000,
+                });
+            } else {
+                await updateLibro(data, id);
+                swal({
+                    title: "Libro modificado: " + data.titulo,
+                    text: "Modificado correctamente",
+                    icon: "success",
+                    button: "Aceptar",
+                    timer: 2000,
+                });
+            }
             navigate(-1);
         } catch (error) {
             swal({
@@ -32,17 +51,28 @@ export const Formulario = () => {
                 text: error.message,
                 icon: "error",
                 button: "Aceptar",
+                timer: 2000,
             });
         }
-    
     });
-
     useEffect(() => {
         const fetchData = async () => {
             const generos = await getGeneros();
             setGeneros(generos);
             const autores = await getAllAutores();
             setAutores(autores);
+            if (id) {
+                const libro = await getLibro(id);
+                for (let campo in libro) {
+                    if (campo === "fecha_publicacion" && libro[campo]) {
+                        const fecha = new Date(libro[campo]);
+                        const fechaFormateada = fecha
+                            .toISOString()
+                            .split("T")[0];
+                        setValue(campo, fechaFormateada);
+                    } else setValue(campo, libro[campo]);
+                }
+            }
         };
         fetchData();
     }, []);
@@ -51,13 +81,13 @@ export const Formulario = () => {
         <>
             <form onSubmit={onSubmit}>
                 <div className="form-group">
-                    <label htmlFor="inp-titulo" className={`fw-bold text-dark`}>
+                    <label htmlFor="inp-titulo" className="fw-bold text-dark">
                         Titulo
                     </label>
                     <input
                         type="text"
                         placeholder="Ingrese titulo nuevo"
-                        className={`form-control ${
+                        className={`form-control text-dark ${
                             errors.titulo ? "is-invalid" : ""
                         }`}
                         {...register("titulo", {
@@ -208,11 +238,11 @@ export const Formulario = () => {
                     )}
                 </div>
                 <div className="container-fluid d-flex m-3">
-                    <button className="btn btn-success ml-2 " type="submit">
-                        Crear nuevo libro
+                    <button className="btn btn-success ml-2" type="submit">
+                        {id ? "Modificar" : "Crear"}
                     </button>
                     <button
-                        className="btn btn-dark mx-2"
+                        className="btn btn-dark"
                         onClick={() => {
                             navigate(-1);
                         }}

@@ -55,7 +55,6 @@ export const createLibro = async (obj) => {
     if (!response.ok) {
         throw new Error(data.message);
     }
-    
 
     return data;
 };
@@ -75,4 +74,29 @@ export const deleteLibro = async (id) => {
         );
     }
     return await response.json();
+};
+
+export const updateLibro = async (obj, idLibro) => {
+    const options = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj),
+    };
+    const response = await fetch(URL + `api/libros/${idLibro}`, options);
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message);
+    }
+};
+
+export const getLibrosPorTitulo = async (titulo) => {
+    const response = await fetch(`${URL}api/libros/porTitulo?titulo=${titulo}`);
+    if (!response.ok) {
+        throw new Error("Error al obtener libros con ese titulo");
+    }
+    const data = await response.json();
+
+    return data;
 };

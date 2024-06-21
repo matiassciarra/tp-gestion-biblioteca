@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const Input = ({ textoDentroInput }) => {
+export const Input = ({ textoDentroInput, obtenerTitulo }) => {
     return (
         <div className="input-group mb-3 m-2">
             <span className="input-group-text">
@@ -25,6 +25,7 @@ export const Input = ({ textoDentroInput }) => {
                 type="text"
                 placeholder={textoDentroInput}
                 className="form-control"
+                onChange={(e) => obtenerTitulo(e.target.value)}
             />
             <button className="btn btn-primary"> Buscar</button>
             <Link to="/libros/crearOModificar">
