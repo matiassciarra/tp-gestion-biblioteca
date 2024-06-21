@@ -17,12 +17,20 @@ import {
 
 import { UnGenero, AllGeneros, Genero } from "./pages/Genero/Genero";
 import { getAllGenero } from "./service/generos";
+<<<<<<< HEAD
 // Crear una instancia del navegador
 
 export function App() {
+=======
+// importar elementos de home
+import { Home,RegistrarUsuario } from "./pages/auth/auth";
+export default function App() {
+>>>>>>> e3838f673fa86645ea46007ad12b5946d6ff666c
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<NavBar />}>
+                <Route index element={<Home/>}/>
+                <Route path="registrar" element={<RegistrarUsuario/>} />
                 <Route path="autores/*" element={<AutoresMain />}>
                     <Route
                         index
@@ -64,7 +72,7 @@ export function App() {
                     <Route path=":nombreGenero" element={<UnGenero />} />
                 </Route>
 
-                <Route path="*" element={<h1>hola</h1>}></Route>
+                <Route path="*" element={<h1>Not Found</h1>}></Route>
             </Route>
         )
     );

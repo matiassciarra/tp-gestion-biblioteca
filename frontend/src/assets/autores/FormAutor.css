@@ -1,4 +1,76 @@
-form {
+/* Estilos para el contenedor de autores */
+.containerAutores {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    width: 80%;
+    margin: 0 auto; /* Centra el contenedor `.containerAutores` en la página */
+    gap: 2em;
+    flex-wrap: wrap;
+    background-color: #e0f7fa; /* Añade un color de fondo suave */
+    padding: 20px; /* Añade un poco de espacio interno */
+    border-radius: 15px; /* Añade bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Añade una sombra suave */
+    transition: all 0.5s ease; /* Añade una transición suave a todos los cambios de propiedad */
+}
+
+.containerAutores:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño del contenedor cuando se pasa el ratón por encima */
+}
+
+/* Estilos para la acción de autores */
+.accionAutores {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    transition: all 0.5s ease; /* Añade una transición suave a todos los cambios de propiedad */
+}
+
+.accionAutores:hover {
+    transform: rotate(360deg); /* Gira el elemento 360 grados cuando se pasa el ratón por encima */
+}
+
+/* Estilos para el formulario de autores */
+formAutores form {
     display: flex;
     flex-direction: column;
+    gap: 1em; /* Añade un espacio entre los elementos del formulario */
+    width: 100%; /* Asegura que el formulario ocupe todo el ancho disponible */
+    max-width: 600px; /* Limita el ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario en la página */
+    padding: 2em; /* Añade un poco de relleno alrededor del formulario */
+    border-radius: 10px; /* Añade bordes redondeados al formulario */
+    background-color: #e0f7fa; /* Añade el mismo color de fondo suave al formulario */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Añade una sombra suave al formulario */
+}
+
+formAutores form input,
+formAutores form textarea,
+formAutores form select {
+    width: 100%; /* Asegura que los campos del formulario ocupen todo el ancho disponible */
+    padding: 10px; /* Añade un poco de relleno a los campos del formulario */
+    border-radius: 5px; /* Añade bordes redondeados a los campos del formulario */
+    border: 1px solid #ddd; /* Añade un borde a los campos del formulario */
+    transition: all 0.3s ease; /* Añade una transición suave a todos los cambios de propiedad */
+}
+
+formAutores form input:focus,
+formAutores form textarea:focus,
+formAutores form select:focus {
+    border-color: #007BFF; /* Cambia el color del borde cuando el campo está enfocado */
+    outline: none; /* Elimina el contorno predeterminado del navegador */
+}
+
+formAutores form button {
+    padding: 10px 15px; /* Añade un poco de relleno al botón */
+    border: none; /* Elimina el borde del botón */
+    border-radius: 5px; /* Añade bordes redondeados al botón */
+    background-color: #007BFF; /* Añade un color de fondo al botón */
+    color: #fff; /* Añade un color de texto al botón */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón por encima */
+    transition: all 0.3s ease; /* Añade una transición suave a todos los cambios de propiedad */
+}
+
+formAutores form button:hover {
+    background-color: #0056b3; /* Oscurece el color de fondo del botón cuando se pasa el ratón por encima */
 }
