@@ -1,7 +1,7 @@
 import { sequelize } from "../db.js";
 import { DataTypes } from "sequelize";
 import Libro from "./Libro.model.js";
-import  Usuario  from "./Usuario.model.js";
+import Usuario from "./Usuario.model.js";
 const Prestamo = sequelize.define(
     "Prestamo",
     {
@@ -19,14 +19,23 @@ const Prestamo = sequelize.define(
             allowNull: false,
         },
         fecha_prestamo: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
             defaultValue: DataTypes.NOW,
         },
         fecha_devolucion: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: true,
-        }
+            validate: {
+                esFechaFutura(value) {
+                    if (value <= new Date()) {
+                        throw new Error(
+                            "La fecha de devolucion debe ser mayor a la fecha actual"
+                        );
+                    }
+                },
+            },
+        },
     },
     //comando opcionales
     {
@@ -42,8 +51,4 @@ Libro.hasMany(Prestamo, { foreignKey: "id_libro" });
 Prestamo.belongsTo(Usuario, { foreignKey: "id_usuario" });
 Usuario.hasMany(Prestamo, { foreignKey: "id_usuario" });
 
-
-
-
-
-export default Prestamo
+export default Prestamo;

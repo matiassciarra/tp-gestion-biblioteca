@@ -6,13 +6,14 @@ import {
     deletePrestamo,
     createPrestamo,
 } from "../controllers/prestamo.controller.js";
+import { authRequired } from "../middlewares/validateToken.js";
 
 const router = Router();
 
-router.get("/prestamos", getPrestamos);
-router.get("/prestamos/:id", getPrestamoPorId);
-router.post("/prestamos", createPrestamo);
-router.delete("/prestamos/:id", deletePrestamo);
-router.patch("/prestamos/:id", updatePrestamo);
+router.get("/prestamos", authRequired, getPrestamos);
+router.get("/prestamos/:id", authRequired, getPrestamoPorId);
+router.post("/prestamos", authRequired, createPrestamo);
+router.delete("/prestamos/:id", authRequired, deletePrestamo);
+router.patch("/prestamos/:id", authRequired, updatePrestamo);
 
 export default router;
