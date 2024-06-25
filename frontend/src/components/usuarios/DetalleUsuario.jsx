@@ -3,12 +3,12 @@ export const DetalleUsuario = ({ object })=> {
     const { nombre, apellido, username, correo, url_imagen, Pai, url } = object
     return (
       <article className="card cardSingleAutor">
-        {url_imagen?<img src={url_imagen} className="card-img-top imagen" alt="" />:null}
+
           
           <h1 className="card-title placeholder-glow card-header widthMax">{nombre} {apellido}</h1>
           <ul className="card-body list-group list-group-flush widthMax">
             {username && (<li className="list-group-item">
-              <p>{username}</p>
+              <h4>UserName: {username}</h4>
             </li>)}
               {correo && (
                 <li className="list-group-item">

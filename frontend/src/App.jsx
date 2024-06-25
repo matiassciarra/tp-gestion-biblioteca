@@ -82,7 +82,12 @@ export function App() {
                     <Route
                         path=':id'
                         loader={({ params }) => getUsuario(params.id)}
-                        element={<UnUsuario />}
+                        element={<UnUsuario option = {1} />}
+                    />
+                    <Route
+                        path='modificar/:id'
+                        loader={({ params }) => getUsuario(params.id)}
+                        element={<UnUsuario option = {2} />}
                     />
                 </Route>
 

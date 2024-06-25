@@ -50,3 +50,18 @@ export const createUsuario = async (obj) => {
 
     return data;
 };
+
+export const updateUsuario = async (obj, idUsuario) => {
+    const options = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj),
+    };
+    const response = await fetch(URL + `usuarios/${idUsuario}`, options);
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message);
+    }
+};

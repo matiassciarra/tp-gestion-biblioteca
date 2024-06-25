@@ -27,6 +27,10 @@ const TablaUsuarios = () => {
         navigate(`${id}`);
     };
 
+    const handleModificar = (id) => {
+        navigate(`modificar/${id}`);
+    };
+
     useEffect(() => {
 
         const fetchUsuarios = async () => {
@@ -105,7 +109,7 @@ const TablaUsuarios = () => {
                                 </button>
                                 <button
                                     className='btn btn-warning btn-sm m-1'
-                                    //onClick
+                                    onClick={() => handleModificar(usuario.id_usuario)}
                                     title='Modificar'
                                 >
                                     <FontAwesomeIcon icon={faEdit}/>
