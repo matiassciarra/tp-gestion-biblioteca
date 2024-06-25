@@ -119,6 +119,14 @@ export const ModificarUsuario = ({ object }) => {
                     },
                     })}/>
                 </div>
-                </form></>
+                <span className="accion">
+                    <button
+                        onClick={() => navigate(-1)}
+                        className="btn btn-primary text-white fw-bold"
+                    >
+                            Volver
+                    </button>
+                </span>
+            </form></>
     )
 }

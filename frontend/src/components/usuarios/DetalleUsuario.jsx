@@ -1,6 +1,6 @@
 
 export const DetalleUsuario = ({ object })=> {
-    const { nombre, apellido, username, correo, url_imagen, Pai, url } = object
+    const { nombre, apellido, username, correo, Pai, url } = object
     return (
       <article className="card cardSingleAutor">
 
