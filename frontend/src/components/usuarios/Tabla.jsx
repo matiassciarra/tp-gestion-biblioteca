@@ -5,12 +5,14 @@ import { getTipoUsuarios } from '../../service/tipoUsuario';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 import { deleteUsuario } from '../../service/usuarios'
+import { useNavigate } from 'react-router-dom';
 
 
 const TablaUsuarios = () => {
     const [usuarios, setUsuarios] = useState([]);
     const [paisesMap, setPaisesMap] = useState({});
     const [tiposUsuarioMap, setTiposUsuarioMap] = useState({})
+    const navigate = useNavigate();
 
     const handleDelete = async (id) => {
         try {
@@ -19,6 +21,10 @@ const TablaUsuarios = () => {
         } catch (error) {
             console.error('Error al eliminar el usuario')
         }
+    };
+
+    const handleConsultar = (id) => {
+        navigate(`${id}`);
     };
 
     useEffect(() => {
@@ -92,7 +98,7 @@ const TablaUsuarios = () => {
                             <td>
                                 <button
                                     className='btn btn-info btn-sm m-1'
-                                    //onClick
+                                    onClick={() => handleConsultar(usuario.id_usuario)}
                                     title='Consultar'
                                 >
                                     <FontAwesomeIcon icon={faSearch}/>
