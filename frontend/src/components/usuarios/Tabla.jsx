@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUsuarios } from '../../service/usuarios';
 import { getPaises } from '../../service/paises'
+import { getTipoUsuarios } from '../../service/tipoUsuario';
 
 
 const TablaUsuarios = () => {
     const [usuarios, setUsuarios] = useState([]);
     const [paisesMap, setPaisesMap] = useState({});
+    const [tiposUsuarioMap, setTiposUsuarioMap] = useState({})
 
     useEffect(() => {
 
@@ -21,7 +23,7 @@ const TablaUsuarios = () => {
         const fetchPaises = async () => {
             try {
                 const dataPaises = await getPaises();
-                // Crear un mapa de paises indexado por id_pais
+
                 const paisesIndexados = {};
                 dataPaises.forEach(pais => {
                     paisesIndexados[pais.id_pais] = pais.nombre;
@@ -32,11 +34,25 @@ const TablaUsuarios = () => {
             }
         };
 
-        
+        const fetchTipoUsuario = async () => {
+            try {
+                const dataTiposUsuario = await getTipoUsuarios();
+
+                const tiposUsuarioIndexados = {};
+                dataTiposUsuario.forEach(tipoUsuario => {
+                    tiposUsuarioIndexados[tipoUsuario.id_tipo_usuario] = tipoUsuario.nombre_tipo_usuario;
+                });
+                setTiposUsuarioMap(tiposUsuarioIndexados);
+            } catch (error) {
+                console.error('Error: ', error);
+            }
+        };
+
         fetchUsuarios();
         fetchPaises();
+        fetchTipoUsuario();
     }, []);
-    console.log(paisesMap)
+    //console.log(paisesMap)
     return (
         <div className="table-responsive rounded p-4">
             <h2 className='my-4 text-center'>Lista de Usuarios</h2>
@@ -46,7 +62,7 @@ const TablaUsuarios = () => {
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Correo</th>
-                        <th>Estado del Usuario</th>
+                        <th>UserName</th>
                         <th>País</th>
                         <th>Tipo de Usuario</th>
                     </tr>
@@ -59,7 +75,7 @@ const TablaUsuarios = () => {
                             <td>{usuario.username}</td>
                             <td>{usuario.correo}</td>
                             <td>{paisesMap[usuario.id_pais]}</td>
-                            <td>{usuario.id_tipo_usuario}</td>
+                            <td>{tiposUsuarioMap[usuario.id_tipo_usuario]}</td>
                         </tr>
                     ))}
                 </tbody>
