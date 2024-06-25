@@ -19,6 +19,9 @@ import {
 
 import { UnGenero, AllGeneros, Genero } from "./pages/Genero/Genero";
 import { getAllGenero } from "./service/generos";
+
+import { getAllUsuarios } from './service/usuarios.js';
+import { AllUsuarios } from './pages/Usuarios/AllUsuarios.jsx'
 // Crear una instancia del navegador
 
 export function App() {
@@ -67,6 +70,8 @@ export function App() {
                     />
                     <Route path=":nombreGenero" element={<UnGenero />} />
                 </Route>
+
+                <Route path="usuarios" element={<AllUsuarios />} loader={getAllUsuarios} />
 
                 <Route path="*" element={<h1>Not Found</h1>}></Route>
             </Route>
