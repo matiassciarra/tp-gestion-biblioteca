@@ -81,6 +81,7 @@ const TablaUsuarios = () => {
             <table className="table table-striped table-bordered text-center">
                 <thead className='thead-dark'>
                     <tr>
+                        <th>Avatar</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>UserName</th>
@@ -93,13 +94,14 @@ const TablaUsuarios = () => {
                 <tbody>
                     {usuarios.map(usuario => (
                         <tr key={usuario.id_usuario}>
-                            <td>{usuario.nombre}</td>
-                            <td>{usuario.apellido}</td>
-                            <td>{usuario.username}</td>
-                            <td>{usuario.correo}</td>
-                            <td>{paisesMap[usuario.id_pais]}</td>
-                            <td>{tiposUsuarioMap[usuario.id_tipo_usuario]}</td>
-                            <td>
+                            <td><img src={usuario.url} height='100' width='100'></img></td>
+                            <td className='align-middle'>{usuario.nombre}</td>
+                            <td className='align-middle'>{usuario.apellido}</td>
+                            <td className='align-middle'>{usuario.username}</td>
+                            <td className='align-middle'>{usuario.correo}</td>
+                            <td className='align-middle'>{paisesMap[usuario.id_pais]}</td>
+                            <td className='align-middle'>{tiposUsuarioMap[usuario.id_tipo_usuario]}</td>
+                            <td className='align-middle'>
                                 <button
                                     className='btn btn-info btn-sm m-1'
                                     onClick={() => handleConsultar(usuario.id_usuario)}

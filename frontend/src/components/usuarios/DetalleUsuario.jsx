@@ -7,6 +7,11 @@ export const DetalleUsuario = ({ object })=> {
           
           <h1 className="card-title placeholder-glow card-header widthMax">{nombre} {apellido}</h1>
           <ul className="card-body list-group list-group-flush widthMax">
+            {url && (
+                <li className="list-group-item">
+                    <img src={url} alt="userAvatar"></img>
+                </li>
+            )}
             {username && (<li className="list-group-item">
               <h4>UserName: {username}</h4>
             </li>)}
@@ -24,11 +29,7 @@ export const DetalleUsuario = ({ object })=> {
   
               )}
 
-              {url && (
-                <li className="list-group-item">
-                    <h4>URL: {url}</h4>
-                </li>
-              )}
+              
             
           </ul>
           </article>
