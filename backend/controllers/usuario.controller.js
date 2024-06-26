@@ -39,12 +39,16 @@ export const getUserById = async (req, res) => {
 
 export const createUsuario = async (req, res) => {
     try {
-        const { nombre, apellido, correo, id_pais } = req.body;
+        const { nombre, apellido, correo, id_pais, username, password, id_tipo_usuario} = req.body;
         const nuevoUsuario = {
             nombre,
             apellido,
             correo,
             id_pais,
+            username,
+            password,
+            id_tipo_usuario
+
         };
         const usuarioExistente = await Usuario.findOne({
             where: {

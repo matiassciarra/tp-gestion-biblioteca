@@ -52,7 +52,7 @@ export const NavBar = () => {
                             {isAuthenticated && user.rol == "admin" && (
                                 <li className="nav-item">
                                     <NavLink
-                                        to="/users"
+                                        to="/usuarios"
                                         className={({ isActive }) =>
                                             isActive
                                                 ? "nav-link navLink"
@@ -108,7 +108,7 @@ export const NavBar = () => {
                             {isAuthenticated && (
                                 <li className="nav-item">
                                     <NavLink
-                                        to={`/profile/${user.id}`}
+                                        to={`/usuarios/${user.id}`}
                                         className={({ isActive }) =>
                                             isActive
                                                 ? "nav-link navLink"

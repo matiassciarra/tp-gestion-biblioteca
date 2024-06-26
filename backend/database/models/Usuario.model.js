@@ -24,16 +24,22 @@ const Usuario = sequelize.define(
             allowNull: false,
             validate: {
                 notEmpty: { msg: "El correo debe ser requerido" },
-                len: { args: [4, 30], msg: "El nombre de usuario debe ser mínimo 4 caracteres y máximo 30 caracteres" }
+                len: {
+                    args: [4, 30],
+                    msg: "El nombre de usuario debe ser mínimo 4 caracteres y máximo 30 caracteres",
+                },
             },
-            unique: { args: true, msg: "ya existe un nombre de usuario con el mismo nombre" },
+            unique: {
+                args: true,
+                msg: "ya existe un nombre de usuario con el mismo nombre",
+            },
         },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                notEmpty: { msg: "La contraseña debe ser requerida" }
-            }
+                notEmpty: { msg: "La contraseña debe ser requerida" },
+            },
         },
         correo: {
             type: DataTypes.STRING,
@@ -51,27 +57,20 @@ const Usuario = sequelize.define(
         id_tipo_usuario: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: 1
+            defaultValue: 1,
         },
         url: {
             type: DataTypes.STRING,
-            defaultValue: 'https://facilitylogin.medwiserinc.com/img/generic_avatar.jpg',
+            defaultValue:
+                "https://facilitylogin.medwiserinc.com/img/generic_avatar.jpg",
             validate: {
-                isUrl: { msg: "El formato de la URL es incorrecto" }
-            }
-        }
+                isUrl: { msg: "El formato de la URL es incorrecto" },
+            },
+        },
     },
     // opciones adicionales
     {
         // hooks para poder eliminar un espaciado si el usuario lo puso
-        hooks: { 
-            beforeValidate: (user, _) => {
-                user.username = user.username.trim();
-                user.nombre = user.nombre.trim();
-                user.password = user.password.trim();
-                user.apellido = user.apellido.trim();
-            }
-        },
         paranoid: true,
         timestamps: true,
     }

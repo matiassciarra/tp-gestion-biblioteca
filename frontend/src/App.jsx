@@ -28,6 +28,10 @@ import {
 import { UnGenero, AllGeneros, Genero } from "./pages/Genero/Genero";
 import { getAllGenero } from "./service/generos";
 
+import { getAllUsuarios, getUsuario } from "./service/usuarios.js";
+import { AllUsuarios } from "./pages/Usuarios/AllUsuarios.jsx";
+import { Usuario } from "./pages/Usuarios/PantallaUsuario.jsx";
+import { UnUsuario } from "./pages/Usuarios/UnUsuario.jsx";
 // Crear una instancia del navegador
 
 export function App() {
@@ -77,6 +81,7 @@ export function App() {
                         />
                         <Route path=":nombreGenero" element={<UnGenero />} />
                     </Route>
+                    {/*
                     <Route path="users/*" element={<PantallaMainUsuarios />}>
                         <Route
                             index
@@ -88,12 +93,29 @@ export function App() {
                         path="profile/:id"
                         element={<OneUser />}
                         loader={({ params }) => getUserByIdRequest(params.id)}
-                    ></Route>
+                    ></Route> */}
                     <Route
                         path="nuevoPrestamo/:id"
                         element={<SolicitarPrestamo />}
                         loader={({ params }) => getLibro(params.id)}
                     ></Route>
+                    <Route path="usuarios/*" element={<Usuario />}>
+                        <Route
+                            index
+                            loader={getAllUsuarios}
+                            element={<AllUsuarios />}
+                        />
+                        <Route
+                            path=":id"
+                            loader={({ params }) => getUsuario(params.id)}
+                            element={<UnUsuario option={1} />}
+                        />
+                        <Route
+                            path="modificar/:id"
+                            loader={({ params }) => getUsuario(params.id)}
+                            element={<UnUsuario option={2} />}
+                        />
+                    </Route>
                 </Route>
                 <Route path="*" element={<h1>Not Found</h1>}></Route>
             </Route>
