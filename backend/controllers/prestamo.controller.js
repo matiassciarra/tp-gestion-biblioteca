@@ -1,5 +1,7 @@
 import Prestamo from "../database/models/Prestamo.model.js";
 import Libro from "../database/models/Libro.model.js";
+import { Pais } from "../database/models/Pais.model.js";
+import { Genero } from "../database/models/Genero.model.js";
 import Usuario from "../database/models/Usuario.model.js";
 import { z } from "zod";
 
@@ -7,8 +9,16 @@ export const getPrestamos = async (req, res) => {
     try {
         res.send(
             await Prestamo.findAll({
-                where: { id_usuario: req.user.id },
-                include: [{ model: Libro }, { model: Usuario }],
+                include: [
+                    { 
+                        model: Libro, 
+                        include: [{ model: Genero }] 
+                    },
+                    { 
+                        model: Usuario, 
+                        include: [{ model: Pais }] 
+                    }
+                ],
             })
         );
     } catch (error) {
@@ -23,7 +33,16 @@ export const getPrestamoPorId = async (req, res) => {
     try {
         const { id } = req.params;
         const prestamo = await Prestamo.findByPk(id, {
-            include: [{ model: Libro }, { model: Usuario }],
+            include: [
+                { 
+                    model: Libro, 
+                    include: [{ model: Genero }] 
+                },
+                { 
+                    model: Usuario, 
+                    include: [{ model: Pais }] 
+                }
+            ],
         });
 
         if (!prestamo) {

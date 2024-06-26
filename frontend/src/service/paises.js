@@ -2,7 +2,9 @@ const URL = "http://localhost:3002/api/paises";
 
 export const getPaises = async () => {
     try {
-        const response = await fetch(URL);
+        const response = await fetch(URL, {
+            credentials: 'include'
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
