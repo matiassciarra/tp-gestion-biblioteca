@@ -3,7 +3,10 @@ import BookIcon from "../../assets/bookIcon";
 import { Outlet } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import "./navBar.css";
+import { useAuth } from "../../context/AuthContext";
+
 export const NavBar = () => {
+    const { user, isAuthenticated } = useAuth();
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary">
@@ -17,68 +20,105 @@ export const NavBar = () => {
                         id="navbarNavDropdown"
                     >
                         <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <NavLink
-                                    to="/libros"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "nav-link navLink"
-                                            : "nav-link"
-                                    }
-                                    aria-current="page"
-                                >
-                                    Libros
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink
-                                    to="/autores"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "nav-link navLink"
-                                            : "nav-link"
-                                    }
-                                >
-                                    Autores
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink
-                                    to="/usuarios"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "nav-link navLink"
-                                            : "nav-link"
-                                    }
-                                >
-                                    Usuarios
-                                </NavLink>
-                            </li>
-
-                            <li className="nav-item">
-                                <NavLink
-                                    to="/prestamos"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "nav-link navLink"
-                                            : "nav-link"
-                                    }
-                                >
-                                    Prestamos
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink
-                                    to="/generos"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "nav-link navLink"
-                                            : "nav-link"
-                                    }
-                                >
-                                    Generos
-                                </NavLink>
-                            </li>
+                            {isAuthenticated && (
+                                <li className="nav-item">
+                                    <NavLink
+                                        to="/libros"
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? "nav-link navLink"
+                                                : "nav-link"
+                                        }
+                                        aria-current="page"
+                                    >
+                                        Libros
+                                    </NavLink>
+                                </li>
+                            )}
+                            {isAuthenticated && (
+                                <li className="nav-item">
+                                    <NavLink
+                                        to="/autores"
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? "nav-link navLink"
+                                                : "nav-link"
+                                        }
+                                    >
+                                        Autores
+                                    </NavLink>
+                                </li>
+                            )}
+                            {isAuthenticated && user.rol == "admin" && (
+                                <li className="nav-item">
+                                    <NavLink
+                                        to="/users"
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? "nav-link navLink"
+                                                : "nav-link"
+                                        }
+                                    >
+                                        Usuarios
+                                    </NavLink>
+                                </li>
+                            )}
+                            {isAuthenticated && user.rol == "admin" && (
+                                <li className="nav-item">
+                                    <NavLink
+                                        to="/prestamos"
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? "nav-link navLink"
+                                                : "nav-link"
+                                        }
+                                    >
+                                        Prestamos
+                                    </NavLink>
+                                </li>
+                            )}
+                            {isAuthenticated && user.rol == "admin" && (
+                                <li className="nav-item">
+                                    <NavLink
+                                        to="/generos"
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? "nav-link navLink"
+                                                : "nav-link"
+                                        }
+                                    >
+                                        Generos
+                                    </NavLink>
+                                </li>
+                            )}
+                            {isAuthenticated && (
+                                <li className="nav-item">
+                                    <NavLink
+                                        to="/misPrestamos"
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? "nav-link navLink"
+                                                : "nav-link"
+                                        }
+                                    >
+                                        Mis prestamos
+                                    </NavLink>
+                                </li>
+                            )}
+                            {isAuthenticated && (
+                                <li className="nav-item">
+                                    <NavLink
+                                        to={`/profile/${user.id}`}
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? "nav-link navLink"
+                                                : "nav-link"
+                                        }
+                                    >
+                                        {user.username}
+                                    </NavLink>
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>

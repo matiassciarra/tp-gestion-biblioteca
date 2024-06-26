@@ -3,7 +3,10 @@ import { Pais } from "../database/models/Pais.model.js";
 
 export const getUsers = async (req, res) => {
     try {
-        const usuarios = await Usuario.findAll({ include: Pais });
+        const usuarios = await Usuario.findAll({
+            include: Pais,
+            attributes: { exclude: ["password"] },
+        });
         return res.send(usuarios);
     } catch (error) {
         res.status(500).send({
@@ -15,7 +18,10 @@ export const getUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await Usuario.findByPk(id, { include: Pais });
+        const user = await Usuario.findByPk(id, {
+            include: Pais,
+            attributes: { exclude: ["password"] },
+        });
         if (!user) {
             res.status(404).send({
                 message: "No existe un usuario con el ID ingresado",

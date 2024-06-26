@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export const Input = ({ textoDentroInput, obtenerTitulo }) => {
+    const { user, isAuthenticated } = useAuth();
     return (
         <div className="input-group mb-3 m-2">
             <span className="input-group-text">
@@ -28,9 +30,11 @@ export const Input = ({ textoDentroInput, obtenerTitulo }) => {
                 onChange={(e) => obtenerTitulo(e.target.value)}
             />
             <button className="btn btn-primary"> Buscar</button>
-            <Link to="/libros/crearOModificar">
-                <button className="btn btn-success"> Nuevo libro </button>
-            </Link>
+            {isAuthenticated && user.rol == "admin" && (
+                <Link to="/libros/crearOModificar">
+                    <button className="btn btn-success"> Nuevo libro </button>
+                </Link>
+            )}
         </div>
     );
 };

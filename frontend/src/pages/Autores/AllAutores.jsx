@@ -4,10 +4,13 @@ import "../../assets/autores/autoresAll.css";
 import { deleteAutor } from "../../service/autores";
 import { modalAutorCreate as Modal } from "../../components/autor/modalAutorCreate";
 import { createAutor } from "../../service/autores";
+import { useAuth } from "../../context/AuthContext";
+
 export const AllAutores = () => {
     const res = useLoaderData();
     const [data, setData] = useState(res);
     const [showModal, setShowModal] = useState(false);
+    const { isAuthenticated, user } = useAuth();
 
     const AccionCreate = async (objeto) => {
         const newUser = await createAutor(objeto);
@@ -32,13 +35,15 @@ export const AllAutores = () => {
     return (
         <>
             <h1 className="tituloMain">Autores</h1>
-            <button
-                type="button"
-                className="btn btn-success text-white fw-bold"
-                onClick={() => setShowModal(true)}
-            >
-                Nuevo Autor
-            </button>
+            {isAuthenticated && user.rol == "admin" && (
+                <button
+                    type="button"
+                    className="btn btn-success text-white fw-bold"
+                    onClick={() => setShowModal(true)}
+                >
+                    Nuevo Autor
+                </button>
+            )}
             <div className="containerAutores">
                 {data.map(({ id_autor, nombre, apellido, biografia }) => (
                     <div key={id_autor} className="card card-body">
@@ -60,19 +65,25 @@ export const AllAutores = () => {
                                             Ver
                                         </button>
                                     </Link>
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-warning card-link fw-bold"
-                                    >
-                                        Modificar
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => handlerDelete(id_autor)}
-                                        className="btn btn-outline-danger card-link fw-bold"
-                                    >
-                                        Eliminar
-                                    </button>
+                                    {isAuthenticated && user.rol == "admin" && (
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-warning card-link fw-bold"
+                                        >
+                                            Modificar
+                                        </button>
+                                    )}
+                                    {isAuthenticated && user.rol == "admin" && (
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                handlerDelete(id_autor)
+                                            }
+                                            className="btn btn-outline-danger card-link fw-bold"
+                                        >
+                                            Eliminar
+                                        </button>
+                                    )}
                                 </li>
                             </ul>
                         </div>

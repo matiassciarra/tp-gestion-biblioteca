@@ -2,6 +2,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { deleteLibro } from "../../service/libros";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 function Libro() {
     const libro = useLoaderData();
@@ -10,7 +11,7 @@ function Libro() {
     const fechaFormateada = `${fechaPublicacion.getDate()}/${
         fechaPublicacion.getMonth() + 1
     }/${fechaPublicacion.getFullYear()}`;
-
+    const { isAuthenticated, user } = useAuth();
     const onDelete = () => {
         swal({
             title: "Eliminar",
@@ -39,12 +40,16 @@ function Libro() {
             >
                 Regresar
             </button>
-            <button className="btn btn-danger" onClick={onDelete}>
-                Eliminar libro
-            </button>{" "}
-            <Link to={`/libros/crearOModificar/${libro.id}`}>
-                <button className="btn btn-warning ml-2">Modificar</button>
-            </Link>
+            {isAuthenticated && user.rol == "admin" && (
+                <button className="btn btn-danger" onClick={onDelete}>
+                    Eliminar libro
+                </button>
+            )}
+            {isAuthenticated && user.rol == "admin" && (
+                <Link to={`/libros/crearOModificar/${libro.id}`}>
+                    <button className="btn btn-warning ml-2">Modificar</button>
+                </Link>
+            )}
             <div className="row">
                 <div className="col-md-4">
                     <img
@@ -69,8 +74,15 @@ function Libro() {
                     <h4 className="fw-medium text-info-emphasis">
                         {fechaFormateada}
                     </h4>
-                    {libro.estado_libro ? (
-                        <h4 className="text-success">Disponible</h4>
+                    {libro.estado_libro && isAuthenticated ? (
+                        <>
+                            <h4 className="text-success">Disponible</h4>
+                            <Link to={`/nuevoPrestamo/${libro.id}`}>
+                                <button className="btn btn-success">
+                                    Solicitar prestamo de este libro
+                                </button>
+                            </Link>
+                        </>
                     ) : (
                         <h4 className="text-danger">No disponible</h4>
                     )}

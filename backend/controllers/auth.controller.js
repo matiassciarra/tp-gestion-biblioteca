@@ -1,10 +1,11 @@
 import { z } from "zod";
-
 import bcrypt from "bcrypt";
 import { createAccessToken } from "../libs/jwt.js";
-
 import Usuario from "../database/models/Usuario.model.js";
 import { TipoUsuario } from "../database/models/TipoUsuario.js";
+import { Sequelize, Op } from "sequelize";
+import jwt from "jsonwebtoken";
+import { PALABRA_SECRETA } from "../src/config.js";
 //register
 
 const registerSchema = z.object({
@@ -36,6 +37,13 @@ export const register = async (req, res) => {
         const { nombre, apellido, username, password, correo, id_pais, url } =
             req.body; //Traemos los datos del req.body
         registerSchema.parse(req.body); //Validamos los datos traidos
+
+        const userFound = await Usuario.findOne({
+            where: { [Op.or]: [{ correo }, { username }] },
+        });
+        if (userFound)
+            return res.status(400).send("El email o el correo ya esta en uso");
+
         const passwordHashed = await bcrypt.hash(password, 10); //Encriptamos el password
         const newUser = await Usuario.create({
             nombre,
@@ -104,4 +112,31 @@ export const login = async (req, res) => {
             error: error.message,
         });
     }
+};
+
+export const verify = async (req, res) => {
+    const { token } = req.cookies;
+
+    if (!token) return res.status(401).json({ message: "Inautorizado" });
+
+    jwt.verify(token, PALABRA_SECRETA, async (err, user) => {
+        if (err) return res.status(401).json({ message: "Inautorizado" });
+
+        const userFound = await Usuario.findOne({
+            where: { id_usuario: user.id },
+        });
+
+        if (!userFound)
+            return res.status(401).json({ message: "Inautorizado" });
+
+        const tipoUsuario = await TipoUsuario.findByPk(
+            userFound.id_tipo_usuario
+        );
+
+        return res.json({
+            id: userFound.id_usuario,
+            username: userFound.username,
+            rol: tipoUsuario.nombre_tipo_usuario,
+        });
+    });
 };
