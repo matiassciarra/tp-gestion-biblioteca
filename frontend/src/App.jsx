@@ -12,10 +12,6 @@ import { Home } from "./pages/auth/auth.js";
 import { FormularioRegistro } from "./pages/auth/registrarUsuario.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ProtectedRoute } from "./components/generales/ProtectedRoute.jsx";
-import { OneUser } from "./pages/users/OneUser.jsx";
-import { AllUsers } from "./pages/users/AllUsers.jsx";
-import { getAllUsersRequest, getUserByIdRequest } from "./service/users.js";
-import { PantallaMainUsuarios } from "./pages/users/PantallaMainUsuarios.jsx";
 import { SolicitarPrestamo } from "./pages/prestamos/solicitarPrestamo.jsx";
 
 import {
@@ -81,19 +77,6 @@ export function App() {
                         />
                         <Route path=":nombreGenero" element={<UnGenero />} />
                     </Route>
-                    {/*
-                    <Route path="users/*" element={<PantallaMainUsuarios />}>
-                        <Route
-                            index
-                            element={<AllUsers />}
-                            loader={getAllUsersRequest}
-                        ></Route>
-                    </Route>
-                    <Route
-                        path="profile/:id"
-                        element={<OneUser />}
-                        loader={({ params }) => getUserByIdRequest(params.id)}
-                    ></Route> */}
                     <Route
                         path="nuevoPrestamo/:id"
                         element={<SolicitarPrestamo />}
