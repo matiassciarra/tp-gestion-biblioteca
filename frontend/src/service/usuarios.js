@@ -1,7 +1,9 @@
 export const URL = "http://localhost:3002/api/";
 
 export const getAllUsuarios = async () => {
-    const response = await fetch(URL + 'usuarios');
+    const response = await fetch(URL + 'usuarios', {
+        credentials: 'include'
+    });
     if (!response.ok) {
         throw new Error('Error al obtener los usuarios');
     }
@@ -10,12 +12,14 @@ export const getAllUsuarios = async () => {
 };
 
 export const getUsuario = async (id) => {
-    const response = await fetch(URL + `usuarios/${id}`);
+    const response = await fetch(URL + `usuarios/${id}`, {
+        credentials: 'include'
+    });
     if (!response.ok) {
         throw new Error('Error al obtener el usuario');
     }
     const data = await response.json();
-    return data
+    return data;
 };
 
 export const deleteUsuario = async (id) => {
@@ -24,6 +28,7 @@ export const deleteUsuario = async (id) => {
         headers: {
             'Content-Type': 'application/json',
         },
+        credentials: 'include'
     };
     const response = await fetch(URL + `usuarios/${id}`, options);
     if (!response.ok) {
@@ -41,13 +46,13 @@ export const createUsuario = async (obj) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(obj),
+        credentials: 'include'
     };
     const response = await fetch(URL + 'usuarios', options);
     if (!response.ok) {
         throw new Error('Error al crear el usuario');
     }
     const data = await response.json();
-
     return data;
 };
 
@@ -58,6 +63,7 @@ export const updateUsuario = async (obj, idUsuario) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(obj),
+        credentials: 'include'
     };
     const response = await fetch(URL + `usuarios/${idUsuario}`, options);
     const data = await response.json();
