@@ -42,7 +42,7 @@
     z-index: 2; /* Asegura que el contenido de .card-body esté por encima del pseudo-elemento */
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
-    border-radius: 0 15px 15px 0;
+    border-radius: 20px;
     backdrop-filter: blur(10px);
 }
 

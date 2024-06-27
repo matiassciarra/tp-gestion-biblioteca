@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import "../../assets/generos/AllGeneros.css";
 import { useState } from "react";
 import {
@@ -8,14 +8,14 @@ import {
     createGenero,
 } from "../../service/generos";
 import ModalG from "../../components/generos/modal";
-
+import swal from "sweetalert";
 export const AllGeneros = () => {
     const initialData = useLoaderData();
     const [generos, setGeneros] = useState(initialData);
     const [searchTerm, setSearchTerm] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [editingGenero, setEditingGenero] = useState(null);
-
+    const navigate = useNavigate();
     const handleSearch = async (e) => {
         e.preventDefault();
         console.log("Buscando género:", searchTerm);
@@ -26,11 +26,37 @@ export const AllGeneros = () => {
             console.error("Error al buscar género:", error);
         }
     };
-
+    const Search = (inputValue) => {
+        // Filtra los géneros basados en el valor del input
+        const filteredGeneros = initialData.filter((genero) =>
+            genero.nombre.toLowerCase().includes(inputValue.toLowerCase())
+        );
+        setSearchTerm(inputValue)
+        setGeneros(filteredGeneros)
+        
+    };
+   
     const handlerDelete = async (id) => {
         try {
-            await deleteGenero(id);
-            setGeneros(generos.filter((genero) => genero.id_genero !== id));
+            swal({
+                title: "Estas seguro que desea eliminar este genero?",
+                text: "Una vez borrado no puedes recuperarlo!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then(async (willDelete) => {
+                if (willDelete) {
+                    await deleteGenero(id);
+                    setGeneros(
+                        generos.filter((genero) => genero.id_genero !== id)
+                    );
+                    swal("Tu genero ha sido borrado!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Tu genero no ha sido borrado!");
+                }
+            });
         } catch (error) {
             console.error("Error al eliminar el género:", error);
         }
@@ -39,12 +65,18 @@ export const AllGeneros = () => {
     const handleUpdateGenero = async (id, newGeneroData) => {
         try {
             const updatedGenero = await updateGenero(id, newGeneroData);
+            swal(
+                "Se guardaron los cambios correctamente!",
+                "Presiona el boton para continuar",
+                "success"
+            );
             const gen = updatedGenero.genero;
             setGeneros(
                 generos.map((genero) =>
                     genero.id_genero === id ? gen : genero
                 )
             );
+            navigate(0)
             handleModalClose();
         } catch (error) {
             console.error("Error al actualizar el género:", error);
@@ -62,7 +94,7 @@ export const AllGeneros = () => {
 
     const handleAddGenero = async (nuevoGenero) => {
         await createGenero(nuevoGenero);
-        setGeneros([...generos, nuevoGenero]);
+        navigate(0);
     };
 
     const handleSaveGenero = async (generoData) => {
@@ -91,14 +123,9 @@ export const AllGeneros = () => {
                         className="form-control"
                         placeholder="Buscar Género"
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) => Search(e.target.value)}
                     />
-                    <button
-                        type="submit"
-                        className="btn btn-primary fw-bold mt-2"
-                    >
-                        Buscar
-                    </button>
+                   
                 </form>
             </div>
             {generos.map(({ id_genero, nombre, url }) => (
