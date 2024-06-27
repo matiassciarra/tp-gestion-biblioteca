@@ -1,0 +1,65 @@
+/* styles.css */
+.card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    border-radius: 15px 0 0 15px;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 153, 255, 0.4), rgba(255, 0, 255, 0.4));
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 0;
+    border-radius: 15px;
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+.card-body {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 0 15px 15px 0;
+    backdrop-filter: blur(10px);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.card h6 {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #0099ff, #ff00ff);
+    border: none;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0077cc, #cc00cc);
+}

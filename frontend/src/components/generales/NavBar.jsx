@@ -108,7 +108,7 @@ export const NavBar = () => {
                             {isAuthenticated && (
                                 <li className="nav-item">
                                     <NavLink
-                                        to={`/usuarios/${user.id}`}
+                                        to={`/usuarios/me`}
                                         className={({ isActive }) =>
                                             isActive
                                                 ? "nav-link navLink"

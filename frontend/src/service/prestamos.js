@@ -1,6 +1,6 @@
 const url = "http://localhost:3002/api/prestamos";
+
 export const postPrestamoRequest = async (datosPrestamo) => {
-     // Cambiar por la URL real del servidor
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -14,19 +14,42 @@ export const postPrestamoRequest = async (datosPrestamo) => {
             throw new Error("Error en la solicitud de préstamo");
         }
         const data = await response.json();
-        return data; // Manejar la respuesta según sea necesario
+        return data;
     } catch (error) {
         console.error("Error al enviar la solicitud de préstamo:", error);
-        throw error; // O manejar el error de manera más específica
+        throw error;
     }
 };
+
 export const getPrestamos = async (id) => {
-    const response = await fetch(url , {
-        credentials: 'include'
+    const response = await fetch(url, {
+        credentials: "include",
     });
     if (!response.ok) {
         throw new Error("Error al obtener prestamos");
     }
     const data = await response.json();
     return data;
+};
+
+export const devolverPrestamoRequest = async (id) => {
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+    };
+
+    try {
+        const response = await fetch(`${url}/${id}`, requestOptions);
+        const data = await response.json();
+        if (!response.ok) {
+            console.log(data.message);
+            throw new Error({ error: data.message });
+        }
+
+        return data;
+    } catch (error) {
+        console.error("Error al devolver el préstamo:", error);
+        throw error;
+    }
 };
