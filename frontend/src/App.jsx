@@ -8,8 +8,7 @@ import { NavBar } from "./components/generales/NavBar";
 import { AutoresMain, AllAutores, OneAutor } from "./pages/Autores/Autores";
 import { getAllAutores, getAutor } from "./service/autores";
 import { getAllLibros, getLibro } from "./service/libros";
-import { Home } from "./pages/auth/auth.js";
-import { FormularioRegistro } from "./pages/auth/registrarUsuario.jsx";
+import { Home , FormularioRegistro } from "./pages/auth/auth.js";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ProtectedRoute } from "./components/generales/ProtectedRoute.jsx";
 import { Prestamos, SolicitarPrestamo } from "./pages/Prestamos/Prestamos.js";
@@ -25,7 +24,7 @@ import {
 import { UnGenero, AllGeneros, Genero } from "./pages/Genero/Genero";
 import { getAllGenero } from "./service/generos";
 
-import { getAllUsuarios, getUsuario } from "./service/usuarios.js";
+import { getAllUsuarios, getUsuario, getUsuarioMe } from "./service/usuarios.js";
 import { AllUsuarios } from "./pages/Usuarios/AllUsuarios.jsx";
 import { Usuario } from "./pages/Usuarios/PantallaUsuario.jsx";
 import { UnUsuario } from "./pages/Usuarios/UnUsuario.jsx";
@@ -110,6 +109,11 @@ export function App() {
                         <Route
                             path=":id"
                             loader={({ params }) => getUsuario(params.id)}
+                            element={<UnUsuario option={1} />}
+                        />
+                        <Route
+                            path="me"
+                            loader={getUsuarioMe}
                             element={<UnUsuario option={1} />}
                         />
                         <Route

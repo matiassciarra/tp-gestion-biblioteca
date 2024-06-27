@@ -1,0 +1,10 @@
+.titleUser span {
+    font-weight: bold;
+}
+
+.accions-btn{
+    display: flex;
+    justify-content: center;
+    gap: 0.7em;
+    align-items: center;
+}
