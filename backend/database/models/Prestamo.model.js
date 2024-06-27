@@ -20,7 +20,7 @@ const Prestamo = sequelize.define(
         },
         fecha_prestamo: {
             type: DataTypes.DATEONLY,
-            allowNull: false,
+            allowNull: true,
             defaultValue: DataTypes.NOW,
         },
         fecha_devolucion: {

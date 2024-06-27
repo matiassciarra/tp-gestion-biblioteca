@@ -14,6 +14,7 @@ import rutaAuth from "../routes/auth.routes.js";
 import rutaTiposUsuario from "../routes/tipo_usuario.js";
 import { authRequired } from "../middlewares/validateToken.js";
 
+
 const app = express();
 //habilitacion
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -25,12 +26,14 @@ app.use(morgan("dev")); //Morgan es para ver en consola las peticiones http e in
 app.use("/api", rutaAuth);
 app.use("/api", rutaTiposUsuario);
 //valida si tiene JWT y puede acceder a las siguientes
+app.use("/api", rutaPaises);
 app.use(authRequired)
 app.use("/api", rutaAutores);
-app.use("/api",rutaUsers);
-app.use("/api", rutaPaises);
 app.use("/api", rutaGeneros);
 app.use("/api", rutaLibro);
 app.use("/api", rutaPrestamos);
+app.use("/api",rutaUsers);
+
+
 
 export default app;

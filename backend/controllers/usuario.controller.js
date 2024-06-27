@@ -1,6 +1,36 @@
 import Usuario from "../database/models/Usuario.model.js";
 import { Pais } from "../database/models/Pais.model.js";
-
+import Prestamo from "../database/models/Prestamo.model.js";
+import Libro from "../database/models/Libro.model.js";
+export const userMe = async (req,res) =>{
+    const {id} = req.user
+    try {
+        const user = await Usuario.findByPk(id,{
+            include: [
+                {
+                    model: Pais,
+                },
+                {
+                    model: Prestamo,
+                    as: 'Prestamos', // asegúrate de usar el alias correcto si lo has definido
+                    include: [
+                        {
+                            model: Libro,
+                            as: 'Libro' // asegúrate de usar el alias correcto si lo has definido
+                        }
+                    ]
+                }
+            ]
+        });
+        if (!user) {
+            return res.status(404).json({message:"usuario no encontrado"})
+        }
+        return res.json(user)
+    } catch (error) {
+        return res.message(500).json({message:'hubo un error'})
+    }
+    
+}
 export const getUsers = async (req, res) => {
     try {
         const usuarios = await Usuario.findAll({
@@ -115,3 +145,4 @@ export const updateUsuario = async (req, res) => {
         });
     }
 };
+
