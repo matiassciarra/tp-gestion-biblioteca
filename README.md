@@ -1,26 +1,36 @@
 # Gestion de Libros de Biblioteca
 
 ## Como installar proyecto
-
-Entra a la carpeta backend y ejecuta
+en la carpeta tanto del **backend** como del **frontend** instala las dependecias  
 
 ```bash
 pnpm install
 ```
 
-o usa
+o 
 
 ```bash
-npm install
+npm i
 ```
 
 ### Como abrir proyecto
+###### Entra a la carpeta backend y ejecuta
 
-Para abrir server ejecuta
+```bash
+pnpm start
+```
+
+o usa
 
 ```bash
 npm start
 ```
+
+###### Luego ve a la carpeta frontend y ejecuta
+```bash
+npm run dev
+```
+
 ## Imagen Entidad Relacion
 ![image info](utils/diagrams/DER%20basico.png)
 

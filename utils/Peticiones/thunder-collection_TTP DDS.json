@@ -1,0 +1,319 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "TTP DDS",
+    "collectionId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+    "dateExported": "2024-06-27T04:41:51.972Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "0a14eb9a-4691-426e-940e-c08ee9fbae08",
+            "name": "Libros",
+            "containerId": "",
+            "created": "2024-06-08T18:35:17.288Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "00d384cd-5509-44ad-b82f-d82b4f9feaac",
+            "name": "autores",
+            "containerId": "",
+            "created": "2024-06-11T14:31:28.728Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "065c6102-4d5b-4ba2-94f2-d47e630d2ad8",
+            "name": "paises",
+            "containerId": "",
+            "created": "2024-06-11T20:15:52.972Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "a49b56dc-d010-44e7-8d61-53c2013c51d4",
+            "name": "generos",
+            "containerId": "",
+            "created": "2024-06-12T00:08:28.384Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "773254c1-cd38-4796-a990-e1da6a9182b7",
+            "name": "usuarios",
+            "containerId": "",
+            "created": "2024-06-13T04:18:25.162Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "3e22d4f4-abdd-4d32-81dd-654d78732b2a",
+            "name": "prestamos",
+            "containerId": "",
+            "created": "2024-06-26T17:09:53.019Z",
+            "sortNum": 60000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "6bda7ce7-8094-48b2-919c-7cb170fef681",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "3e22d4f4-abdd-4d32-81dd-654d78732b2a",
+            "name": "getPrestamos",
+            "url": "http://localhost:3002/api/prestamos",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-06-26T17:09:46.571Z",
+            "modified": "2024-06-26T17:10:10.845Z",
+            "headers": []
+        },
+        {
+            "_id": "20485201-dfa3-460f-b9bf-d9c8c43e1a5d",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "0a14eb9a-4691-426e-940e-c08ee9fbae08",
+            "name": "getLibro",
+            "url": "http://localhost:3002/api/libros/",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-06-08T18:35:26.670Z",
+            "modified": "2024-06-08T20:09:45.443Z",
+            "headers": []
+        },
+        {
+            "_id": "e62d2ae5-3cca-4369-8ae9-85fac1f73e26",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "00d384cd-5509-44ad-b82f-d82b4f9feaac",
+            "name": "create Autor",
+            "url": "http://localhost:3002/api/autores/",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-06-11T20:53:11.457Z",
+            "modified": "2024-06-11T22:33:46.969Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n    \"nombre\": \"sadasdsadsadsad\",\r\n    \"apellido\": \"asdasdsadasdasd\",\r\n    \"biografia\": \"sadsadsad\",\r\n    \"id_pais\": 1,\r\n    \"URL\": \"asdsad\"\r\n  }",
+                "form": []
+            }
+        },
+        {
+            "_id": "fb549e42-3e1f-4126-8dd0-761836325c0d",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "0a14eb9a-4691-426e-940e-c08ee9fbae08",
+            "name": "getLibroId",
+            "url": "http://localhost:3002/api/libros/3",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-06-08T19:12:45.209Z",
+            "modified": "2024-06-26T19:20:16.606Z",
+            "headers": []
+        },
+        {
+            "_id": "a527db56-50c2-47f9-a0b7-f5a28e087a25",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "0a14eb9a-4691-426e-940e-c08ee9fbae08",
+            "name": "update libro",
+            "url": "http://localhost:3002/api/libros/1",
+            "method": "PATCH",
+            "sortNum": 45000,
+            "created": "2024-06-08T19:58:37.636Z",
+            "modified": "2024-06-11T16:20:20.918Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"fecha_publicacion\":\"2020-03-30\",\n  \"estado_libro\":false\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "cc965511-dec7-4e63-9ab6-97a112373aa3",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "0a14eb9a-4691-426e-940e-c08ee9fbae08",
+            "name": "delete Libro",
+            "url": "http://localhost:3002/api/libros/2",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-06-08T19:41:16.296Z",
+            "modified": "2024-06-26T16:48:47.273Z",
+            "headers": []
+        },
+        {
+            "_id": "6b96bba5-ec13-468f-bef2-9d47b42c3ffa",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "00d384cd-5509-44ad-b82f-d82b4f9feaac",
+            "name": "getLAutores",
+            "url": "http://localhost:3002/api/autores",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2024-06-11T14:31:38.267Z",
+            "modified": "2024-06-27T03:34:39.599Z",
+            "headers": []
+        },
+        {
+            "_id": "6f56d31e-7140-4c83-a9c7-47a3bafd8790",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "00d384cd-5509-44ad-b82f-d82b4f9feaac",
+            "name": "autores",
+            "url": "http://localhost:3002/api/autores/",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-06-11T14:37:09.796Z",
+            "modified": "2024-06-27T03:42:25.714Z",
+            "headers": []
+        },
+        {
+            "_id": "58ba62d3-7f2c-454f-9254-d04403eae4ff",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "00d384cd-5509-44ad-b82f-d82b4f9feaac",
+            "name": "updateLibro",
+            "url": "http://localhost:3002/api/libros/15",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-06-11T16:17:54.475Z",
+            "modified": "2024-06-12T00:25:24.664Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"fecha_publicacion\":\"2020-03-24\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "c6f2a65e-861e-4851-bd38-1b897e91f4a1",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "065c6102-4d5b-4ba2-94f2-d47e630d2ad8",
+            "name": "getPaises",
+            "url": "http://localhost:3002/api/paises",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2024-06-11T20:16:05.410Z",
+            "modified": "2024-06-27T03:45:14.096Z",
+            "headers": []
+        },
+        {
+            "_id": "59a501fa-6b38-488e-833d-c6c3099ea967",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "a49b56dc-d010-44e7-8d61-53c2013c51d4",
+            "name": "consultar generos",
+            "url": "http://localhost:3002/api/generos",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2024-06-12T00:08:46.975Z",
+            "modified": "2024-06-27T03:36:28.021Z",
+            "headers": []
+        },
+        {
+            "_id": "882bd84f-fd82-44b8-9ddc-286bac5d10d6",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "773254c1-cd38-4796-a990-e1da6a9182b7",
+            "name": "get usuarios",
+            "url": "http://localhost:3002/api/usuarios",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2024-06-13T04:18:41.646Z",
+            "modified": "2024-06-27T04:40:20.720Z",
+            "headers": []
+        },
+        {
+            "_id": "0f52c685-ef25-446d-8c6d-399d975a1d99",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "773254c1-cd38-4796-a990-e1da6a9182b7",
+            "name": "registrar usuario",
+            "url": "http://localhost:3002/api/register/",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-06-21T20:49:20.911Z",
+            "modified": "2024-06-27T03:31:24.308Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n           \"nombre\": \"Matias\",\n           \"apellido\": \"Sciarra\",\n           \"username\": \"CHACK23\",\n           \"password\": \"password123\",\n           \"correo\": \"ckack23@example.com\",\n           \"id_pais\": 1\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "f948f3bd-8463-4ed5-bb63-b117a1e55ab8",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "773254c1-cd38-4796-a990-e1da6a9182b7",
+            "name": "loggin",
+            "url": "http://localhost:3002/api/login",
+            "method": "POST",
+            "sortNum": 130000,
+            "created": "2024-06-21T21:11:44.584Z",
+            "modified": "2024-06-27T03:54:44.152Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"correo\":\"ckack23@example.com\",\n  \"password\":\"password123\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "ed4210b6-dfa9-4abc-b8d2-d4948e1a7e12",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "773254c1-cd38-4796-a990-e1da6a9182b7",
+            "name": "verify",
+            "url": "http://localhost:3002/api/verify",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2024-06-26T16:39:03.173Z",
+            "modified": "2024-06-26T16:39:11.250Z",
+            "headers": []
+        },
+        {
+            "_id": "0b608e5e-0311-446a-8dd0-608792b67c97",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "773254c1-cd38-4796-a990-e1da6a9182b7",
+            "name": "logout",
+            "url": "http://localhost:3002/api/logout",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2024-06-26T16:40:51.932Z",
+            "modified": "2024-06-26T16:41:10.656Z",
+            "headers": []
+        },
+        {
+            "_id": "f765006a-e80f-45bf-8fcc-a6984a53a0ba",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "3e22d4f4-abdd-4d32-81dd-654d78732b2a",
+            "name": "un prestamo",
+            "url": "http://localhost:3002/api/prestamo/4",
+            "method": "GET",
+            "sortNum": 160000,
+            "created": "2024-06-27T00:59:57.439Z",
+            "modified": "2024-06-27T03:20:17.633Z",
+            "headers": []
+        },
+        {
+            "_id": "0c53fc3b-6e9c-44ce-b186-28883526cc5d",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "3e22d4f4-abdd-4d32-81dd-654d78732b2a",
+            "name": "prestamo usuario",
+            "url": "http://localhost:3002/api/prestamos/me",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2024-06-27T01:09:20.249Z",
+            "modified": "2024-06-27T01:11:45.144Z",
+            "headers": []
+        },
+        {
+            "_id": "8ca54c64-659c-406a-b3c0-7e3a3e55b850",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "3e22d4f4-abdd-4d32-81dd-654d78732b2a",
+            "name": "devolver prestamo",
+            "url": "http://localhost:3002/api/prestamos/6",
+            "method": "POST",
+            "sortNum": 180000,
+            "created": "2024-06-27T03:20:31.949Z",
+            "modified": "2024-06-27T04:05:44.625Z",
+            "headers": []
+        },
+        {
+            "_id": "7d902a31-f4cb-443e-b99d-0cec0f562bae",
+            "colId": "6aabefb4-bcea-42fe-919b-a135770ea795",
+            "containerId": "773254c1-cd38-4796-a990-e1da6a9182b7",
+            "name": "info ME",
+            "url": "http://localhost:3002/api/usuarios/me",
+            "method": "GET",
+            "sortNum": 210000,
+            "created": "2024-06-27T04:35:16.477Z",
+            "modified": "2024-06-27T04:35:46.944Z",
+            "headers": []
+        }
+    ],
+    "ref": "Oa0KcKqRfgPR-RKLaj42gd3-mJx2t_h6xxYqxV32BtFDuWFiZhjBckZ6GF9QY1HEOpCyjptS-c7E1cXIn7JxMQ"
+}

@@ -6,13 +6,15 @@ import {
     deletePais,
     updatePais,
 } from "../controllers/pais.controller.js";
+import { adminToken } from "../middlewares/adminToken.js";
 
 const router = Router();
 
 router.get("/paises", getPaises);
-router.get("/paises/:id", getPaisById);
-router.post("/paises", createPais);
-router.delete("/paises/:id", deletePais);
-router.patch("/paises/:id", updatePais);
+
+router.get("/paises/:id",adminToken , getPaisById);
+router.post("/paises",adminToken , createPais);
+router.delete("/paises/:id",adminToken , deletePais);
+router.patch("/paises/:id",adminToken , updatePais);
 
 export default router;
