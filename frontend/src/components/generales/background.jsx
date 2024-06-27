@@ -1,19 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import './backgroudrandom.css'
+export const Background = ({children}) => {
+    const [imageUrl, setImageUrl] = useState('');
 
-export const Background = () => {
-    
+    useEffect(() => {
+        const fetchImage = async () => {
+            try {
+                const response = await fetch('http://localhost:3002/api/file');
+                const data = await response.json();
+                setImageUrl(data.url);
+            } catch (error) {
+                console.error('Error fetching the image:', error);
+            }
+        };
+
+        fetchImage();
+    }, []);
 
     return (
         <section style={{ 
             width: '100%',
             height: '100vh', // Ajusta esto según tus necesidades
-            backgroundImage: url('../../../../backend/public/hola.jpg'),
             backgroundSize: 'cover',
+            backgroundImage: `url('../../../${imageUrl}')`,
             backgroundPosition: 'center'
         }}>
+            {children}
         </section>
     );
 };
-
-
-
