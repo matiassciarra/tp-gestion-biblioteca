@@ -6,6 +6,7 @@
     border-radius: 15px;
     background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Asegura que el contenido de la tarjeta esté por encima del pseudo-elemento */
 }
 
 .card:hover {
@@ -27,17 +28,18 @@
     background: linear-gradient(135deg, rgba(0, 153, 255, 0.4), rgba(255, 0, 255, 0.4));
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    z-index: 0;
+    z-index: 0; /* El pseudo-elemento debe tener un z-index menor que el contenido de la tarjeta */
     border-radius: 15px;
+    pointer-events: none; /* Asegura que el pseudo-elemento no bloquee la interacción con los elementos hijos */
 }
 
 .card:hover::after {
-    opacity: 1;
+    opacity: 0.4 ;
 }
 
 .card-body {
-    position: relative;
-    z-index: 1;
+    position: relative; /* Asegura que el contenido de .card-body esté posicionado relativamente */
+    z-index: 2; /* Asegura que el contenido de .card-body esté por encima del pseudo-elemento */
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 0 15px 15px 0;
@@ -58,6 +60,7 @@
     background: linear-gradient(135deg, #0099ff, #ff00ff);
     border: none;
     transition: background 0.3s ease-in-out;
+    z-index: 3; /* Asegura que los botones estén por encima del contenido de .card-body */
 }
 
 .btn-primary:hover {
