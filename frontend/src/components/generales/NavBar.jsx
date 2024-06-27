@@ -7,7 +7,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import { useAuth } from "../../context/AuthContext";
 import "./navBar.css";
-
+import {Background} from './background.jsx'
 export const NavBar = () => {
     const navigate = useNavigate();
     const { user, isAuthenticated, signOut } = useAuth();
@@ -88,8 +88,11 @@ export const NavBar = () => {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-            )}
-            <Outlet />
+            )} 
+            <Background>
+             <Outlet />
+            </Background>
+           
         </>
     );
 };
