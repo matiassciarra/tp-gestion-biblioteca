@@ -12,11 +12,11 @@ export const userMe = async (req,res) =>{
                 },
                 {
                     model: Prestamo,
-                    as: 'Prestamos', // asegúrate de usar el alias correcto si lo has definido
+                    as: 'Prestamos',
                     include: [
                         {
                             model: Libro,
-                            as: 'Libro' // asegúrate de usar el alias correcto si lo has definido
+                            as: 'Libro'
                         }
                     ]
                 }

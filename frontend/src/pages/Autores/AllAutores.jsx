@@ -40,7 +40,7 @@ export const AllAutores = () => {
 
     return (
         <div className="mx-4">
-            <h1 className="tituloMain">Autores</h1>
+            <h1 className="tituloMain text-white fw-bold">Autores</h1>
             {isAuthenticated && user.rol == "admin" && (
                 <button
                     type="button"

@@ -29,7 +29,7 @@ export const Prestamos = ({ infoMe = false }) => {
 
     return (
         <>
-            <h1>Prestamos</h1>
+            <h1 className="text-white fw-bold">Prestamos</h1>
             <section className="mx-4 my-2">
                 {data.map(
                     ({

@@ -15,7 +15,7 @@ export const Filtros = () => {
 
     return (
         <>
-            <h2 className=" p-2 mt-5">Generos</h2>
+            <h2 className=" p-2 mt-5 text-white fw-bold">Generos</h2>
 
             <button className="btn btn-primary m-2 w-100"> Filtrar</button>
         </>
