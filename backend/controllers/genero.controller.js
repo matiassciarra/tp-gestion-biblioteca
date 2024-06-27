@@ -1,14 +1,20 @@
 import { Genero } from "../database/models/Genero.model.js";
 
+//rutas llamadas
+export const getGeneros = async (req, res) => {
+    try {
+        return res.send(await Genero.findAll());
+    } catch (error) {
+        res.status(500).json({message:'hubo un error desconocido'})
+    }
+};
+
+
 //llamada por genero
 const buscarGeneroById = async (id) => {
     return await Genero.findByPk(id);
 };
 
-//rutas llamadas
-export const getGeneros = async (req, res) => {
-    res.send(await Genero.findAll());
-};
 
 export const getGeneroById = async (req, res) => {
     const { id } = req.params;

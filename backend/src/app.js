@@ -27,10 +27,11 @@ app.use("/api", rutaTiposUsuario);
 //valida si tiene JWT y puede acceder a las siguientes
 app.use(authRequired)
 app.use("/api", rutaAutores);
-app.use("/api",rutaUsers);
 app.use("/api", rutaPaises);
 app.use("/api", rutaGeneros);
 app.use("/api", rutaLibro);
 app.use("/api", rutaPrestamos);
+app.use("/api",rutaUsers);
+
 
 export default app;

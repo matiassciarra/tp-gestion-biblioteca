@@ -5,14 +5,19 @@ import {
     createUsuario,
     deleteUsuario,
     updateUsuario,
+    userMe
 } from "../controllers/usuario.controller.js";
+import { adminToken } from "../middlewares/adminToken.js";
 
 const router = Router();
+//crear usuario
 
-router.get("/usuarios", getUsers);
-router.get("/usuarios/:id", getUserById);
-router.post("/usuarios", createUsuario);
-router.delete("/usuarios/:id", deleteUsuario);
-router.patch("/usuarios/:id", updateUsuario);
+router.get("/usuarios/me",userMe)
+router.get("/usuarios", adminToken, getUsers);
+router.get("/usuarios/:id", adminToken, getUserById);
+router.delete("/usuarios/:id", adminToken, deleteUsuario);
+router.patch("/usuarios/:id", adminToken, updateUsuario);
+router.post("/usuarios", adminToken, createUsuario);
+
 
 export default router;
