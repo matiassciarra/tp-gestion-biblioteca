@@ -14,6 +14,7 @@ import rutaAuth from "../routes/auth.routes.js";
 import rutaTiposUsuario from "../routes/tipo_usuario.js";
 import { authRequired } from "../middlewares/validateToken.js";
 
+
 const app = express();
 //habilitacion
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));

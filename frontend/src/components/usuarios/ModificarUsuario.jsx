@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const ModificarUsuario = ({ object }) => {
     const [paises, setPaises] = useState([])
-    const { id_usuario, nombre, apellido, Pai, url } = object;
+    const { id_usuario, nombre, apellido, Pai, username, password, url } = object;
     const { 
         handleSubmit,
         register, 
@@ -14,8 +14,15 @@ export const ModificarUsuario = ({ object }) => {
     const navigate = useNavigate();
 
     const onSubmit = handleSubmit(async (data) => {
+        const datosActualizados = {
+            nombre: data.nombre || nombre,
+            apellido: data.apellido || apellido,
+            id_pais: data.id_pais || Pai.id_pais,
+            url: data.url || url,
+        };
+
         try {
-            await updateUsuario(data, id_usuario)
+            await updateUsuario(datosActualizados, id_usuario)
             navigate(-1);
         } catch (error) {
             console.error('Error al modificar el usuario')
@@ -33,7 +40,7 @@ export const ModificarUsuario = ({ object }) => {
     }, []);
 
     return (
-        <>
+        <div className='container mt-5'>
             <form onSubmit={onSubmit}>
                 <div className='form-group mb-3'>
                     <label htmlFor='inp-nombre' className='fw-bold text-dark'>
@@ -103,7 +110,7 @@ export const ModificarUsuario = ({ object }) => {
                 </div>
                 <div className='form-group mb-3'>
                     <label htmlFor='inp-url' className='fw-bold text-dark'>
-                        URL
+                        URL de la imagen del Avatar
                     </label>
                     <input
                     type='text'
@@ -119,14 +126,26 @@ export const ModificarUsuario = ({ object }) => {
                     },
                     })}/>
                 </div>
-                <span className="accion">
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="btn btn-primary text-white fw-bold"
-                    >
-                            Volver
-                    </button>
-                </span>
-            </form></>
+                <div className='d-flex justify-content-center'>
+                    <div className='d-flex flex-grow-1 justify-content-center mx-2'>
+                    
+                        <button
+                            className="btn btn-primary btn-lg w-50 fw-bold"
+                            onClick={() => navigate(-1)}
+                        >
+                                Volver
+                        </button>
+                    </div>
+                    <div className='d-flex flex-grow-1 justify-content-center mx-2'>
+                        <button
+                            type='submit'
+                            className='btn btn-warning btn-lg w-50 text-white fw-bold'
+                        >
+                            Modificar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     )
 }
