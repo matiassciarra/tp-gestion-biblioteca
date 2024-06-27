@@ -25,7 +25,7 @@ const Prestamo = sequelize.define(
         },
         fecha_devolucion: {
             type: DataTypes.DATEONLY,
-            allowNull: true,
+            allowNull: false,
             validate: {
                 esFechaFutura(value) {
                     if (value <= new Date()) {
@@ -36,6 +36,11 @@ const Prestamo = sequelize.define(
                 },
             },
         },
+        fecha_devolucion_real:{
+            type:DataTypes.DATEONLY,
+            allowNull: true,
+            defaultValue: null
+        }
     },
     //comando opcionales
     {

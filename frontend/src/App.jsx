@@ -84,7 +84,7 @@ export function App() {
                         </Route>
                     </Route>
                     <Route path="prestamos/*" >
-                        <Route index  loader={getPrestamos} element={<Prestamos/>}/>
+                        <Route index  loader={getPrestamos} element={<Prestamos infoMe/>}/>
                         <Route path="me" element={<Prestamos/>} 
                         loader={prestamoByMe}/>
                         <Route

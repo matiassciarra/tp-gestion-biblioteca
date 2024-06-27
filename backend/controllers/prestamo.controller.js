@@ -146,6 +146,10 @@ export const devolverLibro = async (req, res) => {
                 .json({ message: "El libro ya fue devuelto" });
         }
         await libro.update({ estado_libro: true });
+        //se le inserta la fecha de devolucion real para marcar que ya fue devuelto
+        const today = new Date();
+        const fechaHoy = today.toISOString().split('T')[0];
+        await prestamo.update({fecha_devolucion_real: fechaHoy })
         res.send({ message: "el libro fue devuelto con exito" });
     } catch (error) {
         return res.status(500).json({ message: "hubo un error" });
