@@ -14,88 +14,80 @@ export const NavBar = () => {
     return (
         <>
             {isAuthenticated && (
-                
-                    <Navbar expand="lg" className="bg-body-tertiary">
-                        <Container fluid>
-                            <Navbar.Brand as={NavLink} to="/">
-                                <BookIcon />
-                            </Navbar.Brand>
-                            <Navbar.Toggle aria-controls="navbarNavDropdown" />
-                            <Navbar.Collapse id="responsive-navbar-nav">
-                                <Nav className="me-auto">
-                                    {isAuthenticated && (
+                <Navbar expand="lg" className="bg-body-tertiary">
+                    <Container fluid>
+                        <Navbar.Brand as={NavLink} to="/">
+                            <BookIcon />
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="navbarNavDropdown" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="me-auto">
+                                <>
+                                    <Nav.Link as={NavLink} to="/libros">
+                                        Libros
+                                    </Nav.Link>
+
+                                    {user.rol === "admin" && (
                                         <>
-                                            <Nav.Link as={NavLink} to="/libros">
-                                                Libros
-                                            </Nav.Link>
                                             <Nav.Link
                                                 as={NavLink}
                                                 to="/autores"
                                             >
                                                 Autores
                                             </Nav.Link>
-                                            {user.rol === "admin" && (
-                                                <>
-                                                    <Nav.Link
-                                                        as={NavLink}
-                                                        to="/usuarios"
-                                                    >
-                                                        Usuarios
-                                                    </Nav.Link>
-                                                    <Nav.Link
-                                                        as={NavLink}
-                                                        to="/prestamos"
-                                                    >
-                                                        Prestamos
-                                                    </Nav.Link>
-                                                    <Nav.Link
-                                                        as={NavLink}
-                                                        to="/generos"
-                                                    >
-                                                        Generos
-                                                    </Nav.Link>
-                                                </>
-                                            )}
                                             <Nav.Link
                                                 as={NavLink}
-                                                to="prestamos/me"
+                                                to="/usuarios"
                                             >
-                                                Mis prestamos
+                                                Usuarios
+                                            </Nav.Link>
+                                            <Nav.Link
+                                                as={NavLink}
+                                                to="/prestamos"
+                                            >
+                                                Prestamos
+                                            </Nav.Link>
+                                            <Nav.Link
+                                                as={NavLink}
+                                                to="/generos"
+                                            >
+                                                Generos
                                             </Nav.Link>
                                         </>
                                     )}
-                                </Nav>
-                                {isAuthenticated && (
-                                    <Nav className="drodown">
-                                        <NavDropdown
-                                            title={user.username}
-                                            id="basic-nav-dropdown"
+                                    <Nav.Link as={NavLink} to="prestamos/me">
+                                        Mis prestamos
+                                    </Nav.Link>
+                                </>
+                            </Nav>
+                            <Nav className="drodown">
+                                <NavDropdown
+                                    title={user.username}
+                                    id="basic-nav-dropdown"
+                                >
+                                    <NavDropdown.Item href="#action/3.1">
+                                        <Nav.Link
+                                            as={NavLink}
+                                            to={`/usuarios/me`}
                                         >
-                                            <NavDropdown.Item href="#action/3.1">
-                                                <Nav.Link
-                                                    as={NavLink}
-                                                    to={`/usuarios/me`}
-                                                >
-                                                    Ver mi perfil
-                                                </Nav.Link>
-                                            </NavDropdown.Item>
-                                            <NavDropdown.Item>
-                                                <Nav.Link
-                                                    onClick={() => {
-                                                        signOut();
-                                                        navigate("/");
-                                                    }}
-                                                >
-                                                    Cerrar Sesion
-                                                </Nav.Link>
-                                            </NavDropdown.Item>
-                                        </NavDropdown>
-                                    </Nav>
-                                )}
-                            </Navbar.Collapse>
-                        </Container>
-                    </Navbar>
-                
+                                            Ver mi perfil
+                                        </Nav.Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item>
+                                        <Nav.Link
+                                            onClick={() => {
+                                                signOut();
+                                                navigate("/");
+                                            }}
+                                        >
+                                            Cerrar Sesion
+                                        </Nav.Link>
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
             )}
             <Outlet />
         </>

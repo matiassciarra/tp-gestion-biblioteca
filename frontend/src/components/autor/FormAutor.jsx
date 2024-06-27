@@ -10,8 +10,7 @@ export const FormAutor = ({action = null}) => {
     const [paises, setPaises] = useState([]);
     useEffect(() => {
         const fetchPaises = async () => {
-            const res = await getPaises();
-            const paisesData = await res.json();
+            const paisesData = await getPaises();
             setPaises(paisesData);
         };
         fetchPaises();
