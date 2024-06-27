@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { getPaises } from '../../service/paises';
 import { useEffect, useState } from 'react';
 
-export const FormAutor = ({action = null}) => {
+export const FormAutor = ({action = null, accionModificar}) => {
     const [paises, setPaises] = useState([]);
     useEffect(() => {
         const fetchPaises = async () => {
@@ -24,7 +24,7 @@ export const FormAutor = ({action = null}) => {
     } = useForm();
 
     const onSubmit = (data) => {
-        action(data)
+        action(data,accionModificar)
     };
 
     const validateDate = (value) => {

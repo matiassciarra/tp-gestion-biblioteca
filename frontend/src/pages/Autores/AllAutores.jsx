@@ -12,13 +12,19 @@ export const AllAutores = () => {
     const [showModal, setShowModal] = useState(false);
     const { isAuthenticated, user } = useAuth();
 
-    const AccionCreate = async (objeto) => {
-        const newUser = await createAutor(objeto);
-        //aca agregar manejo de error
-        setData([...data, newUser]);
-        return true;
+    const AccionCreate = async (objeto, accion=false) => {
+        if (!accion){
+            const newUser = await createAutor(objeto);
+            //aca agregar manejo de error
+            setData([...data, newUser]);
+            return true;
+        }
+        
     };
 
+    const addAutor = () => {
+        setShowModal(true);
+    };
     // Función para eliminar usuario
     const handlerDelete = async (id) => {
         try {
@@ -39,7 +45,7 @@ export const AllAutores = () => {
                 <button
                     type="button"
                     className="btn btn-success text-white fw-bold"
-                    onClick={() => setShowModal(true)}
+                    onClick={addAutor}
                 >
                     Nuevo Autor
                 </button>
