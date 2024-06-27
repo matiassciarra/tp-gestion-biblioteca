@@ -24,7 +24,7 @@ import {
 import { UnGenero, AllGeneros, Genero } from "./pages/Genero/Genero";
 import { getAllGenero } from "./service/generos";
 
-import { getAllUsuarios, getUsuario } from "./service/usuarios.js";
+import { getAllUsuarios, getUsuario, getUsuarioMe } from "./service/usuarios.js";
 import { AllUsuarios } from "./pages/Usuarios/AllUsuarios.jsx";
 import { Usuario } from "./pages/Usuarios/PantallaUsuario.jsx";
 import { UnUsuario } from "./pages/Usuarios/UnUsuario.jsx";
@@ -102,6 +102,11 @@ export function App() {
                         <Route
                             path=":id"
                             loader={({ params }) => getUsuario(params.id)}
+                            element={<UnUsuario option={1} />}
+                        />
+                        <Route
+                            path="me"
+                            loader={getUsuarioMe}
                             element={<UnUsuario option={1} />}
                         />
                         <Route

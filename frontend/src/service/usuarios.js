@@ -71,3 +71,15 @@ export const updateUsuario = async (obj, idUsuario) => {
         throw new Error(data.message);
     }
 };
+
+
+export const getUsuarioMe = async () => {
+    const response = await fetch(URL + `usuarios/me`, {
+        credentials: 'include'
+    });
+    if (!response.ok) {
+        throw new Error('Error al obtener el usuario');
+    }
+    const data = await response.json();
+    return data;
+};
