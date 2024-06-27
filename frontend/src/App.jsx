@@ -12,9 +12,13 @@ import { Home } from "./pages/auth/auth.js";
 import { FormularioRegistro } from "./pages/auth/registrarUsuario.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ProtectedRoute } from "./components/generales/ProtectedRoute.jsx";
-import {OnePrestamo ,Prestamos ,SolicitarPrestamo} from './pages/Prestamos/Prestamos.js'
+import {
+    OnePrestamo,
+    Prestamos,
+    SolicitarPrestamo,
+} from "./pages/prestamos/Prestamos.js";
 import { getPrestamos } from "./service/prestamos.js";
-import {AdminRoute} from './components/generales/AdminRoute.jsx'
+import { AdminRoute } from "./components/generales/AdminRoute.jsx";
 import {
     OneLibro,
     TodoLibros,
@@ -83,15 +87,19 @@ export function App() {
                             />
                         </Route>
                     </Route>
-                    <Route path="prestamos/*" >
-                        <Route index  loader={getPrestamos} element={<Prestamos/>}/>
+                    <Route path="prestamos/*">
+                        <Route
+                            index
+                            loader={getPrestamos}
+                            element={<Prestamos />}
+                        />
                         <Route
                             path="nuevoPrestamo/:id"
                             element={<SolicitarPrestamo />}
                             loader={({ params }) => getLibro(params.id)}
                         ></Route>
                     </Route>
-                    
+
                     <Route path="usuarios/*" element={<Usuario />}>
                         <Route
                             index
