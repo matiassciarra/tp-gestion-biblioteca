@@ -21,28 +21,28 @@ export const OneAutor = () => {
         Pai,
     } = useLoaderData();
     return (
-        <section className="sectionCard">
-            <div className="info">
-                <span className="accion">
+        <section>
+            <div>
+                <div className="container g-2">
                     <button
                         onClick={() => navigate(-1)}
-                        className="btn btn-primary text-white fw-bold "
+                        className="btn btn-primary text-white fw-bold m-2"
                     >
                         Volver atras
                     </button>
                     <button
                         onClick={() => {}}
-                        className="btn btn-warning text-white fw-bold "
+                        className="btn btn-warning text-white fw-bold mx-2"
                     >
                         Modificar
                     </button>
                     <button
                         onClick={() => deleteHandler(id_autor)}
-                        className="btn btn-danger fw-bold "
+                        className="btn btn-danger fw-bold mx-2"
                     >
                         Eliminar usuario
                     </button>
-                </span>
+                </div>
                 <CardAutor
                     object={{
                         id_autor,
@@ -55,7 +55,6 @@ export const OneAutor = () => {
                     }}
                 />
             </div>
-            <div className="peliculas"></div>
         </section>
     );
 };

@@ -141,6 +141,6 @@ export const verify = async (req, res) => {
     });
 };
 
-export const logout = async (req,res)=>{
-    return res.clearCookie('token').send({message:'logOut successful'})
-}
+export const logout = async (req, res) => {
+    return res.clearCookie("token").send({ message: "logOut successful" });
+};

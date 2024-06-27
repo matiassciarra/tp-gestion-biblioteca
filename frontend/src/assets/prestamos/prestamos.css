@@ -10,7 +10,7 @@
 }
 
 .card:hover {
-    transform: translateY(-15px);
+    transform: translateY(-5px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
 }
 
@@ -25,16 +25,20 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0, 153, 255, 0.4), rgba(255, 0, 255, 0.4));
+    background: linear-gradient(
+        135deg,
+        rgba(0, 153, 255, 0.4),
+        rgba(255, 0, 255, 0.4)
+    );
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    z-index: 0; /* El pseudo-elemento debe tener un z-index menor que el contenido de la tarjeta */
+    z-index: -1;
     border-radius: 15px;
     pointer-events: none; /* Asegura que el pseudo-elemento no bloquee la interacción con los elementos hijos */
 }
 
 .card:hover::after {
-    opacity: 0.4 ;
+    opacity: 0.4;
 }
 
 .card-body {
