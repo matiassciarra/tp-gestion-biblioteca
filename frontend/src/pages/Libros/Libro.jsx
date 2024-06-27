@@ -77,7 +77,7 @@ function Libro() {
                     {libro.estado_libro && isAuthenticated ? (
                         <>
                             <h4 className="text-success">Disponible</h4>
-                            <Link to={`/nuevoPrestamo/${libro.id}`}>
+                            <Link to={`/prestamos/nuevoPrestamo/${libro.id}`}>
                                 <button className="btn btn-success">
                                     Solicitar prestamo de este libro
                                 </button>

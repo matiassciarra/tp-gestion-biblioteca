@@ -29,6 +29,20 @@ export const getPrestamos = async (req, res) => {
     }
 };
 
+export const getPrestamosUsuario = async (req,res)=>{
+    const {id} = req.user
+    const {Prestamos} =await Usuario.findByPk(id,{
+        include: [
+            {
+                model: Prestamo,
+                as: 'Prestamos', // asegúrate de usar el alias correcto si lo has definido
+            }
+        ],
+    })
+    res.send(Prestamos)
+}
+
+
 export const getPrestamoPorId = async (req, res) => {
     try {
         const { id } = req.params;
