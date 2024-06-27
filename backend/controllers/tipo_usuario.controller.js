@@ -13,11 +13,11 @@ export const getTiposUsuarios = async (_, res) => {
 
 export const createTipoUsuario = async (req, res) => {
     try {
-        const { nombre } = req.body;
-        const nuevoTipoUsuario = { nombre };
+        const { nombre_tipo_usuario } = req.body;
+        const nuevoTipoUsuario = { nombre_tipo_usuario };
         const tipoUsuarioExistente = await TipoUsuario.findOne({
             where: {
-                nombre,
+                nombre_tipo_usuario,
             },
         });
         if (!tipoUsuarioExistente) {
@@ -31,6 +31,7 @@ export const createTipoUsuario = async (req, res) => {
     } catch (error) {
         res.status(500).send({
             message: "Error del servidor al crear tipo de usuario",
+            error: error.toString(),
         });
     }
 };

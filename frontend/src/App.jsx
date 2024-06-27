@@ -11,9 +11,9 @@ import { getAllLibros, getLibro } from "./service/libros";
 import { Home , FormularioRegistro } from "./pages/auth/auth.js";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ProtectedRoute } from "./components/generales/ProtectedRoute.jsx";
-import {Prestamos ,SolicitarPrestamo} from './pages/Prestamos/Prestamos.js'
-import { getPrestamos , prestamoByMe } from "./service/prestamos.js";
-import {AdminRoute} from './components/generales/AdminRoute.jsx'
+import { Prestamos, SolicitarPrestamo } from "./pages/Prestamos/Prestamos.js";
+import { getPrestamos, prestamoByMe } from "./service/prestamos.js";
+import { AdminRoute } from "./components/generales/AdminRoute.jsx";
 import {
     OneLibro,
     TodoLibros,
@@ -82,17 +82,24 @@ export function App() {
                             />
                         </Route>
                     </Route>
-                    <Route path="prestamos/*" >
-                        <Route index  loader={getPrestamos} element={<Prestamos infoMe/>}/>
-                        <Route path="me" element={<Prestamos/>} 
-                        loader={prestamoByMe}/>
+                    <Route path="prestamos/*">
+                        <Route
+                            index
+                            loader={getPrestamos}
+                            element={<Prestamos infoMe />}
+                        />
+                        <Route
+                            path="me"
+                            element={<Prestamos />}
+                            loader={prestamoByMe}
+                        />
                         <Route
                             path="nuevoPrestamo/:id"
                             element={<SolicitarPrestamo />}
                             loader={({ params }) => getLibro(params.id)}
                         ></Route>
                     </Route>
-                    
+
                     <Route path="usuarios/*" element={<Usuario />}>
                         <Route
                             index

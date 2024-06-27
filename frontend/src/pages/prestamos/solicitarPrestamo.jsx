@@ -97,8 +97,12 @@ export const SolicitarPrestamo = () => {
                             Confirmar
                         </button>
                     </form>
-
-                    <button className="btn btn-danger my-2">Cancelar</button>
+                    <button
+                        className="btn btn-danger my-2"
+                        onClick={() => navigate(-1)}
+                    >
+                        Cancelar
+                    </button>
                 </div>
             </div>
         </div>

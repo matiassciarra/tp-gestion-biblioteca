@@ -194,11 +194,12 @@ export const updateLibro = async (req, res) => {
                 id_autor: id_autor,
                 id_genero: id_genero,
                 titulo: titulo,
+                id: { [Op.ne]: libro.id },
             },
         });
         if (libroExist) {
             throw new Error(
-                "Ya existe un libro con el titulo y autor ingresados"
+                "Ya existe un libro con ese titulo, autor y genero"
             );
             //return res.status(400).json({message:""})
         }

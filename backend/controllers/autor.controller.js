@@ -1,6 +1,6 @@
 import Autor from "../database/models/Autor.model.js";
 import { Pais } from "../database/models/Pais.model.js";
-import Libro from "../database/models/Libro.model.js"
+import Libro from "../database/models/Libro.model.js";
 import { Genero } from "../database/models/Genero.model.js";
 import { z } from "zod";
 export const getAutores = async (req, res) => {
@@ -29,9 +29,9 @@ export const getAutorPorId = async (req, res) => {
                 Pais,
                 {
                     model: Libro,
-                    include: [Genero]
-                }
-            ]
+                    include: [Genero],
+                },
+            ],
         });
         if (!autor) {
             return res.status(404).send("no se encontro autor por id");
@@ -48,25 +48,38 @@ export const createAutor = async (req, res) => {
     try {
         const AutorSchema = z.object({
             nombre: z.string(),
-            apellido: z.string(),  // Asumiendo que 'apellido' es requerido y debe ser un string
-            biografia: z.string().optional(),  // Hace que 'biografia' sea opcional
-            fecha_nacimiento: z.string().refine((val) => !isNaN(Date.parse(val)), {
-                message: "Invalid date format",
-            }).optional(),
-            id_pais: z.number().optional(),  // Hace que 'id_pais' sea opcional
-            URL: z.string().optional()
+            apellido: z.string(), // Asumiendo que 'apellido' es requerido y debe ser un string
+            biografia: z.string().optional(), // Hace que 'biografia' sea opcional
+            fecha_nacimiento: z
+                .string()
+                .refine((val) => !isNaN(Date.parse(val)), {
+                    message: "Invalid date format",
+                })
+                .optional(),
+            id_pais: z.number().optional(), // Hace que 'id_pais' sea opcional
+            url_imagen: z.string().optional(),
         });
         const validationResult = AutorSchema.safeParse(req.body);
         if (!validationResult.success) {
-            return res.status(400).json({ error: validationResult.error.errors });
+            return res
+                .status(400)
+                .json({ error: validationResult.error.errors });
         }
-        const { nombre, apellido, biografia, fecha_nacimiento, id_pais } = validationResult.data
+        const {
+            nombre,
+            apellido,
+            biografia,
+            fecha_nacimiento,
+            id_pais,
+            url_imagen,
+        } = validationResult.data;
         const nuevoAutor = {
             nombre,
             apellido,
             biografia,
             fecha_nacimiento,
             id_pais,
+            url_imagen,
         };
         const autorExistente = await Autor.findOne({
             where: {

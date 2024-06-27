@@ -12,6 +12,7 @@ import rutaLibro from "../routes/libro.routes.js";
 import rutaPrestamos from "../routes/prestamo.routes.js";
 import rutaAuth from "../routes/auth.routes.js";
 import rutaTiposUsuario from "../routes/tipo_usuario.js";
+import routerImage from "../routes/images.routes.js";
 import { authRequired } from "../middlewares/validateToken.js";
 
 
@@ -21,11 +22,14 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 //Middlewares
 app.use(express.json()); //Es para interpretar los JSON
 app.use(cookieParser());
+//Morgan es para ver en consola las peticiones http e informacion
+app.use(morgan("dev")); 
 
-app.use(morgan("dev")); //Morgan es para ver en consola las peticiones http e informacion
+//valida 
 app.use("/api", rutaAuth);
 app.use("/api", rutaTiposUsuario);
 app.use("/api", rutaPaises);
+app.use("/api",routerImage)
 //valida si tiene JWT y puede acceder a las siguientes
 
 app.use(authRequired)
