@@ -5,7 +5,7 @@
     justify-content: center; /* Centra el contenido horizontalmente */
     align-items: center; /* Centra el contenido verticalmente */
     height: 100vh; /* Hace que el contenedor ocupe toda la altura de la ventana */
-    background-image: url("https://th.bing.com/th/id/R.652236b82e4d252cc0bc6b0954257706?rik=0tjJg7H6OA5Mbg&pid=ImgRaw&r=0"); /* Ruta a tu imagen de fondo */
+    background-image: url("https://th.bing.com/th/id/OIG3.9uLcmiAIo38l9LJCuVLl?pid=ImgGn"); /* Ruta a tu imagen de fondo */
     background-size: cover; /* Ajusta la imagen para que cubra todo el contenedor */
     background-position: center; /* Centra la imagen de fondo */
     padding: 20px; /* Añade un poco de espacio interno */
