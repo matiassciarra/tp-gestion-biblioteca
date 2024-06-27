@@ -5,7 +5,7 @@
     justify-content: center; /* Centra el contenido horizontalmente */
     align-items: center; /* Centra el contenido verticalmente */
     height: 100vh; /* Hace que el contenedor ocupe toda la altura de la ventana */
-    background-image: url("https://files.oaiusercontent.com/file-fo2pCmgc3kyNJ3tRgU5R6v5l?se=2024-06-27T16%3A02%3A00Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D19459b52-c218-47a9-8f55-59e5bd176955.webp&sig=48Ns5D/oeu84uu7/drdp0plVq7/DjaBSiPd2RAZ7MTo%3D"); /* Ruta a tu imagen de fondo */
+    background-image: url("../../../public/background.webp"); /* Ruta a tu imagen de fondo */
     background-size: cover; /* Ajusta la imagen para que cubra todo el contenedor */
     background-position: center; /* Centra la imagen de fondo */
     padding: 20px; /* Añade un poco de espacio interno */
