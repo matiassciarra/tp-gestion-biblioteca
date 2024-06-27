@@ -53,3 +53,17 @@ export const devolverPrestamoRequest = async (id) => {
         throw error;
     }
 };
+
+export const prestamoByMe = async()=>{
+    const peticion = url + '/me'
+    const response = await fetch(peticion, {
+        credentials: "include",
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        console.log(data.message);
+        throw new Error(data.message);
+    }
+    
+    return data;
+}

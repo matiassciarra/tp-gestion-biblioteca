@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useLoaderData, useNavigate, NavLink } from "react-router-dom";
 import { devolverPrestamoRequest } from "../../service/prestamos"; // Importar la función de devolución
-//import "../../assets/prestamos/prestamos.css"
+import "../../assets/prestamos/prestamos.css"
 import swal from 'sweetalert';
 export const Prestamos = () => {
     const data = useLoaderData();

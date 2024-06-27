@@ -10,14 +10,14 @@ export const getPrestamos = async (req, res) => {
         res.send(
             await Prestamo.findAll({
                 include: [
-                    { 
-                        model: Libro, 
-                        include: [{ model: Genero }] 
+                    {
+                        model: Libro,
+                        include: [{ model: Genero }],
                     },
-                    { 
-                        model: Usuario, 
-                        include: [{ model: Pais }] 
-                    }
+                    {
+                        model: Usuario,
+                        include: [{ model: Pais }],
+                    },
                 ],
             })
         );
@@ -29,33 +29,40 @@ export const getPrestamos = async (req, res) => {
     }
 };
 
-export const getPrestamosUsuario = async (req,res)=>{
-    const {id} = req.user
-    const {Prestamos} =await Usuario.findByPk(id,{
+export const getPrestamosUsuario = async (req, res) => {
+    const { id } = req.user;
+    const Prestamos =await Prestamo.findAll({
+        where: {
+            id_usuario:id    
+        },
         include: [
             {
-                model: Prestamo,
-                as: 'Prestamos', // asegúrate de usar el alias correcto si lo has definido
-            }
+                model: Libro,
+                include: [{ model: Genero }],
+            },
+            {
+                model: Usuario,
+                include: [{ model: Pais }],
+            },
         ],
     })
-    res.send(Prestamos)
-}
-
+    
+    res.send(Prestamos);
+};
 
 export const getPrestamoPorId = async (req, res) => {
     try {
         const { id } = req.params;
         const prestamo = await Prestamo.findByPk(id, {
             include: [
-                { 
-                    model: Libro, 
-                    include: [{ model: Genero }] 
+                {
+                    model: Libro,
+                    include: [{ model: Genero }],
                 },
-                { 
-                    model: Usuario, 
-                    include: [{ model: Pais }] 
-                }
+                {
+                    model: Usuario,
+                    include: [{ model: Pais }],
+                },
             ],
         });
 
@@ -107,38 +114,43 @@ export const createPrestamo = async (req, res) => {
     }
 };
 
-export const devolverLibro = async(req,res)=>{
+export const devolverLibro = async (req, res) => {
     try {
-        const { id:id_prestamo} = req.params
-        const {id:id_sesion, rol} = req.user
-        const prestamo = await Prestamo.findByPk(id_prestamo,{
-            include:Libro
+        const { id: id_prestamo } = req.params;
+        const { id: id_sesion, rol } = req.user;
+        const prestamo = await Prestamo.findByPk(id_prestamo, {
+            include: Libro,
         });
         if (!prestamo) {
-            return res.status(404).json({message:'no se encontro prestamos correspondiente'})
+            return res
+                .status(404)
+                .json({ message: "no se encontro prestamos correspondiente" });
         }
-        const { id_usuario } = prestamo
+        const { id_usuario } = prestamo;
         // aca verifica que el id del usuario es el mismo de la sesion o el rol es admin
-        if (id_usuario !== id_sesion && rol !== 'admin') {
-            return res.status(401).json({ message: 'no estas autorizado a cambiar el prestamo' });
+        if (id_usuario !== id_sesion && rol !== "admin") {
+            return res
+                .status(401)
+                .json({ message: "no estas autorizado a cambiar el prestamo" });
         }
-        //aca agregar logistica de poder 
-        const libro = await Libro.findByPk(prestamo.id_libro)
-        if (!libro){
-            return res.status(404).send({message:'no fue encontrado el libro'})
+        //aca agregar logistica de poder
+        const libro = await Libro.findByPk(prestamo.id_libro);
+        if (!libro) {
+            return res
+                .status(404)
+                .send({ message: "no fue encontrado el libro" });
         }
         if (libro.estado_libro) {
-            return res.status(400).json({ message: 'El libro ya fue devuelto' });
+            return res
+                .status(400)
+                .json({ message: "El libro ya fue devuelto" });
         }
-        await libro.update({ estado_libro: true })
-        res.send({message:"el libro fue devuelto con exito"})
+        await libro.update({ estado_libro: true });
+        res.send({ message: "el libro fue devuelto con exito" });
     } catch (error) {
-        return res.status(500).json({message:'hubo un error'})
+        return res.status(500).json({ message: "hubo un error" });
     }
-    
-    
-
-}
+};
 
 export const deletePrestamo = async (req, res) => {
     try {

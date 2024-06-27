@@ -25,8 +25,9 @@ app.use(cookieParser());
 app.use(morgan("dev")); //Morgan es para ver en consola las peticiones http e informacion
 app.use("/api", rutaAuth);
 app.use("/api", rutaTiposUsuario);
-//valida si tiene JWT y puede acceder a las siguientes
 app.use("/api", rutaPaises);
+//valida si tiene JWT y puede acceder a las siguientes
+
 app.use(authRequired)
 app.use("/api", rutaAutores);
 app.use("/api", rutaGeneros);
