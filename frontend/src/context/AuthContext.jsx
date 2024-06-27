@@ -3,6 +3,7 @@ import {
     registerRequest,
     loginRequest,
     verifyTokenRequest,
+    logout
 } from "../service/auth";
 import Cookies from "js-cookie";
 
@@ -41,6 +42,15 @@ export const AuthProvider = ({ children }) => {
             setErrors(error.response.data.message);
         }
     };
+    const signOut = async () => {
+        try {
+            await logout();
+            setIsAuthenticated(null);
+            setUser(null);
+        } catch (error) {
+            setErrors(error.response.data.message)    
+        }
+    }
 
     useEffect(() => {
         if (errors) {
@@ -74,7 +84,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ signup, user, isAuthenticated, errors, signin }}
+            value={{ signup, user, isAuthenticated, errors, signin, signOut }}
         >
             {children}
         </AuthContext.Provider>

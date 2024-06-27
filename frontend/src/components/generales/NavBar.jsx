@@ -1,128 +1,102 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import BookIcon from "../../assets/bookIcon";
 import { Outlet } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
-import "./navBar.css";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Container from "react-bootstrap/Container";
 import { useAuth } from "../../context/AuthContext";
+import "./navBar.css";
 
 export const NavBar = () => {
-    const { user, isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+    const { user, isAuthenticated, signOut } = useAuth();
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary">
-                <div className="container-fluid">
-                    <NavLink to="/" className="navbar-brand">
-                        <BookIcon></BookIcon>
-                    </NavLink>
-
-                    <div
-                        className="collapse navbar-collapse"
-                        id="navbarNavDropdown"
-                    >
-                        <ul className="navbar-nav">
-                            {isAuthenticated && (
-                                <li className="nav-item">
-                                    <NavLink
-                                        to="/libros"
-                                        className={({ isActive }) =>
-                                            isActive
-                                                ? "nav-link navLink"
-                                                : "nav-link"
-                                        }
-                                        aria-current="page"
-                                    >
-                                        Libros
-                                    </NavLink>
-                                </li>
-                            )}
-                            {isAuthenticated && (
-                                <li className="nav-item">
-                                    <NavLink
-                                        to="/autores"
-                                        className={({ isActive }) =>
-                                            isActive
-                                                ? "nav-link navLink"
-                                                : "nav-link"
-                                        }
-                                    >
-                                        Autores
-                                    </NavLink>
-                                </li>
-                            )}
-                            {isAuthenticated && user.rol == "admin" && (
-                                <li className="nav-item">
-                                    <NavLink
-                                        to="/usuarios"
-                                        className={({ isActive }) =>
-                                            isActive
-                                                ? "nav-link navLink"
-                                                : "nav-link"
-                                        }
-                                    >
-                                        Usuarios
-                                    </NavLink>
-                                </li>
-                            )}
-                            {isAuthenticated && user.rol == "admin" && (
-                                <li className="nav-item">
-                                    <NavLink
-                                        to="/prestamos"
-                                        className={({ isActive }) =>
-                                            isActive
-                                                ? "nav-link navLink"
-                                                : "nav-link"
-                                        }
-                                    >
-                                        Prestamos
-                                    </NavLink>
-                                </li>
-                            )}
-                            {isAuthenticated && user.rol == "admin" && (
-                                <li className="nav-item">
-                                    <NavLink
-                                        to="/generos"
-                                        className={({ isActive }) =>
-                                            isActive
-                                                ? "nav-link navLink"
-                                                : "nav-link"
-                                        }
-                                    >
-                                        Generos
-                                    </NavLink>
-                                </li>
-                            )}
-                            {isAuthenticated && (
-                                <li className="nav-item">
-                                    <NavLink
-                                        to="prestamos/me"
-                                        className={({ isActive }) =>
-                                            isActive
-                                                ? "nav-link navLink"
-                                                : "nav-link"
-                                        }
-                                    >
-                                        Mis prestamos
-                                    </NavLink>
-                                </li>
-                            )}
-                            {isAuthenticated && (
-                                <li className="nav-item">
-                                    <NavLink
-                                        to={`/usuarios/me`}
-                                        className={({ isActive }) =>
-                                            isActive
-                                                ? "nav-link navLink"
-                                                : "nav-link"
-                                        }
-                                    >
-                                        {user.username}
-                                    </NavLink>
-                                </li>
-                            )}
-                        </ul>
-                    </div>
-                </div>
-            </Navbar>
+            {isAuthenticated && (
+                
+                    <Navbar expand="lg" className="bg-body-tertiary">
+                        <Container fluid>
+                            <Navbar.Brand as={NavLink} to="/">
+                                <BookIcon />
+                            </Navbar.Brand>
+                            <Navbar.Toggle aria-controls="navbarNavDropdown" />
+                            <Navbar.Collapse id="responsive-navbar-nav">
+                                <Nav className="me-auto">
+                                    {isAuthenticated && (
+                                        <>
+                                            <Nav.Link as={NavLink} to="/libros">
+                                                Libros
+                                            </Nav.Link>
+                                            <Nav.Link
+                                                as={NavLink}
+                                                to="/autores"
+                                            >
+                                                Autores
+                                            </Nav.Link>
+                                            {user.rol === "admin" && (
+                                                <>
+                                                    <Nav.Link
+                                                        as={NavLink}
+                                                        to="/usuarios"
+                                                    >
+                                                        Usuarios
+                                                    </Nav.Link>
+                                                    <Nav.Link
+                                                        as={NavLink}
+                                                        to="/prestamos"
+                                                    >
+                                                        Prestamos
+                                                    </Nav.Link>
+                                                    <Nav.Link
+                                                        as={NavLink}
+                                                        to="/generos"
+                                                    >
+                                                        Generos
+                                                    </Nav.Link>
+                                                </>
+                                            )}
+                                            <Nav.Link
+                                                as={NavLink}
+                                                to="prestamos/me"
+                                            >
+                                                Mis prestamos
+                                            </Nav.Link>
+                                        </>
+                                    )}
+                                </Nav>
+                                {isAuthenticated && (
+                                    <Nav className="drodown">
+                                        <NavDropdown
+                                            title={user.username}
+                                            id="basic-nav-dropdown"
+                                        >
+                                            <NavDropdown.Item href="#action/3.1">
+                                                <Nav.Link
+                                                    as={NavLink}
+                                                    to={`/usuarios/me`}
+                                                >
+                                                    Ver mi perfil
+                                                </Nav.Link>
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item>
+                                                <Nav.Link
+                                                    onClick={() => {
+                                                        signOut();
+                                                        navigate("/");
+                                                    }}
+                                                >
+                                                    Cerrar Sesion
+                                                </Nav.Link>
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    </Nav>
+                                )}
+                            </Navbar.Collapse>
+                        </Container>
+                    </Navbar>
+                
+            )}
             <Outlet />
         </>
     );
