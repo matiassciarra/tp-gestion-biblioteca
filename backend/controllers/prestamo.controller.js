@@ -10,14 +10,14 @@ export const getPrestamos = async (req, res) => {
         res.send(
             await Prestamo.findAll({
                 include: [
-                    { 
-                        model: Libro, 
-                        include: [{ model: Genero }] 
+                    {
+                        model: Libro,
+                        include: [{ model: Genero }],
                     },
-                    { 
-                        model: Usuario, 
-                        include: [{ model: Pais }] 
-                    }
+                    {
+                        model: Usuario,
+                        include: [{ model: Pais }],
+                    },
                 ],
             })
         );
@@ -34,14 +34,14 @@ export const getPrestamoPorId = async (req, res) => {
         const { id } = req.params;
         const prestamo = await Prestamo.findByPk(id, {
             include: [
-                { 
-                    model: Libro, 
-                    include: [{ model: Genero }] 
+                {
+                    model: Libro,
+                    include: [{ model: Genero }],
                 },
-                { 
-                    model: Usuario, 
-                    include: [{ model: Pais }] 
-                }
+                {
+                    model: Usuario,
+                    include: [{ model: Pais }],
+                },
             ],
         });
 
