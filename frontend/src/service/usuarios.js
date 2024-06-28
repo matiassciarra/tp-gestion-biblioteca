@@ -83,3 +83,19 @@ export const getUsuarioMe = async () => {
     const data = await response.json();
     return data;
 };
+
+export const updateUsuarioMe = async (obj) => {
+    const options = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj),
+        credentials: 'include'
+    };
+    const response = await fetch(URL + `usuarios/me`, options);
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message);
+    }
+};

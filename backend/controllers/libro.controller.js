@@ -85,9 +85,7 @@ export const getLibro = async (req, res) => {
         });
         return res.send(libros);
     } catch (error) {
-        return res
-            .statusCode(500)
-            .send({ error: "Error al obtener los libros." });
+        return res.status(500).send({ error: "Error al obtener los libros." });
     }
 };
 

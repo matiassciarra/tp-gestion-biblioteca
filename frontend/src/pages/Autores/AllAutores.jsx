@@ -3,35 +3,83 @@ import { useState } from "react";
 import "../../assets/autores/autoresAll.css";
 import { deleteAutor } from "../../service/autores";
 import { modalAutorCreate as Modal } from "../../components/autor/modalAutorCreate";
-import { createAutor } from "../../service/autores";
+import { createAutor, updateAutor as update } from "../../service/autores";
 import { useAuth } from "../../context/AuthContext";
+import swal from 'sweetalert';
+
 
 export const AllAutores = () => {
     const res = useLoaderData();
     const [data, setData] = useState(res);
     const [showModal, setShowModal] = useState(false);
+    const [showModalUpdate, setShowModalUpdate] = useState(false)
+    const [number, setNumberEdit] = useState(null);
     const { isAuthenticated, user } = useAuth();
 
-    const AccionCreate = async (objeto, accion=false) => {
-        if (!accion){
-            const newUser = await createAutor(objeto);
-            //aca agregar manejo de error
-            setData([...data, newUser]);
-            return true;
-        }
+    const AccionCreate = async (objeto) => {
+        const newUser = await createAutor(objeto);
+        //aca agregar manejo de error
+        setData([...data, newUser]);
+        return true;
     };
 
-    const addAutor = () => {
-        setShowModal(true);
-    };
+    const updateModal = (id) => {
+        setNumberEdit(id)
+        setShowModalUpdate(true)
+    }
+
+    const updateCreate = async (id,obj)=>{
+        try {
+            const updateAutor = await update(id,obj);
+            if (!updateAutor){
+                return false
+            }
+            const newData = data.map((autor)=>{
+                if (autor.id_autor != id){
+                    return autor
+                } else {
+                    return updateAutor
+                }
+            })
+            setData(newData);
+            return true
+        } catch (error) {
+            swal({
+                title: error,
+                text: "Hubo un error!",
+                icon: "error",
+                button: "Continuar",
+            });
+            return false
+        }
+        
+    }
+    
     // Función para eliminar usuario
     const handlerDelete = async (id) => {
         try {
+            swal({
+                title: "Estas seguro que lo quieres eliminar?",
+                text: "Se eliminara de forma permantes, y sus libros relacionados!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then(async (willDelete) => {
+                
+                if (willDelete) {
+                    await deleteAutor(id);
+                    // Actualiza el estado filtrando el autor eliminado
+                    const newData = data.filter((autor) => autor.id_autor !== id);
+                    setData(newData);
+                    swal("Se elimino correctamente!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("No se ha eliminado");
+                }
+            });
             // Llama a la API para eliminar el autor
-            await deleteAutor(id);
-            // Actualiza el estado filtrando el autor eliminado
-            const newData = data.filter((autor) => autor.id_autor !== id);
-            setData(newData);
+            
         } catch (error) {
             console.error("Error al eliminar el autor:", error);
         }
@@ -44,7 +92,7 @@ export const AllAutores = () => {
                 <button
                     type="button"
                     className="btn btn-success text-white fw-bold"
-                    onClick={addAutor}
+                    onClick={() => setShowModal(true)}
                 >
                     Nuevo Autor
                 </button>
@@ -84,6 +132,7 @@ export const AllAutores = () => {
                                                 <button
                                                     type="button"
                                                     className="btn btn-outline-warning card-link fw-bold"
+                                                    onClick={()=> updateModal(id_autor)}
                                                 >
                                                     Modificar
                                                 </button>
@@ -111,6 +160,12 @@ export const AllAutores = () => {
                 bool={showModal}
                 setBool={setShowModal}
                 action={AccionCreate}
+            />
+            <Modal
+                bool={showModalUpdate}
+                setBool={setShowModalUpdate}
+                action={updateCreate}
+                idAutor={number}
             />
         </div>
     );

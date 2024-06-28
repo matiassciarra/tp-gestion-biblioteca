@@ -128,17 +128,17 @@ export const deleteAutor = async (req, res) => {
 
 export const updateAutor = async (req, res) => {
     try {
+        console.log(req.body);
         const { id } = req.params;
 
         const autorExistente = await Autor.findByPk(id);
-
-        if (autorExistente) {
-            await Autor.update(req.body, { where: { id_autor: id } });
-
-            res.send({ message: "Autor actualizado con éxito" });
-        } else {
+        if (!autorExistente){
             res.status(404).send("Autor no encontrado");
         }
+        const response = await autorExistente.update(req.body)
+        res.send(response);
+       
+        
     } catch (error) {
         res.status(500).send({
             message: "Hubo un error al actualizar el autor",

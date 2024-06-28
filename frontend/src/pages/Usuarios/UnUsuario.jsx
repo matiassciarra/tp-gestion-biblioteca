@@ -88,4 +88,19 @@ export const UnUsuario = ( {option }) => {
 
         </section>
     )} else if (option === 4) {
+        return (
+            <div>
+                <ModificarUsuario
+                    object={{
+                        id_usuario,
+                        nombre,
+                        apellido,
+                        Pai,
+                        url,
+                    }}
+                    option={2}
+                />
+            </div>
+        )
+
     }};

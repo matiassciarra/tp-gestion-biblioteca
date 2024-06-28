@@ -4,26 +4,50 @@ import "../../assets/autores/FormAutor.css";
 import Form from "react-bootstrap/Form";
 import { useForm, Controller } from "react-hook-form";
 import { getPaises } from "../../service/paises";
+import { getAutor } from "../../service/autores";
 import { useEffect, useState } from "react";
 
-export const FormAutor = ({action = null}) => {
+export const FormAutor = ({action = null, idAutor}) => {
+    function formatFecha(fecha) {
+        const fechaObj = new Date(fecha);
+        return fechaObj.toISOString().split('T')[0];
+    }
     const [paises, setPaises] = useState([]);
+    const [autor,setAutor] = useState(null)
     useEffect(() => {
         const fetchPaises = async () => {
             const res = await getPaises();
             setPaises(res);
         };
+        if (idAutor){
+            const fetchAutor = async (idAutor)=> 
+            {
+                const autorRes = await getAutor(idAutor);
+                if (!autorRes){
+                    throw new Error('hubo un error')
+                } 
+                setValue("nombre", autorRes.nombre);
+                setValue("apellido", autorRes.apellido);
+                setValue("biografia", autorRes.biografia);
+                setValue("fecha_nacimiento", formatFecha(autorRes.fecha_nacimiento));
+                setValue("id_pais", autorRes.id_pais);
+                setValue("url_imagen", autorRes.url_imagen);
+                setAutor(autorRes)
+            };
+            fetchAutor(idAutor)
+        } 
         fetchPaises();
     }, []);
-
     const {
         handleSubmit,
         formState: { errors },
         control,
         watch,
+        setValue
     } = useForm();
 
     const onSubmit = (data) => {
+        //envia para creedo
         action(data)
     };
 
@@ -40,7 +64,7 @@ export const FormAutor = ({action = null}) => {
             "La fecha de nacimiento debe ser al menos 5 años menor que la fecha actual"
         );
     };
-
+    
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>

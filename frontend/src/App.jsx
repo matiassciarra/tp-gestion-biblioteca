@@ -121,12 +121,11 @@ export function App() {
                             loader={getUsuarioMe}
                             element={<UnUsuario option={3} />}
                         />
-                        <Route path="me/modificar" element={<h1>Hola</h1>} />
-                        <Route
-                            path="me/modificar/:id"
-                            loader={({ params }) => getUsuario(params.id)}
-                            element={<UnUsuario option={2} />}
-                        />
+                        <Route 
+                            path="me/modificar"
+                            loader={getUsuarioMe}
+                            element={<UnUsuario option={4} />}/>
+                        
                     </Route>
                 </Route>
                 <Route path="*" element={<h1>Not Found</h1>}></Route>
