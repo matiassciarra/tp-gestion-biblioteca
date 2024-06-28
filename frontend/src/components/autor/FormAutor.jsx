@@ -48,11 +48,7 @@ export const FormAutor = ({action = null, idAutor}) => {
 
     const onSubmit = (data) => {
         //envia para creedo
-        if (!autor){
-            return action(data)
-        }
-        //envia para editar
-        return action(idAutor,data)
+        action(data)
     };
 
     const validateDate = (value) => {

@@ -31,10 +31,17 @@ export const AllAutores = () => {
     const updateCreate = async (id,obj)=>{
         try {
             const updateAutor = await update(id,obj);
-            console.log(updateAutor);
-                if (!updateAutor){
-                    return false
+            if (!updateAutor){
+                return false
+            }
+            const newData = data.map((autor)=>{
+                if (autor.id_autor != id){
+                    return autor
+                } else {
+                    return updateAutor
                 }
+            })
+            setData(newData);
             return true
         } catch (error) {
             swal({
@@ -51,11 +58,28 @@ export const AllAutores = () => {
     // Función para eliminar usuario
     const handlerDelete = async (id) => {
         try {
+            swal({
+                title: "Estas seguro que lo quieres eliminar?",
+                text: "Se eliminara de forma permantes, y sus libros relacionados!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then(async (willDelete) => {
+                
+                if (willDelete) {
+                    await deleteAutor(id);
+                    // Actualiza el estado filtrando el autor eliminado
+                    const newData = data.filter((autor) => autor.id_autor !== id);
+                    setData(newData);
+                    swal("Se elimino correctamente!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("No se ha eliminado");
+                }
+            });
             // Llama a la API para eliminar el autor
-            await deleteAutor(id);
-            // Actualiza el estado filtrando el autor eliminado
-            const newData = data.filter((autor) => autor.id_autor !== id);
-            setData(newData);
+            
         } catch (error) {
             console.error("Error al eliminar el autor:", error);
         }
