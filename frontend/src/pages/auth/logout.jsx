@@ -7,7 +7,6 @@ export const Logout = () => {
     useLoaderData()
     const navigate = useNavigate();
     useEffect(() => {
-        // Aquí puedes agregar cualquier lógica de cierre de sesión si es necesario.
         navigate("/");
     }, []);
   return (

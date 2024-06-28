@@ -53,7 +53,39 @@ export const UnUsuario = ( {option }) => {
                     Pai,
                     url,
                 }}
+                option={1}
             />
         </div>
     )
-}};
+} else if (option === 3) {
+    return (
+        <section className="sectionCard">
+            <div className="info">
+                <DetalleUsuario
+                    object={{
+                        id_usuario,
+                        nombre,
+                        apellido,
+                        username,
+                        correo,
+                        Pai,
+                        url,
+                    }}
+                />
+                <button
+                        onClick={() => navigate(-1)}
+                        className="btn btn-primary text-white fw-bold"
+                        >
+                            Volver
+                </button>
+                <button
+                        onClick={() => navigate(`./modificar/${id_usuario}`)}
+                        className="btn btn-primary text-white fw-bold"
+                        >
+                            Modificar
+                </button>
+            </div>
+
+        </section>
+    )} else if (option === 4) {
+    }};

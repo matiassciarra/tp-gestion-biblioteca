@@ -82,7 +82,7 @@ const TablaUsuarios = () => {
     //console.log(paisesMap)
     return (
         <div className="table-responsive rounded p-4">
-            <h2 className="my-4 text-center">Lista de Usuarios</h2>
+            <h2 className="my-4 text-center text-white fw-bold">Lista de Usuarios</h2>
             <table className="table table-striped table-bordered text-center">
                 <thead className="thead-dark">
                     <tr>

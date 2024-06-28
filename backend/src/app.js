@@ -12,7 +12,6 @@ import rutaLibro from "../routes/libro.routes.js";
 import rutaPrestamos from "../routes/prestamo.routes.js";
 import rutaAuth from "../routes/auth.routes.js";
 import rutaTiposUsuario from "../routes/tipo_usuario.js";
-import routerImage from "../routes/images.routes.js";
 import { authRequired } from "../middlewares/validateToken.js";
 
 
@@ -29,7 +28,6 @@ app.use(morgan("dev"));
 app.use("/api", rutaAuth);
 app.use("/api", rutaTiposUsuario);
 app.use("/api", rutaPaises);
-app.use("/api",routerImage)
 //valida si tiene JWT y puede acceder a las siguientes
 
 app.use(authRequired)
