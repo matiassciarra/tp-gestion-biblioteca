@@ -1,7 +1,7 @@
 import Modal from 'react-bootstrap/Modal';
 import { FormAutor } from './FormAutor';
 
-export const modalAutorCreate = ({bool,setBool, action=null, modificar=false}) =>{
+export const modalAutorCreate = ({bool,setBool, action=null}) =>{
   if(!action) action = setBool
   const res = (data) =>{
     const res = action(data)
@@ -17,7 +17,7 @@ export const modalAutorCreate = ({bool,setBool, action=null, modificar=false}) =
         </Modal.Header>
         <Modal.Body>
           {/*TODO: aca va el formulario */}
-          <FormAutor action={res} accionModificar={modificar}/>
+          <FormAutor action={res}/>
         </Modal.Body>
       </Modal>
   )

@@ -6,3 +6,6 @@
 .drodown{
     margin: 0 70px;
 }
+li {
+    list-style: none;
+}

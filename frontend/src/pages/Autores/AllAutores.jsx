@@ -19,7 +19,6 @@ export const AllAutores = () => {
             setData([...data, newUser]);
             return true;
         }
-        
     };
 
     const addAutor = () => {
@@ -52,7 +51,7 @@ export const AllAutores = () => {
             )}
             <div className="d-flex flex-wrap justify-content-center">
                 {data.map(
-                    ({ id_autor, nombre, apellido, biografia, url_imagen }) => (
+                    ({ id_autor, nombre, apellido, url_imagen }) => (
                         <div
                             key={id_autor}
                             className="card mx-2 my-2"

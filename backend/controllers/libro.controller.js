@@ -83,10 +83,11 @@ export const getLibro = async (req, res) => {
         const libros = await Libro.findAll({
             include: [{ model: Autor }, { model: Genero }],
         });
-        return res.status(200).send(libros);
+        return res.send(libros);
     } catch (error) {
-        console.error("Error al obtener los libros:", error);
-        return res.status(500).send({ error: "Error al obtener los libros." });
+        return res
+            .statusCode(500)
+            .send({ error: "Error al obtener los libros." });
     }
 };
 

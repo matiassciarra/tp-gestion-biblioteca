@@ -121,6 +121,7 @@ export function App() {
                             loader={getUsuarioMe}
                             element={<UnUsuario option={3} />}
                         />
+                        <Route path="me/modificar" element={<h1>Hola</h1>} />
                         <Route
                             path="me/modificar/:id"
                             loader={({ params }) => getUsuario(params.id)}

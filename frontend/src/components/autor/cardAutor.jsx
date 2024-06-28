@@ -1,4 +1,5 @@
-export const cardAutor = ({ object }) => {
+
+export const CardAutor = ({ object }) => {
     const { nombre, apellido, biografia, fecha_nacimiento, url_imagen, Pai } =
         object;
     const fechaNacimientoFormateada = fecha_nacimiento
