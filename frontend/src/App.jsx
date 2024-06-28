@@ -11,7 +11,7 @@ import { getAllLibros, getLibro } from "./service/libros";
 import { Home , FormularioRegistro } from "./pages/auth/auth.js";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ProtectedRoute } from "./components/generales/ProtectedRoute.jsx";
-import { Prestamos, SolicitarPrestamo } from "./pages/prestamos/Prestamos.js";
+import { Prestamos, SolicitarPrestamo } from "./pages/Prestamos/Prestamos.js";
 import { getPrestamos, prestamoByMe } from "./service/prestamos.js";
 import { AdminRoute } from "./components/generales/AdminRoute.jsx";
 import {
