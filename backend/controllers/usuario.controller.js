@@ -146,3 +146,25 @@ export const updateUsuario = async (req, res) => {
     }
 };
 
+export const patchUsuarioMe = async (req,res) => {
+    try {
+        const { id } = req.user;
+        const usuarioExistente = await Usuario.findByPk(id);
+
+        if (usuarioExistente) {
+            await Usuario.update(req.body, {
+                where: {
+                    id_usuario: id,
+                },
+            });
+            res.send({ message: "Usuario actualizado exitosamente" });
+        } else {
+            res.status(404).send("Usuario no encontrado");
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: "Error del servidor",
+            error: error.toString(),
+        });
+    }
+}

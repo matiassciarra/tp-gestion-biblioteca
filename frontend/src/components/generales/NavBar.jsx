@@ -22,18 +22,16 @@ export const NavBar = () => {
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
                                 <>
+                                    
                                     <Nav.Link as={NavLink} to="/libros">
                                         Libros
+                                    </Nav.Link>
+                                    <Nav.Link as={NavLink} to="/autores">
+                                        Autores
                                     </Nav.Link>
 
                                     {user.rol === "admin" && (
                                         <>
-                                            <Nav.Link
-                                                as={NavLink}
-                                                to="/autores"
-                                            >
-                                                Autores
-                                            </Nav.Link>
                                             <Nav.Link
                                                 as={NavLink}
                                                 to="/usuarios"
@@ -87,9 +85,8 @@ export const NavBar = () => {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-            )} 
-             <Outlet />
-           
+            )}
+            <Outlet />
         </>
     );
 };
