@@ -81,7 +81,7 @@ export const Formulario = () => {
         <>
             <form onSubmit={onSubmit}>
                 <div className="form-group">
-                    <label htmlFor="inp-titulo" className="fw-bold text-white">
+                    <label htmlFor="inp-titulo" className="fw-bold text-dark">
                         Titulo
                     </label>
                     <input
@@ -114,7 +114,7 @@ export const Formulario = () => {
                     )}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="inp-autor " className="fw-bold text-white">
+                    <label htmlFor="inp-autor " className="fw-bold text-dark">
                         Autor
                     </label>
                     <select
@@ -145,7 +145,7 @@ export const Formulario = () => {
                 <div className="form-group">
                     <label
                         htmlFor="inp-generoSelect"
-                        className="fw-bold text-white"
+                        className="fw-bold text-dark"
                     >
                         Genero
                     </label>
@@ -173,7 +173,7 @@ export const Formulario = () => {
                 <div className="form-group">
                     <label
                         htmlFor="fechaPublicacion"
-                        className="fw-bold text-white"
+                        className="fw-bold text-dark"
                     >
                         Fecha de publicacion
                     </label>
@@ -208,7 +208,7 @@ export const Formulario = () => {
                 <div className="form-group">
                     <label
                         htmlFor="fechaPublicacion"
-                        className="fw-bold text-white"
+                        className="fw-bold text-dark"
                     >
                         URL de imagen
                     </label>

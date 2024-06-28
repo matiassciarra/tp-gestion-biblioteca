@@ -29,9 +29,7 @@ export const cardAutor = ({ object }) => {
                         {biografia && (
                             <li className="list-group-item">
                                 <h4>Biografia</h4>
-                                <li>
-                                    <p>{biografia}</p>
-                                </li>
+                                <p>{biografia}</p>
                             </li>
                         )}
                         {fecha_nacimiento && (

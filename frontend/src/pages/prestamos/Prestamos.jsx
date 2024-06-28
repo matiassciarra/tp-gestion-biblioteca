@@ -15,7 +15,7 @@ export const Prestamos = ({ infoMe = false }) => {
                 icon: "success",
                 button: "Continuar",
             });
-            navigate("/libros"); // Recargar la página para reflejar los cambios
+            navigate(-1); // Recargar la página para reflejar los cambios
         } catch (error) {
             swal({
                 title: `Ups...Hubo un error!`,
@@ -31,81 +31,85 @@ export const Prestamos = ({ infoMe = false }) => {
         <>
             <h1 className="text-white fw-bold">Prestamos</h1>
             <section className="mx-4 my-2">
-                {data.map(
-                    ({
-                        id,
-                        id_libro,
-                        Libro,
-                        id_usuario,
-                        fecha_devolucion_real,
-                        Usuario,
-                        fecha_prestamo,
-                        fecha_devolucion,
-                    }) => (
-                        <div key={id} className="card mb-3">
-                            <div className="row g-0">
-                                <div className="col-md-4">
-                                    <img
-                                        src={Libro ? Libro.url : null}
-                                        className="img-fluid rounded-start"
-                                        alt="..."
-                                    />
-                                </div>
-                                <div className="col-md-8">
-                                    <div className="card-body">
-                                        <h5 className="card-title">
-                                            Prestamo Nro {id}
-                                        </h5>
-                                        {Libro ? (
-                                            <NavLink
-                                                to={`/libros/libro/${id_libro}`}
-                                            >
+                {[...data]
+                    .reverse()
+                    .map(
+                        ({
+                            id,
+                            id_libro,
+                            Libro,
+                            id_usuario,
+                            fecha_devolucion_real,
+                            Usuario,
+                            fecha_prestamo,
+                            fecha_devolucion,
+                        }) => (
+                            <div key={id} className="card mb-3">
+                                <div className="row g-0">
+                                    <div className="col-md-4">
+                                        <img
+                                            src={Libro ? Libro.url : null}
+                                            className="img-fluid rounded-start"
+                                            alt="..."
+                                        />
+                                    </div>
+                                    <div className="col-md-8">
+                                        <div className="card-body">
+                                            <h5 className="card-title">
+                                                Prestamo Nro {id}
+                                            </h5>
+                                            {Libro ? (
+                                                <NavLink
+                                                    to={`/libros/libro/${id_libro}`}
+                                                >
+                                                    <h6>
+                                                        Nombre Libro:{" "}
+                                                        {Libro.titulo}
+                                                    </h6>
+                                                </NavLink>
+                                            ) : (
+                                                <h6>Libro no disponible</h6>
+                                            )}
+                                            {infoMe ? (
                                                 <h6>
-                                                    Nombre Libro: {Libro.titulo}
+                                                    Nombre del Usuario:{" "}
+                                                    {Usuario.username}
                                                 </h6>
-                                            </NavLink>
-                                        ) : (
-                                            <h6>Libro no disponible</h6>
-                                        )}
-                                        {infoMe ? (
-                                            <h6>
-                                                Nombre del Usuario:{" "}
-                                                {Usuario.username}
-                                            </h6>
-                                        ) : null}
+                                            ) : null}
 
-                                        <h6>
-                                            Fecha Prestamo: {fecha_prestamo}
-                                        </h6>
-                                        {fecha_devolucion ? (
                                             <h6>
-                                                Fecha Devolucion:{" "}
-                                                {fecha_devolucion}
+                                                Fecha Prestamo: {fecha_prestamo}
                                             </h6>
-                                        ) : (
-                                            <h6>Todavia no fue devuelto</h6>
-                                        )}
-                                        {!fecha_devolucion_real ? (
-                                            <button
-                                                className="btn btn-primary"
-                                                onClick={() =>
-                                                    handleDevolver(id)
-                                                }
-                                            >
-                                                Devolver Libro
-                                            </button>
-                                        ) : (
-                                            <h6>
-                                                fecha de devolucion real:{" "}
-                                                {fecha_devolucion_real}
-                                            </h6>
-                                        )}
+                                            {fecha_devolucion ? (
+                                                <h6>
+                                                    Fecha estimada de
+                                                    devolucion:{" "}
+                                                    {fecha_devolucion}
+                                                </h6>
+                                            ) : (
+                                                <h6>Todavia no fue devuelto</h6>
+                                            )}
+                                            {!fecha_devolucion_real ? (
+                                                <button
+                                                    className="btn btn-primary"
+                                                    onClick={() =>
+                                                        handleDevolver(id)
+                                                    }
+                                                >
+                                                    Devolver Libro
+                                                </button>
+                                            ) : (
+                                                <h6>
+                                                    Fecha de devolucion real:{" "}
+                                                    {fecha_devolucion_real}
+                                                </h6>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                )}
+                        )
+                    )}
             </section>
         </>
     );

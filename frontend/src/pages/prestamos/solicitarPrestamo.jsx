@@ -37,7 +37,6 @@ export const SolicitarPrestamo = () => {
             console.error(error);
         }
     };
-    console.log(errors);
     return (
         <div className="container my-3">
             <div className="row">
