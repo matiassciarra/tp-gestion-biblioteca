@@ -79,7 +79,7 @@ export const UnUsuario = ( {option }) => {
                             Volver
                 </button>
                 <button
-                        onClick={() => navigate(`./modificar/${id_usuario}`)}
+                        onClick={() => navigate(`modificar/`)}
                         className="btn btn-primary text-white fw-bold"
                         >
                             Modificar

@@ -1,9 +1,12 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { deleteAutor } from "../../service/autores";
-import { cardAutor as CardAutor } from "../../components/autor/cardAutor.jsx";
+import { CardAutor } from "../../components/autor/cardAutor.jsx";
 import "../../assets/autores/cardSingleAutor.css";
+import { useAuth } from "../../context/AuthContext";
+
 export const OneAutor = () => {
     const navigate = useNavigate(); // Estado para el toggle
+    const { user } = useAuth();
 
     const deleteHandler = async (id) => {
         await deleteAutor(id);
@@ -30,18 +33,22 @@ export const OneAutor = () => {
                     >
                         Volver atras
                     </button>
-                    <button
-                        onClick={() => {}}
-                        className="btn btn-warning text-white fw-bold mx-2"
-                    >
-                        Modificar
-                    </button>
-                    <button
-                        onClick={() => deleteHandler(id_autor)}
-                        className="btn btn-danger fw-bold mx-2"
-                    >
-                        Eliminar usuario
-                    </button>
+                    {user.rol === "admin" && (
+                        <>
+                            <button
+                                onClick={() => {}}
+                                className="btn btn-warning text-white fw-bold mx-2"
+                            >
+                                Modificar
+                            </button>
+                            <button
+                                onClick={() => deleteHandler(id_autor)}
+                                className="btn btn-danger fw-bold mx-2"
+                            >
+                                Eliminar usuario
+                            </button>
+                        </>
+                    )}
                 </div>
                 <CardAutor
                     object={{

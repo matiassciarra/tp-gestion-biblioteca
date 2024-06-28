@@ -5,7 +5,8 @@ import {
     createUsuario,
     deleteUsuario,
     updateUsuario,
-    userMe
+    userMe,
+    patchUsuarioMe
 } from "../controllers/usuario.controller.js";
 import { adminToken } from "../middlewares/adminToken.js";
 
@@ -13,6 +14,7 @@ const router = Router();
 //crear usuario
 
 router.get("/usuarios/me",userMe)
+router.patch("/usuarios/me",patchUsuarioMe)
 router.get("/usuarios", adminToken, getUsers);
 router.get("/usuarios/:id", adminToken, getUserById);
 router.delete("/usuarios/:id", adminToken, deleteUsuario);
