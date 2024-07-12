@@ -14,12 +14,12 @@ Mejorar funcionalidades de filtrado.
 Mejorar diseño consistente entre paginas.
 Aplicar paginacion.
 
-##Que hice yo en este proyecto
+## Que hice yo en este proyecto
 Hice las bases del backend, utilice Express js como framework del servidor, y una base de datos Sequelize.
 Cree el modelo de los autores, y los controladores para su REST API.
 El el frontend utlizamos React, cree la estructura de carpetas y utilizamos React Router Dom para manejar el enrutamiento,
 cree la pantalla de los libros incluidos todos sus filtros, la parte de los formularios de creacion, modificacion. Y el eliminar libro con sus respectivas validaciones.
-Sistema de Log-in con JWT almacenado en Cookies del ordenador
+Sistema de Log-in con JWT almacenado en Cookies del ordenador.
 
 ## Como installar proyecto
 en la carpeta tanto del **backend** como del **frontend** instala las dependecias  
