@@ -15,7 +15,7 @@ Mejorar diseño consistente entre paginas.
 Aplicar paginacion.
 
 ## Que hice yo en este proyecto
-Hice las bases del backend, utilice Express js como framework del servidor, y una base de datos Sequelize.
+Hice las bases del backend, utilice Express js como framework del servidor, y el ORM Sequelize.
 Cree el modelo de los autores, y los controladores para su REST API.
 El el frontend utlizamos React, cree la estructura de carpetas y utilizamos React Router Dom para manejar el enrutamiento,
 cree la pantalla de los libros incluidos todos sus filtros, la parte de los formularios de creacion, modificacion. Y el eliminar libro con sus respectivas validaciones.
