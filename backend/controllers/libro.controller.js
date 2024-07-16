@@ -272,3 +272,44 @@ export const getLibrosPorTitulo = async (req, res) => {
         });
     }
 };
+
+export const getLibrosPorFiltro = async (req, res) => {
+    const { id_genero, fecha_desde, fecha_hasta, id_autor } = req.query;
+    const filtros = {};
+
+    if (id_genero) {
+        filtros.id_genero = id_genero;
+    }
+    if (fecha_desde && fecha_hasta) {
+        filtros.fecha_publicacion = {
+            [Op.between]: [new Date(fecha_desde), new Date(fecha_hasta)],
+        };
+    } else if (fecha_desde) {
+        filtros.fecha_publicacion = {
+            [Op.gte]: new Date(fecha_desde),
+        };
+    } else if (fecha_hasta) {
+        filtros.fecha_publicacion = {
+            [Op.lte]: new Date(fecha_hasta),
+        };
+    }
+    if (id_autor) {
+        filtros.id_autor = id_autor;
+    }
+
+    try {
+        const librosFiltrados = await Libro.findAll({
+            where: filtros,
+        });
+        if (librosFiltrados.length > 0) {
+            res.status(200).send(librosFiltrados);
+        } else {
+            res.status(200).send([]);
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: "Ha ocurrido un error al buscar los libros.",
+            error: error,
+        });
+    }
+};
